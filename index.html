@@ -357,20 +357,8 @@ body {
     <p>章节练习 · 110题</p>
   </div>
 
-  <div style="padding:8px 10px 4px;">
-    <div style="font-size:11px;color:#64748b;letter-spacing:.05em;text-transform:uppercase;font-weight:700;margin-bottom:6px;">📚 章节练习</div>
-    <div style="display:flex;gap:4px;">
-      <button class="rand-btn active" id="ch-btn-practice" style="flex:1;border-radius:6px;padding:6px 4px;"
-        onclick="setChapterQuizMode('practice')">
-        <span class="rand-icon" style="font-size:14px;">✏️</span>
-        <span style="font-size:12px;">练习</span>
-      </button>
-      <button class="rand-btn" id="ch-btn-test" style="flex:1;border-radius:6px;padding:6px 4px;"
-        onclick="setChapterQuizMode('test')">
-        <span class="rand-icon" style="font-size:14px;">📝</span>
-        <span style="font-size:12px;">测试</span>
-      </button>
-    </div>
+  <div style="padding:8px 10px 4px;font-size:11px;color:#64748b;letter-spacing:.05em;text-transform:uppercase;font-weight:700;">
+    📚 章节练习
   </div>
   <div id="chapter-list"></div>
 
@@ -550,7 +538,6 @@ function closeSidebar() {
 // ── Sidebar active state helpers ──
 function clearSidebarActive() {
   document.querySelectorAll('.ch-item').forEach(e => e.classList.remove('active'));
-  document.getElementById('btn-chapter-mode').classList.remove('active');
   document.getElementById('btn-practice').classList.remove('active');
   document.getElementById('btn-test').classList.remove('active');
   document.getElementById('wrong-btn').classList.remove('active');
@@ -566,14 +553,13 @@ function setChapterQuizMode(m) {
 function startChapter(ci) {
   clearSidebarActive();
   document.getElementById('ch-' + ci).classList.add('active');
-  sessionMode = 'chapter'; quizMode = chapterQuizMode; reviewMode = false;
+  sessionMode = 'chapter'; quizMode = 'practice'; reviewMode = false;
   questions = CHAPTERS[ci].questions.map(q => Object.assign({}, q, {chapterIdx: ci, chapterName: CHAPTERS[ci].name}));
   answers   = questions.map(() => ({selected: null, correct: false, skipped: false}));
   currentIdx = 0; selectedOpt = null;
-  const modeLabel = chapterQuizMode === 'test' ? ' · 测试' : ' · 练习';
-  document.getElementById('chapter-title').textContent = CHAPTERS[ci].name + modeLabel;
-  document.getElementById('test-badge').classList.toggle('hidden', chapterQuizMode !== 'test');
-  document.getElementById('score-badge').classList.toggle('hidden', chapterQuizMode === 'test');
+  document.getElementById('chapter-title').textContent = CHAPTERS[ci].name;
+  document.getElementById('test-badge').classList.add('hidden');
+  document.getElementById('score-badge').classList.remove('hidden');
   showQuiz();
   renderQuestion();
 }
