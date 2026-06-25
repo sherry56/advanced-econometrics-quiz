@@ -3,302 +3,1015 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>高级计量经济学（Ⅱ）复习资料</title>
+  <title>高级计量经济学（Ⅱ）期末复习资料</title>
   <style>
     :root {
-      --ink: #1f2933;
-      --muted: #657184;
-      --line: #d7dee8;
-      --panel: #ffffff;
-      --soft: #f4f7fb;
-      --green: #27695f;
-      --blue: #245f9e;
-      --orange: #8d5720;
-      --shadow: 0 18px 42px rgba(31, 41, 55, 0.1);
+      --bg: #f6f7f9;
+      --surface: #ffffff;
+      --surface-soft: #fafbfc;
+      --ink: #202124;
+      --muted: #646a73;
+      --subtle: #8a9099;
+      --line: #e5e7eb;
+      --line-strong: #d6dae0;
+      --accent: #24745f;
+      --accent-soft: #eef7f3;
+      --blue: #2563a8;
+      --blue-soft: #eff6ff;
+      --danger-soft: #fff7ed;
+      --shadow: 0 16px 38px rgba(31, 35, 41, 0.08);
+      --radius: 8px;
+      --sidebar-width: 272px;
+      --toc-width: 188px;
     }
 
     * {
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       color: var(--ink);
-      background: #eef2f6;
+      background: var(--bg);
       font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", Arial, sans-serif;
-      line-height: 1.65;
+      line-height: 1.68;
     }
 
-    .app {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+    button,
+    a {
+      font: inherit;
     }
 
-    header {
-      background: #ffffff;
-      border-bottom: 1px solid var(--line);
-      box-shadow: 0 8px 26px rgba(31, 41, 55, 0.06);
-      z-index: 2;
+    button {
+      color: inherit;
     }
 
-    .header-inner {
-      max-width: 1220px;
-      margin: 0 auto;
-      padding: 24px 24px 18px;
-    }
-
-    .eyebrow {
-      margin: 0 0 6px;
-      color: var(--green);
-      font-weight: 700;
-      letter-spacing: 0;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 30px;
-      line-height: 1.25;
-      letter-spacing: 0;
-    }
-
-    .subtitle {
-      max-width: 900px;
-      margin: 10px 0 0;
-      color: var(--muted);
-      font-size: 15px;
-    }
-
-    .switcher {
-      max-width: 1220px;
-      margin: 0 auto;
-      padding: 14px 24px 16px;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .module-button {
-      min-height: 94px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--panel);
-      padding: 14px 16px;
-      color: var(--ink);
-      text-align: left;
-      cursor: pointer;
-      box-shadow: 0 6px 18px rgba(31, 41, 55, 0.05);
-      transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
-    }
-
-    .module-button:hover {
-      transform: translateY(-1px);
-      border-color: #9db9c1;
-      box-shadow: 0 12px 28px rgba(31, 41, 55, 0.09);
-    }
-
-    .module-button.active {
-      border-color: var(--green);
-      box-shadow: 0 0 0 3px rgba(39, 105, 95, 0.14), 0 10px 26px rgba(31, 41, 55, 0.08);
-    }
-
-    .module-title {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 18px;
-      font-weight: 800;
-      line-height: 1.35;
-    }
-
-    .module-desc {
-      display: block;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .module-meta {
-      display: inline-block;
-      margin-top: 8px;
-      color: var(--orange);
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .viewer-shell {
-      width: min(1220px, calc(100% - 48px));
-      margin: 18px auto 28px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      min-height: 660px;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .viewer-bar {
+    .globalbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      height: 58px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      padding: 12px 14px;
+      gap: 18px;
+      padding: 0 24px;
       border-bottom: 1px solid var(--line);
-      background: #f8fafc;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(14px);
     }
 
-    .viewer-title {
-      margin: 0;
-      font-weight: 800;
-      color: #203648;
+    .globalbrand {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #111827;
+      font-size: 17px;
+      font-weight: 900;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .viewer-actions {
+    .menu-icon {
+      width: 18px;
+      height: 14px;
+      display: inline-grid;
+      gap: 4px;
+    }
+
+    .menu-icon::before,
+    .menu-icon::after,
+    .menu-icon span {
+      content: "";
+      display: block;
+      height: 2px;
+      border-radius: 2px;
+      background: #344054;
+    }
+
+    .book-mark {
+      flex: 0 0 auto;
+      width: 28px;
+      height: 28px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 6px;
+      background: var(--accent);
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .current-page {
+      min-width: 120px;
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .global-actions {
       display: flex;
       align-items: center;
       gap: 8px;
       flex-wrap: wrap;
     }
 
-    .link-button {
-      display: inline-flex;
-      align-items: center;
-      min-height: 34px;
-      padding: 6px 10px;
-      border: 1px solid #bfd0dd;
-      border-radius: 6px;
-      color: #214c67;
-      background: #ffffff;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 700;
+    .app-shell {
+      min-height: calc(100vh - 58px);
+      display: grid;
+      grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+      background: var(--bg);
     }
 
-    .link-button:hover {
-      border-color: var(--blue);
+    .sidebar {
+      position: sticky;
+      top: 58px;
+      height: calc(100vh - 58px);
+      overflow: auto;
+      border-right: 1px solid var(--line);
+      background: #fbfbfc;
+      padding: 18px 14px;
+    }
+
+    .brand {
+      padding: 8px 8px 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      margin-bottom: 12px;
+      display: inline-grid;
+      place-items: center;
+      border: 1px solid #bfd9cf;
+      border-radius: 8px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .brand-title {
+      margin: 0;
+      color: #1f2937;
+      font-size: 16px;
+      font-weight: 900;
+      line-height: 1.45;
+    }
+
+    .brand-subtitle {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .search-box {
+      margin: 14px 8px 0;
+      min-height: 38px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--line-strong);
+      border-radius: 7px;
+      background: #ffffff;
+      color: var(--subtle);
+      padding: 0 10px;
+      font-size: 13px;
+    }
+
+    .search-icon {
+      width: 14px;
+      height: 14px;
+      border: 2px solid #8a9099;
+      border-radius: 50%;
+      position: relative;
+    }
+
+    .search-icon::after {
+      content: "";
+      position: absolute;
+      width: 6px;
+      height: 2px;
+      right: -5px;
+      bottom: -2px;
+      border-radius: 2px;
+      background: #8a9099;
+      transform: rotate(45deg);
+    }
+
+    .nav-group {
+      padding: 16px 0 0;
+    }
+
+    .nav-caption {
+      margin: 0 8px 8px;
+      color: var(--subtle);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .nav-list {
+      display: grid;
+      gap: 2px;
+    }
+
+    .nav-button {
+      width: 100%;
+      min-height: 44px;
+      display: grid;
+      grid-template-columns: 26px minmax(0, 1fr);
+      align-items: start;
+      gap: 8px;
+      border: 0;
+      border-radius: 7px;
+      background: transparent;
+      padding: 9px 9px;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .nav-button:hover {
+      background: #f0f2f5;
+    }
+
+    .nav-button.active {
+      background: #edf5f2;
+      color: #183f36;
+    }
+
+    .nav-icon {
+      width: 20px;
+      height: 20px;
+      margin-top: 1px;
+      border: 1px solid var(--line-strong);
+      border-radius: 5px;
+      background: #ffffff;
+      position: relative;
+    }
+
+    .nav-icon::before,
+    .nav-icon::after {
+      content: "";
+      position: absolute;
+      left: 5px;
+      right: 5px;
+      height: 1px;
+      background: #9aa3af;
+    }
+
+    .nav-icon::before {
+      top: 7px;
+    }
+
+    .nav-icon::after {
+      top: 12px;
+    }
+
+    .nav-button.active .nav-icon {
+      border-color: #9cc8bb;
+      background: #ffffff;
+    }
+
+    .nav-title {
+      display: block;
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    .nav-desc {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .sidebar-note {
+      margin: 18px 8px 0;
+      padding: 10px 0 0;
+      border-top: 1px solid var(--line);
+      color: var(--subtle);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .main-area {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .action-button,
+    .action-link {
+      min-height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      background: #ffffff;
+      color: #344054;
+      padding: 5px 10px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .action-button:hover,
+    .action-link:hover {
+      border-color: #a7b5c3;
+      background: #f8fafc;
       color: var(--blue);
     }
 
-    iframe {
+    .action-link[hidden] {
+      display: none;
+    }
+
+    .content-wrap {
+      width: min(1180px, calc(100% - 56px));
+      margin: 0 auto;
+      padding: 34px 0 52px;
+      display: grid;
+      grid-template-columns: minmax(0, 820px) var(--toc-width);
+      gap: 40px;
+      align-items: start;
+    }
+
+    .document {
+      min-width: 0;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 44px 48px 52px;
+    }
+
+    .doc-header {
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h1 {
+      margin: 0;
+      color: #111827;
+      font-size: 34px;
+      line-height: 1.26;
+      letter-spacing: 0;
+    }
+
+    .doc-intro {
+      max-width: 680px;
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .doc-meta {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+      color: var(--subtle);
+      font-size: 13px;
+    }
+
+    .doc-meta span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      border-bottom: 1px solid transparent;
+    }
+
+    .section {
+      padding-top: 28px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      color: #1f2937;
+      font-size: 22px;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      color: #253041;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .info-board {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .info-item {
+      min-height: 92px;
+      padding: 15px 16px;
+      border-right: 1px solid var(--line);
+      background: var(--surface-soft);
+    }
+
+    .info-item:last-child {
+      border-right: 0;
+    }
+
+    .info-label {
+      margin: 0 0 8px;
+      color: var(--subtle);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .info-value {
+      margin: 0;
+      color: #172033;
+      font-size: 19px;
+      font-weight: 900;
+      line-height: 1.35;
+    }
+
+    .score-table {
       width: 100%;
-      height: 78vh;
-      min-height: 620px;
+      border-collapse: collapse;
+      table-layout: fixed;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      font-size: 14px;
+    }
+
+    .score-table th,
+    .score-table td {
+      border-bottom: 1px solid var(--line);
+      padding: 12px 14px;
+      text-align: left;
+      vertical-align: top;
+      word-break: break-word;
+    }
+
+    .score-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .score-table th {
+      background: #f8fafc;
+      color: #475467;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .score-table td:first-child {
+      color: #1f2937;
+      font-weight: 900;
+    }
+
+    .score-table td:nth-child(2) {
+      color: var(--accent);
+      font-weight: 900;
+    }
+
+    .block-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .doc-block {
+      display: grid;
+      grid-template-columns: 124px minmax(0, 1fr);
+      gap: 18px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .doc-block:last-child {
+      border-bottom: 0;
+    }
+
+    .doc-block-title {
+      color: #253041;
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .doc-block ul {
+      margin: 0;
+      padding-left: 20px;
+      color: #344054;
+    }
+
+    .doc-block li + li {
+      margin-top: 4px;
+    }
+
+    .callout {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border: 1px solid #d7e7fb;
+      border-left: 4px solid var(--blue);
+      border-radius: var(--radius);
+      background: var(--blue-soft);
+      color: #24364a;
+      font-size: 14px;
+    }
+
+    .toc {
+      position: sticky;
+      top: 82px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .toc-title {
+      margin: 0 0 10px;
+      color: #475467;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .toc a {
+      display: block;
+      padding: 7px 0 7px 12px;
+      border-left: 2px solid var(--line);
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      color: var(--accent);
+      border-left-color: var(--accent);
+    }
+
+    .frame-view {
+      grid-column: 1 / -1;
+      min-height: calc(100vh - 124px);
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .view {
+      display: none;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    iframe {
+      display: block;
+      width: 100%;
+      height: calc(100vh - 126px);
+      min-height: 680px;
       border: 0;
       background: #ffffff;
     }
 
-    @media (max-width: 760px) {
-      .header-inner {
-        padding: 20px 16px 14px;
+    .app-shell.expanded {
+      position: fixed;
+      inset: 58px 0 0;
+      z-index: 20;
+      grid-template-columns: 232px minmax(0, 1fr);
+      background: var(--bg);
+    }
+
+    .app-shell.expanded .sidebar {
+      top: 0;
+      height: calc(100vh - 58px);
+    }
+
+    .app-shell.expanded .content-wrap {
+      width: calc(100% - 36px);
+      max-width: none;
+      grid-template-columns: minmax(0, 1fr);
+      padding: 18px 0;
+    }
+
+    .app-shell.expanded .toc {
+      display: none;
+    }
+
+    .app-shell.expanded .document {
+      min-height: calc(100vh - 94px);
+    }
+
+    .app-shell.expanded iframe {
+      height: calc(100vh - 96px);
+      min-height: 0;
+    }
+
+    @media (max-width: 1120px) {
+      .content-wrap {
+        grid-template-columns: minmax(0, 1fr);
       }
 
-      h1 {
-        font-size: 24px;
+      .toc {
+        display: none;
       }
+    }
 
-      .switcher {
-        grid-template-columns: 1fr;
-        padding: 12px 16px 14px;
-      }
-
-      .viewer-shell {
-        width: calc(100% - 28px);
-        margin-top: 14px;
-      }
-
-      .viewer-bar {
+    @media (max-width: 860px) {
+      .globalbar {
+        height: auto;
+        min-height: 58px;
+        padding: 12px 16px;
         align-items: flex-start;
         flex-direction: column;
       }
 
+      .global-actions {
+        width: 100%;
+      }
+
+      .app-shell,
+      .app-shell.expanded {
+        position: static;
+        display: block;
+      }
+
+      .sidebar {
+        position: static;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .nav-button {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      .nav-desc,
+      .sidebar-note {
+        display: none;
+      }
+
+      .content-wrap,
+      .app-shell.expanded .content-wrap {
+        width: calc(100% - 24px);
+        padding: 16px 0 34px;
+      }
+
+      .document {
+        padding: 30px 22px 36px;
+      }
+
+      h1 {
+        font-size: 27px;
+      }
+
+      .info-board {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .info-item:nth-child(2) {
+        border-right: 0;
+      }
+
+      .info-item:nth-child(1),
+      .info-item:nth-child(2) {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .doc-block {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
       iframe {
-        height: 76vh;
+        height: 74vh;
         min-height: 560px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .nav-list {
+        grid-template-columns: 1fr;
+      }
+
+      .info-board {
+        grid-template-columns: 1fr;
+      }
+
+      .info-item,
+      .info-item:nth-child(2) {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .info-item:last-child {
+        border-bottom: 0;
+      }
+
+      .score-table col:nth-child(1) {
+        width: 28% !important;
+      }
+
+      .score-table col:nth-child(2) {
+        width: 31% !important;
+      }
+
+      .score-table col:nth-child(3) {
+        width: 41% !important;
       }
     }
   </style>
 </head>
 <body>
-  <div class="app">
-    <header>
-      <div class="header-inner">
-        <p class="eyebrow">高级计量经济学（Ⅱ）</p>
-        <h1>期末复习资料</h1>
-        <p class="subtitle">
-          选择下面的模块，在同一个页面内打开对应内容。选择题练习和模拟实证研究题资料仍然保留为独立文件，后续更新原文件后这里会同步显示。
-        </p>
+  <header class="globalbar">
+    <div class="globalbrand">
+      <span class="menu-icon" aria-hidden="true"><span></span></span>
+      <span class="book-mark" aria-hidden="true">计</span>
+      <span>高级计量经济学（Ⅱ）复习资料库</span>
+    </div>
+    <span class="current-page" id="contentTitle">考试大纲与题型分数</span>
+    <div class="global-actions">
+      <button class="action-button" type="button" id="toggleExpand">放大视图</button>
+      <a class="action-link" id="openStandalone" href="multiple-choice.html" target="_blank" rel="noopener" hidden>单独打开</a>
+    </div>
+  </header>
+
+  <div class="app-shell" id="appShell">
+    <aside class="sidebar" aria-label="复习资料目录">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">计</div>
+        <p class="brand-title">高级计量经济学（Ⅱ）<br>期末复习资料</p>
+        <p class="brand-subtitle">知识库式目录 · 点击切换内容</p>
       </div>
 
-      <nav class="switcher" aria-label="复习模块">
-        <button class="module-button active" type="button" data-module="quiz">
-          <span class="module-title">选择题练习</span>
-          <span class="module-desc">章节练习、选择题训练与即时复习。</span>
-          <span class="module-meta">点击打开选择题页面</span>
-        </button>
-        <button class="module-button" type="button" data-module="empirical">
-          <span class="module-title">模拟实证研究题复习资料</span>
-          <span class="module-desc">模型选择、模型设定、Stata 命令与系数解释模板。</span>
-          <span class="module-meta">点击打开实证题页面</span>
-        </button>
-      </nav>
-    </header>
-
-    <main class="viewer-shell">
-      <div class="viewer-bar">
-        <p class="viewer-title" id="viewerTitle">选择题练习</p>
-        <div class="viewer-actions">
-          <a class="link-button" id="openStandalone" href="高级计量经济学选择题练习.html" target="_blank" rel="noopener">单独打开</a>
-        </div>
+      <div class="search-box" aria-hidden="true">
+        <span class="search-icon"></span>
+        <span>搜索文档</span>
       </div>
-      <iframe
-        id="contentFrame"
-        title="选择题练习"
-        src="高级计量经济学选择题练习.html">
-      </iframe>
+
+      <div class="nav-group">
+        <p class="nav-caption">复习目录</p>
+        <nav class="nav-list">
+          <button class="nav-button active" type="button" data-view="outline">
+            <span class="nav-icon" aria-hidden="true"></span>
+            <span>
+              <span class="nav-title">考试大纲与题型分数</span>
+              <span class="nav-desc">时间、卷面分、题型和答题流程</span>
+            </span>
+          </button>
+          <button class="nav-button" type="button" data-view="quiz">
+            <span class="nav-icon" aria-hidden="true"></span>
+            <span>
+              <span class="nav-title">选择题</span>
+              <span class="nav-desc">章节练习、随机测试与错题复盘</span>
+            </span>
+          </button>
+          <button class="nav-button" type="button" data-view="empirical">
+            <span class="nav-icon" aria-hidden="true"></span>
+            <span>
+              <span class="nav-title">案例分析题</span>
+              <span class="nav-desc">模型设定、Stata 命令和系数解释</span>
+            </span>
+          </button>
+        </nav>
+      </div>
+
+      <p class="sidebar-note">建议顺序：先看考试结构，再刷选择题，最后按模型整理案例分析题模板。</p>
+    </aside>
+
+    <main class="main-area">
+      <div class="content-wrap">
+        <article class="document view active" id="outlineView">
+          <header class="doc-header">
+            <h1>高级计量经济学（Ⅱ）期末复习资料</h1>
+            <p class="doc-intro">这里汇总考试大纲、题型分数和案例分析题复习路径。整体按知识库页面组织，左侧切换模块，右侧进入具体内容。</p>
+            <div class="doc-meta">
+              <span>考试时间：6.30 下午</span>
+              <span>卷面：100 分</span>
+              <span>建议携带：计算器</span>
+            </div>
+          </header>
+
+          <section class="section" id="exam-info">
+            <h2>考试信息</h2>
+            <div class="info-board">
+              <div class="info-item">
+                <p class="info-label">考试时间</p>
+                <p class="info-value">6.30 下午</p>
+              </div>
+              <div class="info-item">
+                <p class="info-label">考试时长</p>
+                <p class="info-value">2.5 小时</p>
+              </div>
+              <div class="info-item">
+                <p class="info-label">卷面 / 期末分值</p>
+                <p class="info-value">100 分</p>
+              </div>
+              <div class="info-item">
+                <p class="info-label">携带物品</p>
+                <p class="info-value">计算器</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="score">
+            <h2>题型分数</h2>
+            <table class="score-table">
+              <colgroup>
+                <col style="width: 24%;">
+                <col style="width: 28%;">
+                <col style="width: 48%;">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>题型</th>
+                  <th>分数</th>
+                  <th>复习重点</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>选择题</td>
+                  <td>40 题 x 1 分 = 40 分</td>
+                  <td>来自学习通线上课程与章节测验，重点覆盖各模型的基本假设、适用场景和结果解释。</td>
+                </tr>
+                <tr>
+                  <td>案例分析题</td>
+                  <td>5 小题 x 6 分 = 30 分</td>
+                  <td>根据研究背景判断模型，写模型设定、Stata 主命令，并解释核心解释变量的经济含义。</td>
+                </tr>
+                <tr>
+                  <td>计算分析题</td>
+                  <td>3 道 x 10 分 = 30 分</td>
+                  <td>可能涉及计算器、画图或填表，重点复习能直接计算的方法和指标。</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="section" id="outline">
+            <h2>案例分析题复习大纲</h2>
+            <div class="block-list">
+              <div class="doc-block">
+                <div class="doc-block-title">面板模型</div>
+                <ul>
+                  <li>基准双向固定效应</li>
+                  <li>GMM 动态面板</li>
+                  <li>门限面板、分位数面板</li>
+                  <li>空间面板与溢出效应</li>
+                </ul>
+              </div>
+              <div class="doc-block">
+                <div class="doc-block-title">微观计量模型</div>
+                <ul>
+                  <li>二项选择模型</li>
+                  <li>有序 / 无序多项选择</li>
+                  <li>截尾、截断、计数模型</li>
+                  <li>生存分析与久期数据</li>
+                </ul>
+              </div>
+              <div class="doc-block">
+                <div class="doc-block-title">因果推断模型</div>
+                <ul>
+                  <li>工具变量与内生性</li>
+                  <li>DID / PSM-DID</li>
+                  <li>RDD 断点回归</li>
+                  <li>政策评价与经济意义解释</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="workflow">
+            <h2>答题流程</h2>
+            <div class="block-list">
+              <div class="doc-block">
+                <div class="doc-block-title">1. 选模型</div>
+                <p>先判断数据类型、被解释变量类型和题目关键词，再选择对应模型。</p>
+              </div>
+              <div class="doc-block">
+                <div class="doc-block-title">2. 写设定式</div>
+                <p>写出被解释变量、核心解释变量、控制变量、固定效应或动态项，并明确误差项。</p>
+              </div>
+              <div class="doc-block">
+                <div class="doc-block-title">3. 写 Stata 命令</div>
+                <p>主命令要体现模型类型、固定效应、聚类稳健标准误或 GMM 选项。</p>
+              </div>
+              <div class="doc-block">
+                <div class="doc-block-title">4. 解释经济意义</div>
+                <p>围绕核心解释变量说明方向、显著性和幅度，注意被解释变量是否取对数。</p>
+              </div>
+            </div>
+            <div class="callout">
+              答题提醒：卷子尽量写满，不留空白；模型选择理由、设定式、命令和经济意义都写上。若题目没有给具体估计结果，可以直接假设核心系数显著并解释其经济含义。
+            </div>
+          </section>
+        </article>
+
+        <aside class="toc" id="outlineToc" aria-label="页面目录">
+          <p class="toc-title">本页目录</p>
+          <a href="#exam-info">考试信息</a>
+          <a href="#score">题型分数</a>
+          <a href="#outline">案例分析题复习大纲</a>
+          <a href="#workflow">答题流程</a>
+        </aside>
+
+        <section class="frame-view view" id="frameView">
+          <iframe id="contentFrame" title="复习内容"></iframe>
+        </section>
+      </div>
     </main>
   </div>
 
   <script>
-    const modules = {
+    const views = {
+      outline: {
+        title: '考试大纲与题型分数',
+        src: ''
+      },
       quiz: {
-        title: '选择题练习',
-        src: '高级计量经济学选择题练习.html'
+        title: '选择题',
+        src: 'multiple-choice.html'
       },
       empirical: {
-        title: '模拟实证研究题复习资料',
-        src: '期末复习/期末复习/模拟实证研究题_面板模型.html'
+        title: '案例分析题',
+        src: 'empirical.html'
       }
     };
 
-    const buttons = Array.from(document.querySelectorAll('.module-button'));
+    const appShell = document.getElementById('appShell');
+    const navButtons = Array.from(document.querySelectorAll('.nav-button'));
+    const outlineView = document.getElementById('outlineView');
+    const outlineToc = document.getElementById('outlineToc');
+    const frameView = document.getElementById('frameView');
     const frame = document.getElementById('contentFrame');
-    const viewerTitle = document.getElementById('viewerTitle');
+    const contentTitle = document.getElementById('contentTitle');
     const standalone = document.getElementById('openStandalone');
+    const toggleExpand = document.getElementById('toggleExpand');
 
-    function setModule(key, updateHash = true) {
-      const module = modules[key] || modules.quiz;
-      buttons.forEach((button) => {
-        button.classList.toggle('active', button.dataset.module === key);
+    function setView(key, updateHash = true) {
+      const viewKey = views[key] ? key : 'outline';
+      const view = views[viewKey];
+
+      navButtons.forEach((button) => {
+        button.classList.toggle('active', button.dataset.view === viewKey);
       });
-      viewerTitle.textContent = module.title;
-      frame.title = module.title;
-      frame.src = module.src;
-      standalone.href = module.src;
+
+      contentTitle.textContent = view.title;
+
+      if (viewKey === 'outline') {
+        outlineView.classList.add('active');
+        outlineToc.hidden = false;
+        frameView.classList.remove('active');
+        frame.removeAttribute('src');
+        standalone.hidden = true;
+      } else {
+        outlineView.classList.remove('active');
+        outlineToc.hidden = true;
+        frameView.classList.add('active');
+        if (frame.getAttribute('src') !== view.src) {
+          frame.src = view.src;
+        }
+        standalone.href = view.src;
+        standalone.hidden = false;
+      }
+
       if (updateHash) {
-        history.replaceState(null, '', `#${key}`);
+        history.replaceState(null, '', viewKey === 'outline' ? location.pathname : `#${viewKey}`);
       }
     }
 
-    buttons.forEach((button) => {
-      button.addEventListener('click', () => setModule(button.dataset.module));
+    navButtons.forEach((button) => {
+      button.addEventListener('click', () => setView(button.dataset.view));
+    });
+
+    toggleExpand.addEventListener('click', () => {
+      const expanded = appShell.classList.toggle('expanded');
+      toggleExpand.textContent = expanded ? '退出放大' : '放大视图';
     });
 
     const initial = location.hash.replace('#', '');
-    if (modules[initial]) {
-      setModule(initial, false);
-    }
+    setView(views[initial] ? initial : 'outline', false);
   </script>
 </body>
 </html>
