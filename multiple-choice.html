@@ -509,6 +509,7 @@ let currentIdx   = 0;
 let answers      = [];
 let chapterScores = {};
 let selectedOpt  = null;
+let optionOrderHistory = {};
 
 CHAPTERS.forEach((ch, ci) => {
   chapterScores[ci] = {correct: 0, total: ch.questions.length, done: 0};
@@ -568,12 +569,73 @@ function setChapterQuizMode(m) {
   document.getElementById('ch-btn-test').classList.toggle('active', m === 'test');
 }
 
+function shuffleArray(items) {
+  const shuffled = items.slice();
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+function prepareQuestion(q) {
+  const prepared = Object.assign({}, q);
+  const sourceOptions = q.options || {};
+  if (sourceOptions.note) {
+    prepared.displayOptions = sourceOptions;
+    prepared.displayAnswer = q.answer;
+    return prepared;
+  }
+
+  const originalLetters = ['A', 'B', 'C', 'D'].filter(letter => sourceOptions[letter] !== undefined);
+  const optionEntries = originalLetters.map(letter => ({ originalLetter: letter, text: sourceOptions[letter] }));
+  let shuffledEntries = shuffleArray(optionEntries);
+
+  const orderId = qid(q);
+  const previousOrder = optionOrderHistory[orderId];
+  let currentOrder = shuffledEntries.map(entry => entry.originalLetter).join('');
+  let sameAsOriginal = shuffledEntries.every((entry, idx) => entry.originalLetter === originalLetters[idx]);
+  let rotateCount = 0;
+  while ((sameAsOriginal || currentOrder === previousOrder) && shuffledEntries.length > 1 && rotateCount < shuffledEntries.length) {
+    shuffledEntries = shuffledEntries.slice(1).concat(shuffledEntries[0]);
+    currentOrder = shuffledEntries.map(entry => entry.originalLetter).join('');
+    sameAsOriginal = shuffledEntries.every((entry, idx) => entry.originalLetter === originalLetters[idx]);
+    rotateCount++;
+  }
+  optionOrderHistory[orderId] = currentOrder;
+
+  const displayOptions = {};
+  let displayAnswer = q.answer;
+  originalLetters.forEach((displayLetter, idx) => {
+    const entry = shuffledEntries[idx];
+    displayOptions[displayLetter] = entry.text;
+    if (entry.originalLetter === q.answer) displayAnswer = displayLetter;
+  });
+
+  prepared.displayOptions = displayOptions;
+  prepared.displayAnswer = displayAnswer;
+  return prepared;
+}
+
+function prepareQuestionsForSession(items) {
+  return items.map(prepareQuestion);
+}
+
+function formatOptionTextForLabel(text) {
+  return String(text || '')
+    .replace(/<[^>]*>/g, '')
+    .replace(/\\\(|\\\)/g, '')
+    .replace(/\\lt/g, '<')
+    .replace(/\\gt/g, '>')
+    .trim();
+}
+
 // ── Start chapter ──
 function startChapter(ci) {
   clearSidebarActive();
   document.getElementById('ch-' + ci).classList.add('active');
   sessionMode = 'chapter'; quizMode = 'practice'; reviewMode = false;
-  questions = CHAPTERS[ci].questions.map(q => Object.assign({}, q, {chapterIdx: ci, chapterName: CHAPTERS[ci].name}));
+  questions = prepareQuestionsForSession(CHAPTERS[ci].questions.map(q => Object.assign({}, q, {chapterIdx: ci, chapterName: CHAPTERS[ci].name})));
   answers   = questions.map(() => ({selected: null, correct: false, skipped: false}));
   currentIdx = 0; selectedOpt = null;
   document.getElementById('chapter-title').textContent = CHAPTERS[ci].name;
@@ -601,7 +663,7 @@ function startRandom(qm) {
     const j = Math.floor(Math.random() * (i + 1));
     [all[i], all[j]] = [all[j], all[i]];
   }
-  questions  = all.slice(0, 40);
+  questions  = prepareQuestionsForSession(all.slice(0, 40));
   answers    = questions.map(() => ({selected: null, correct: false, skipped: false}));
   currentIdx = 0; selectedOpt = null;
 
@@ -634,7 +696,7 @@ function startWrong() {
     const j = Math.floor(Math.random() * (i + 1));
     [all[i], all[j]] = [all[j], all[i]];
   }
-  questions  = all;
+  questions  = prepareQuestionsForSession(all);
   answers    = questions.map(() => ({selected: null, correct: false, skipped: false}));
   currentIdx = 0; selectedOpt = null;
   document.getElementById('chapter-title').textContent = '错题本 · ' + all.length + ' 题';
@@ -715,7 +777,8 @@ function renderQuestion() {
   // Options
   const optDiv = document.getElementById('options');
   optDiv.innerHTML = '';
-  const opts = q.options;
+  const opts = q.displayOptions || q.options;
+  const correctAnswer = q.displayAnswer || q.answer;
   if (opts.note) {
     optDiv.innerHTML = '<div style="padding:16px;background:#fef9c3;border-radius:8px;color:#854d0e;font-size:14px;">⚠️ ' + opts.note + '</div>';
   } else {
@@ -727,7 +790,7 @@ function renderQuestion() {
       if (isAnswered) {
         if (reveal) {
           if (a.selected === letter) btn.classList.add(a.correct ? 'correct' : 'wrong');
-          else if (letter === q.answer) btn.classList.add('show-correct');
+          else if (letter === correctAnswer) btn.classList.add('show-correct');
         } else {
           // test mode, not revealed: amber highlight for selected
           if (a.selected === letter) btn.classList.add('test-selected');
@@ -753,7 +816,8 @@ function renderQuestion() {
   const explDiv = document.getElementById('explanation');
   if (isAnswered && reveal) {
     explDiv.style.display = 'block';
-    const ansLabel = q.answer + (q.answer_text ? ' — ' + q.answer_text.substring(0, 80) : '');
+    const ansOptionText = formatOptionTextForLabel(opts[correctAnswer]);
+    const ansLabel = correctAnswer + (ansOptionText ? ' — ' + ansOptionText.substring(0, 80) : '');
     document.getElementById('correct-ans-label').textContent = ansLabel;
     const expl = (q.explanation && q.explanation.length > 0)
       ? q.explanation.filter(s => s && !s.includes('高级计量经济学(II).pdf')).join('\n').trim()
@@ -816,7 +880,7 @@ function showFeedback(correct) {
 function confirmAnswer() {
   if (selectedOpt === null) return;
   const q = questions[currentIdx];
-  const correct = selectedOpt === q.answer;
+  const correct = selectedOpt === (q.displayAnswer || q.answer);
   answers[currentIdx] = {selected: selectedOpt, correct, skipped: false};
 
   if (quizMode === 'practice') {
@@ -1027,6 +1091,7 @@ function reviewWrong() {
 
 function retryAll() {
   reviewMode = false;
+  questions  = prepareQuestionsForSession(questions);
   answers    = questions.map(() => ({selected: null, correct: false, skipped: false}));
   currentIdx = 0; selectedOpt = null;
   if (quizMode === 'test') {
