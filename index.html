@@ -4,6 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>高级计量经济学（Ⅱ）期末复习资料</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
   <style>
     :root {
       --bg: #f6f7f9;
@@ -401,9 +413,9 @@
       min-width: 0;
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 44px 48px 52px;
+      border-radius: 14px;
+      box-shadow: 0 18px 44px rgba(31, 35, 41, 0.06);
+      padding: 48px 56px 56px;
     }
 
     .doc-header {
@@ -440,6 +452,117 @@
       align-items: center;
       min-height: 24px;
       border-bottom: 1px solid transparent;
+    }
+
+    .kb-home,
+    #examView,
+    .empirical-doc {
+      min-height: calc(100vh - 180px);
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+      background: transparent;
+    }
+
+    .kb-home,
+    #examView {
+      padding-top: 42px;
+    }
+
+    .kb-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .kb-title-main {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-width: 0;
+    }
+
+    .kb-book-icon {
+      flex: 0 0 auto;
+      width: 46px;
+      height: 46px;
+      display: inline-grid;
+      place-items: center;
+      border: 2px solid #8ab8ef;
+      border-radius: 8px;
+      background: #dbeafe;
+      color: #2563a8;
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .kb-welcome {
+      margin-top: 78px;
+      max-width: 720px;
+    }
+
+    .kb-welcome h2 {
+      border-left: 0;
+      padding-left: 0;
+      margin-bottom: 12px;
+      font-size: 18px;
+    }
+
+    .kb-welcome p {
+      color: #344054;
+      font-size: 16px;
+    }
+
+    .doc-index-list {
+      margin-top: 88px;
+      display: grid;
+      gap: 0;
+    }
+
+    .doc-index-row {
+      width: 100%;
+      min-height: 46px;
+      display: grid;
+      grid-template-columns: minmax(180px, auto) minmax(120px, 1fr) auto;
+      align-items: center;
+      gap: 16px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: #344054;
+      padding: 0 8px;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .doc-index-row:hover {
+      background: #f7f8fa;
+    }
+
+    .doc-index-title {
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    .doc-index-title.indent {
+      padding-left: 34px;
+    }
+
+    .doc-index-line {
+      height: 1px;
+      border-bottom: 1px dashed #d8dde5;
+    }
+
+    .doc-index-date {
+      color: var(--subtle);
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .doc-index-toggle {
+      margin-right: 8px;
+      color: var(--muted);
     }
 
     .section {
@@ -611,6 +734,436 @@
       border-left-color: var(--accent);
     }
 
+    .empirical-doc {
+      --green: var(--accent);
+      --soft: #f8fbfa;
+      --orange: #d97706;
+      --red: #d92d20;
+      --code: #18212f;
+      --code-ink: #eef6ff;
+      grid-column: 1 / -1;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+      background: transparent;
+      overflow: visible;
+    }
+
+    .empirical-doc > header,
+    .empirical-doc .model-directory,
+    .empirical-doc .model-nav {
+      grid-column: 1 / -1;
+    }
+
+    .empirical-doc > header {
+      padding: 34px 40px 24px;
+      border-bottom: 4px solid var(--accent);
+      background: transparent;
+    }
+
+    .empirical-doc .eyebrow {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .empirical-doc .subtitle {
+      margin: 12px 0 0;
+      max-width: 860px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .empirical-doc > section {
+      grid-column: 1;
+      padding: 26px 40px;
+      border-bottom: 1px solid #e7ecf2;
+    }
+
+    .empirical-doc > section:last-child {
+      border-bottom: 0;
+    }
+
+    .empirical-doc h2 {
+      margin: 0 0 16px;
+      padding-left: 12px;
+      border-left: 5px solid var(--accent);
+      font-size: 22px;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    .empirical-doc .model-title {
+      margin: 0 0 18px;
+      padding: 12px 16px;
+      border-left: 0;
+      border-top: 4px solid var(--accent);
+      background: #edf6f4;
+      color: #173f3a;
+      font-size: 24px;
+    }
+
+    .empirical-doc .sub-title {
+      margin-top: 4px;
+      font-size: 20px;
+      border-left-width: 4px;
+    }
+
+    .empirical-doc h3 {
+      margin: 22px 0 10px;
+      color: #1f3f5f;
+      font-size: 18px;
+      line-height: 1.4;
+      letter-spacing: 0;
+    }
+
+    .empirical-doc p {
+      margin: 8px 0;
+    }
+
+    .empirical-doc ul,
+    .empirical-doc ol {
+      margin: 8px 0 12px 24px;
+      padding: 0;
+    }
+
+    .empirical-doc li {
+      margin: 5px 0;
+    }
+
+    .empirical-doc table {
+      width: 100%;
+      margin: 14px 0 18px;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-size: 15px;
+    }
+
+    .empirical-doc th,
+    .empirical-doc td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      vertical-align: top;
+      word-break: break-word;
+    }
+
+    .empirical-doc th {
+      background: #edf6f4;
+      color: #173f3a;
+      text-align: left;
+      font-weight: 800;
+    }
+
+    .empirical-doc code {
+      color: #7b3f13;
+      background: #fff2e4;
+      border: 1px solid #f4d7b8;
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.94em;
+    }
+
+    .empirical-doc pre {
+      margin: 10px 0 16px;
+      padding: 14px 16px;
+      overflow-x: auto;
+      border-radius: 8px;
+      background: var(--code);
+      color: var(--code-ink);
+      line-height: 1.55;
+    }
+
+    .empirical-doc pre code {
+      color: inherit;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    .empirical-doc .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 14px 0;
+    }
+
+    .empirical-doc .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: var(--soft);
+    }
+
+    .empirical-doc .card h3 {
+      margin-top: 0;
+    }
+
+    .empirical-doc .note {
+      margin: 14px 0;
+      padding: 14px 16px;
+      border-left: 5px solid var(--orange);
+      background: #fff8ed;
+    }
+
+    .empirical-doc .exam {
+      border-left-color: var(--blue);
+      background: #f1f7ff;
+    }
+
+    .empirical-doc .warn {
+      border-left-color: var(--red);
+      background: #fff5f5;
+    }
+
+    .empirical-doc .formula {
+      margin: 12px 0 16px;
+      padding: 12px 14px;
+      border: 1px solid #dce6ef;
+      border-radius: 8px;
+      background: #fbfdff;
+      overflow-x: auto;
+    }
+
+    .empirical-doc .steps {
+      counter-reset: step;
+      list-style: none;
+      margin-left: 0;
+    }
+
+    .empirical-doc .steps li {
+      counter-increment: step;
+      position: relative;
+      min-height: 34px;
+      margin: 12px 0;
+      padding-left: 46px;
+    }
+
+    .empirical-doc .steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #ffffff;
+      line-height: 30px;
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .empirical-doc .tag {
+      display: inline-block;
+      margin: 2px 6px 2px 0;
+      padding: 2px 8px;
+      border: 1px solid #bfd1dd;
+      border-radius: 999px;
+      background: #f4f8fb;
+      color: #284b63;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .empirical-doc .source {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .empirical-doc .model-directory {
+      padding: 18px 56px 56px;
+      border-bottom: 1px solid #e7ecf2;
+      background: transparent;
+    }
+
+    .empirical-doc .model-directory-head {
+      max-width: 760px;
+      margin-bottom: 18px;
+    }
+
+    .empirical-doc .model-directory-head h2 {
+      margin-bottom: 8px;
+    }
+
+    .empirical-doc .model-directory-head p {
+      color: var(--muted);
+    }
+
+    .empirical-doc .model-directory-grid {
+      display: grid;
+      gap: 0;
+      margin-top: 34px;
+    }
+
+    .empirical-doc .model-card-button {
+      width: 100%;
+      min-height: 42px;
+      display: grid;
+      grid-template-columns: 64px minmax(150px, auto) minmax(80px, 1fr) auto;
+      align-items: center;
+      gap: 12px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      padding: 8px 12px;
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .empirical-doc .model-card-button:hover {
+      background: #f7f8fa;
+    }
+
+    .empirical-doc .model-card-no {
+      display: block;
+      grid-column: 1;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .empirical-doc .model-card-title {
+      display: block;
+      grid-column: 2;
+      margin-top: 0;
+      color: #173f3a;
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.35;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .empirical-doc .model-card-line {
+      grid-column: 3;
+      grid-row: 1;
+      height: 1px;
+      border-bottom: 1px dashed #d8dde5;
+    }
+
+    .empirical-doc .model-card-desc {
+      display: block;
+      grid-column: 4;
+      grid-row: 1;
+      color: var(--subtle);
+      font-size: 13px;
+      line-height: 1.35;
+      white-space: nowrap;
+    }
+
+    .empirical-doc .model-nav {
+      position: sticky;
+      top: 58px;
+      z-index: 5;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 8px;
+      padding: 14px 40px;
+      border-bottom: 1px solid #dfe6ee;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+    }
+
+    .empirical-doc .model-nav[hidden],
+    .empirical-doc .model-directory[hidden],
+    .empirical-doc .model-toc[hidden] {
+      display: none;
+    }
+
+    .empirical-doc .model-nav button {
+      min-height: 56px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+      color: #344054;
+      padding: 8px 10px;
+      text-align: left;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .empirical-doc .model-back {
+      grid-column: 1 / -1;
+      min-height: 36px !important;
+      color: var(--accent) !important;
+      font-weight: 800 !important;
+    }
+
+    .empirical-doc .model-nav button:hover {
+      border-color: #a9c8be;
+      background: #f7fbf9;
+    }
+
+    .empirical-doc .model-nav button.active {
+      border-color: #9cc8bb;
+      background: #edf6f4;
+      color: #173f3a;
+      font-weight: 800;
+    }
+
+    .empirical-doc .model-nav-no {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.25;
+    }
+
+    .empirical-doc .model-nav-title {
+      display: block;
+      margin-top: 2px;
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .empirical-doc .model-section[hidden] {
+      display: none;
+    }
+
+    .empirical-doc .model-section {
+      scroll-margin-top: 76px;
+    }
+
+    .empirical-doc .model-toc {
+      grid-column: 2;
+      grid-row: 1 / span 100;
+      position: sticky;
+      top: 142px;
+      margin: 26px 28px 0 0;
+      padding: 14px 0 14px 14px;
+      border-left: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .empirical-doc .model-toc-title {
+      margin: 0 0 10px;
+      color: #475467;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .empirical-doc .model-toc a {
+      display: block;
+      padding: 6px 0 6px 10px;
+      border-left: 2px solid transparent;
+      color: var(--muted);
+      text-decoration: none;
+      line-height: 1.4;
+    }
+
+    .empirical-doc .model-toc a:hover {
+      border-left-color: var(--accent);
+      color: var(--accent);
+    }
+
     .frame-view {
       grid-column: 1 / -1;
       min-height: calc(100vh - 124px);
@@ -627,6 +1180,12 @@
 
     .view.active {
       display: block;
+    }
+
+    .view.active.empirical-doc.model-open {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 220px;
+      align-items: start;
     }
 
     iframe {
@@ -738,6 +1297,81 @@
         padding: 30px 22px 36px;
       }
 
+      .empirical-doc {
+        padding: 0;
+      }
+
+      .empirical-doc > header,
+      .empirical-doc > section {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .empirical-doc .model-directory {
+        padding: 24px 18px 30px;
+      }
+
+      .empirical-doc .model-directory-grid {
+        margin-top: 24px;
+      }
+
+      .empirical-doc .model-card-button {
+        grid-template-columns: 52px minmax(0, 1fr) auto;
+        min-height: 40px;
+        gap: 8px;
+        padding: 8px 6px;
+      }
+
+      .empirical-doc .model-card-line {
+        display: none;
+      }
+
+      .empirical-doc .model-card-desc {
+        grid-column: 3;
+        font-size: 12px;
+      }
+
+      .empirical-doc .model-nav {
+        position: static;
+        grid-template-columns: 1fr;
+        padding: 12px 18px;
+      }
+
+      .empirical-doc .model-nav button {
+        min-height: 44px;
+      }
+
+      .view.active.empirical-doc.model-open {
+        display: block;
+      }
+
+      .empirical-doc .model-toc {
+        display: none;
+      }
+
+      .empirical-doc .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .kb-title-row {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .kb-welcome,
+      .doc-index-list {
+        margin-top: 34px;
+      }
+
+      .doc-index-row {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 10px;
+      }
+
+      .doc-index-line {
+        display: none;
+      }
+
       h1 {
         font-size: 27px;
       }
@@ -810,7 +1444,7 @@
       <span class="book-mark" aria-hidden="true">计</span>
       <span>高级计量经济学（Ⅱ）复习资料库</span>
     </div>
-    <span class="current-page" id="contentTitle">考试大纲与题型分数</span>
+    <span class="current-page" id="contentTitle">首页</span>
     <div class="global-actions">
       <button class="action-button" type="button" id="toggleExpand">放大视图</button>
       <a class="action-link" id="openStandalone" href="multiple-choice.html" target="_blank" rel="noopener" hidden>单独打开</a>
@@ -834,6 +1468,13 @@
         <p class="nav-caption">复习目录</p>
         <nav class="nav-list">
           <button class="nav-button active" type="button" data-view="outline">
+            <span class="nav-icon" aria-hidden="true"></span>
+            <span>
+              <span class="nav-title">首页</span>
+              <span class="nav-desc">知识库首页与文档列表</span>
+            </span>
+          </button>
+          <button class="nav-button" type="button" data-view="exam">
             <span class="nav-icon" aria-hidden="true"></span>
             <span>
               <span class="nav-title">考试大纲与题型分数</span>
@@ -875,6 +1516,34 @@
               <span class="subnav-kicker">模型五</span>
               <span class="subnav-title">空间面板模型</span>
             </button>
+            <button class="subnav-button" type="button" data-view="empirical" data-model="model-6">
+              <span class="subnav-kicker">模型六</span>
+              <span class="subnav-title">二项选择模型</span>
+            </button>
+            <button class="subnav-button" type="button" data-view="empirical" data-model="model-7">
+              <span class="subnav-kicker">模型七</span>
+              <span class="subnav-title">多项选择模型</span>
+            </button>
+            <button class="subnav-button" type="button" data-view="empirical" data-model="model-8">
+              <span class="subnav-kicker">模型八</span>
+              <span class="subnav-title">截尾与截断模型</span>
+            </button>
+            <button class="subnav-button" type="button" data-view="empirical" data-model="model-9">
+              <span class="subnav-kicker">模型九</span>
+              <span class="subnav-title">计数模型</span>
+            </button>
+            <button class="subnav-button" type="button" data-view="empirical" data-model="model-10">
+              <span class="subnav-kicker">模型十</span>
+              <span class="subnav-title">生存分析模型</span>
+            </button>
+            <button class="subnav-button" type="button" data-view="empirical" data-model="model-11">
+              <span class="subnav-kicker">模型十一</span>
+              <span class="subnav-title">DID 模型</span>
+            </button>
+            <button class="subnav-button" type="button" data-view="empirical" data-model="model-12">
+              <span class="subnav-kicker">模型十二</span>
+              <span class="subnav-title">RDD 模型</span>
+            </button>
           </div>
         </nav>
       </div>
@@ -884,10 +1553,109 @@
 
     <main class="main-area">
       <div class="content-wrap">
-        <article class="document view active" id="outlineView">
+        <article class="document view active kb-home" id="outlineView">
           <header class="doc-header">
-            <h1>高级计量经济学（Ⅱ）期末复习资料</h1>
-            <p class="doc-intro">这里汇总考试大纲、题型分数和案例分析题复习路径。整体按知识库页面组织，左侧切换模块，右侧进入具体内容。</p>
+            <div class="kb-title-row">
+              <div class="kb-title-main">
+                <span class="kb-book-icon" aria-hidden="true">计</span>
+                <h1>高级计量经济学（Ⅱ）复习资料库</h1>
+              </div>
+            </div>
+            <div class="doc-meta">
+              <span>3 文档</span>
+              <span>考试时间：6.30 下午</span>
+              <span>卷面：100 分</span>
+            </div>
+          </header>
+
+          <section class="kb-welcome" id="welcome">
+            <h2>欢迎来到复习资料库</h2>
+            <p>把选择题、案例分析题和考试信息整理成知识库，刷题、查模型和背模板都从这里进入。</p>
+          </section>
+
+          <section class="doc-index-list" id="doc-list" aria-label="文档列表">
+            <button class="doc-index-row" type="button" data-view-shortcut="exam">
+              <span class="doc-index-title">考试大纲与题型分数</span>
+              <span class="doc-index-line"></span>
+              <span class="doc-index-date">06-30 下午</span>
+            </button>
+            <button class="doc-index-row" type="button" data-view-shortcut="quiz">
+              <span class="doc-index-title">选择题</span>
+              <span class="doc-index-line"></span>
+              <span class="doc-index-date">40 题 x 1 分</span>
+            </button>
+            <button class="doc-index-row" type="button" data-view-shortcut="empirical">
+              <span class="doc-index-title"><span class="doc-index-toggle">⌄</span>案例分析题</span>
+              <span class="doc-index-line"></span>
+              <span class="doc-index-date">5 小题 x 6 分</span>
+            </button>
+            <button class="doc-index-row" type="button" data-view-shortcut="empirical" data-model-shortcut="model-1">
+              <span class="doc-index-title indent">基准面板模型</span>
+              <span class="doc-index-line"></span>
+              <span class="doc-index-date">模型一</span>
+            </button>
+            <button class="doc-index-row" type="button" data-view-shortcut="empirical" data-model-shortcut="model-2">
+              <span class="doc-index-title indent">GMM 动态面板模型</span>
+              <span class="doc-index-line"></span>
+              <span class="doc-index-date">模型二</span>
+            </button>
+            <button class="doc-index-row" type="button" data-view-shortcut="empirical" data-model-shortcut="model-3">
+              <span class="doc-index-title indent">面板门限模型</span>
+              <span class="doc-index-line"></span>
+              <span class="doc-index-date">模型三</span>
+            </button>
+            <button class="doc-index-row" type="button" data-view-shortcut="empirical" data-model-shortcut="model-4">
+              <span class="doc-index-title indent">面板分位数模型</span>
+              <span class="doc-index-line"></span>
+              <span class="doc-index-date">模型四</span>
+            </button>
+            <button class="doc-index-row" type="button" data-view-shortcut="empirical" data-model-shortcut="model-5">
+              <span class="doc-index-title indent">空间面板模型</span>
+              <span class="doc-index-line"></span>
+              <span class="doc-index-date">模型五</span>
+            </button>
+            <button class="doc-index-row" type="button" data-view-shortcut="empirical" data-model-shortcut="model-6">
+              <span class="doc-index-title indent">二项选择模型</span>
+              <span class="doc-index-line"></span>
+              <span class="doc-index-date">模型六</span>
+            </button>
+            <button class="doc-index-row" type="button" data-view-shortcut="empirical" data-model-shortcut="model-7">
+              <span class="doc-index-title indent">多项选择模型</span>
+              <span class="doc-index-line"></span>
+              <span class="doc-index-date">模型七</span>
+            </button>
+            <button class="doc-index-row" type="button" data-view-shortcut="empirical" data-model-shortcut="model-8">
+              <span class="doc-index-title indent">截尾与截断模型</span>
+              <span class="doc-index-line"></span>
+              <span class="doc-index-date">模型八</span>
+            </button>
+            <button class="doc-index-row" type="button" data-view-shortcut="empirical" data-model-shortcut="model-9">
+              <span class="doc-index-title indent">计数模型</span>
+              <span class="doc-index-line"></span>
+              <span class="doc-index-date">模型九</span>
+            </button>
+            <button class="doc-index-row" type="button" data-view-shortcut="empirical" data-model-shortcut="model-10">
+              <span class="doc-index-title indent">生存分析模型</span>
+              <span class="doc-index-line"></span>
+              <span class="doc-index-date">模型十</span>
+            </button>
+            <button class="doc-index-row" type="button" data-view-shortcut="empirical" data-model-shortcut="model-11">
+              <span class="doc-index-title indent">DID 模型</span>
+              <span class="doc-index-line"></span>
+              <span class="doc-index-date">模型十一</span>
+            </button>
+            <button class="doc-index-row" type="button" data-view-shortcut="empirical" data-model-shortcut="model-12">
+              <span class="doc-index-title indent">RDD 模型</span>
+              <span class="doc-index-line"></span>
+              <span class="doc-index-date">模型十二</span>
+            </button>
+          </section>
+        </article>
+
+        <article class="document view" id="examView">
+          <header class="doc-header">
+            <h1>考试大纲与题型分数</h1>
+            <p class="doc-intro">汇总考试时间、卷面分值、题型结构和案例分析题复习路径。答题时先判断数据和题型，再写模型设定、Stata 命令与经济含义。</p>
             <div class="doc-meta">
               <span>考试时间：6.30 下午</span>
               <span>卷面：100 分</span>
@@ -1019,6 +1787,2575 @@
           <a href="#workflow">答题流程</a>
         </aside>
 
+        <article class="document view empirical-doc" id="empiricalView">
+      <div class="model-directory" id="modelDirectory">
+        <div class="model-directory-head">
+          <h2>案例分析题模型目录</h2>
+          <p>先按题干关键词判断模型类型，再进入对应模型复习模型设定、Stata 命令、检验和经济含义解释。</p>
+        </div>
+        <div class="model-directory-grid">
+          <button class="model-card-button" type="button" data-model-card="model-1">
+            <span class="model-card-no">模型一</span>
+            <span class="model-card-title">基准面板模型</span>
+            <span class="model-card-line"></span>
+            <span class="model-card-desc">面板基础</span>
+          </button>
+          <button class="model-card-button" type="button" data-model-card="model-2">
+            <span class="model-card-no">模型二</span>
+            <span class="model-card-title">GMM 动态面板模型</span>
+            <span class="model-card-line"></span>
+            <span class="model-card-desc">动态面板</span>
+          </button>
+          <button class="model-card-button" type="button" data-model-card="model-3">
+            <span class="model-card-no">模型三</span>
+            <span class="model-card-title">面板门限模型</span>
+            <span class="model-card-line"></span>
+            <span class="model-card-desc">非线性</span>
+          </button>
+          <button class="model-card-button" type="button" data-model-card="model-4">
+            <span class="model-card-no">模型四</span>
+            <span class="model-card-title">面板分位数模型</span>
+            <span class="model-card-line"></span>
+            <span class="model-card-desc">异质性</span>
+          </button>
+          <button class="model-card-button" type="button" data-model-card="model-5">
+            <span class="model-card-no">模型五</span>
+            <span class="model-card-title">空间面板模型</span>
+            <span class="model-card-line"></span>
+            <span class="model-card-desc">空间溢出</span>
+          </button>
+          <button class="model-card-button" type="button" data-model-card="model-6">
+            <span class="model-card-no">模型六</span>
+            <span class="model-card-title">二项选择模型</span>
+            <span class="model-card-line"></span>
+            <span class="model-card-desc">0/1 选择</span>
+          </button>
+          <button class="model-card-button" type="button" data-model-card="model-7">
+            <span class="model-card-no">模型七</span>
+            <span class="model-card-title">多项选择模型</span>
+            <span class="model-card-line"></span>
+            <span class="model-card-desc">有序/无序</span>
+          </button>
+          <button class="model-card-button" type="button" data-model-card="model-8">
+            <span class="model-card-no">模型八</span>
+            <span class="model-card-title">截尾与截断模型</span>
+            <span class="model-card-line"></span>
+            <span class="model-card-desc">Tobit/Heckman</span>
+          </button>
+          <button class="model-card-button" type="button" data-model-card="model-9">
+            <span class="model-card-no">模型九</span>
+            <span class="model-card-title">计数模型</span>
+            <span class="model-card-line"></span>
+            <span class="model-card-desc">Poisson/NB</span>
+          </button>
+          <button class="model-card-button" type="button" data-model-card="model-10">
+            <span class="model-card-no">模型十</span>
+            <span class="model-card-title">生存分析模型</span>
+            <span class="model-card-line"></span>
+            <span class="model-card-desc">久期/风险</span>
+          </button>
+          <button class="model-card-button" type="button" data-model-card="model-11">
+            <span class="model-card-no">模型十一</span>
+            <span class="model-card-title">DID 模型</span>
+            <span class="model-card-line"></span>
+            <span class="model-card-desc">政策评估</span>
+          </button>
+          <button class="model-card-button" type="button" data-model-card="model-12">
+            <span class="model-card-no">模型十二</span>
+            <span class="model-card-title">RDD 模型</span>
+            <span class="model-card-line"></span>
+            <span class="model-card-desc">断点/LATE</span>
+          </button>
+        </div>
+      </div>
+
+      <nav class="model-nav" aria-label="案例分析题模型切换" hidden>
+        <button class="model-back" type="button" id="backToModels">返回模型目录</button>
+        <button type="button" data-model-target="model-1">
+          <span class="model-nav-no">模型一</span>
+          <span class="model-nav-title">基准面板模型</span>
+        </button>
+        <button type="button" data-model-target="model-2">
+          <span class="model-nav-no">模型二</span>
+          <span class="model-nav-title">GMM 动态面板模型</span>
+        </button>
+        <button type="button" data-model-target="model-3">
+          <span class="model-nav-no">模型三</span>
+          <span class="model-nav-title">面板门限模型</span>
+        </button>
+        <button type="button" data-model-target="model-4">
+          <span class="model-nav-no">模型四</span>
+          <span class="model-nav-title">面板分位数模型</span>
+        </button>
+        <button type="button" data-model-target="model-5">
+          <span class="model-nav-no">模型五</span>
+          <span class="model-nav-title">空间面板模型</span>
+        </button>
+        <button type="button" data-model-target="model-6">
+          <span class="model-nav-no">模型六</span>
+          <span class="model-nav-title">二项选择模型</span>
+        </button>
+        <button type="button" data-model-target="model-7">
+          <span class="model-nav-no">模型七</span>
+          <span class="model-nav-title">多项选择模型</span>
+        </button>
+        <button type="button" data-model-target="model-8">
+          <span class="model-nav-no">模型八</span>
+          <span class="model-nav-title">截尾与截断模型</span>
+        </button>
+        <button type="button" data-model-target="model-9">
+          <span class="model-nav-no">模型九</span>
+          <span class="model-nav-title">计数模型</span>
+        </button>
+        <button type="button" data-model-target="model-10">
+          <span class="model-nav-no">模型十</span>
+          <span class="model-nav-title">生存分析模型</span>
+        </button>
+        <button type="button" data-model-target="model-11">
+          <span class="model-nav-no">模型十一</span>
+          <span class="model-nav-title">DID 模型</span>
+        </button>
+        <button type="button" data-model-target="model-12">
+          <span class="model-nav-no">模型十二</span>
+          <span class="model-nav-title">RDD 模型</span>
+        </button>
+      </nav>
+
+      <aside class="model-toc" id="modelToc" aria-label="当前模型目录" hidden>
+        <p class="model-toc-title">本模型目录</p>
+        <div id="modelTocLinks"></div>
+      </aside>
+
+      <section id="model-1">
+        <h2 class="model-title">模型一：基准面板模型</h2>
+        <h2 class="sub-title">1.1 整理思路：模拟实证研究题怎么答</h2>
+        <p>基准面板模型适用于题目给出“个体 \(i\) - 时间 \(t\)”结构的数据，并要求分析某个核心解释变量 \(x_{it}\) 对被解释变量 \(y_{it}\) 的影响。</p>
+        <ol class="steps">
+          <li><strong>先识别数据：</strong>如果数据是企业-年份、城市-年份、省份-年份、个人-年份、家庭-年份，就是面板数据。</li>
+          <li><strong>再识别变量：</strong>写清楚被解释变量 \(y_{it}\)、核心解释变量 \(x_{it}\)、控制变量 \(Controls_{it}\)、个体编号 \(i\) 和时间 \(t\)。</li>
+          <li><strong>说明为什么用面板模型：</strong>面板数据可以控制不可观测的个体异质性和时间冲击，例如个人能力、地区文化、宏观经济环境等。</li>
+          <li><strong>默认优先写双向固定效应：</strong>考试场景下，若没有特别要求随机效应，基准模型通常写个体固定效应加时间固定效应。</li>
+          <li><strong>最后解释系数：</strong>围绕核心解释变量的系数 \(\beta\) 解释经济含义，注意被解释变量是否取对数。</li>
+        </ol>
+        <div class="note exam">
+          <strong>考场一句话：</strong>本题为个体-年份面板数据，为控制个体层面不随时间变化的不可观测因素以及年份共同冲击，设定双向固定效应模型，并在个体层面使用聚类稳健标准误。
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">1.2 模型设定：从一维固定效应到双向固定效应</h2>
+        <div class="note exam">
+          <strong>考场记忆：</strong>固定效应模型也可以理解为变截距模型，即允许截距随个体或时间变化。个体固定效应是截距随个体变化，时间固定效应是截距随时间变化。
+        </div>
+
+        <h3>1. 个体固定效应模型</h3>
+        <p>如果不同个体之间存在不可观测差异，例如个人能力、家庭背景、企业管理水平、城市制度环境，这些差异会影响 \(y\)，也可能和 \(x\) 相关，就需要控制个体固定效应。</p>
+        <div class="formula">
+          \[
+          y_{it}=\alpha_i+\beta x_{it}+\varepsilon_{it}
+          \]
+        </div>
+        <ul>
+          <li>\(\alpha_i\)：个体固定效应，表示每个个体独有且不随时间变化的不可观测因素。</li>
+          <li>\(\beta\)：核心解释变量的边际影响，是实证题中最需要解释的参数。</li>
+          <li>\(\varepsilon_{it}\)：随个体和时间变化的扰动项。</li>
+        </ul>
+
+        <h3>2. 时间固定效应模型</h3>
+        <p>如果不同年份存在共同冲击，例如宏观经济周期、政策环境、通胀、疫情冲击，需要控制时间固定效应。</p>
+        <div class="formula">
+          \[
+          y_{it}=\gamma_t+\beta x_{it}+\varepsilon_{it}
+          \]
+        </div>
+        <ul>
+          <li>\(\gamma_t\)：时间固定效应，控制同一年所有个体共同受到的冲击。</li>
+          <li>例如，某一年经济大环境变化会影响所有人的工资或所有地区的收入。</li>
+        </ul>
+
+        <h3>3. 双向固定效应模型</h3>
+        <p>模拟实证研究题中最稳妥、最常用的基准写法，是同时控制个体固定效应和时间固定效应：</p>
+        <div class="formula">
+          \[
+          y_{it}=\beta_0+\beta_1 x_{it}+\gamma'Controls_{it}+\alpha_i+\lambda_t+\varepsilon_{it}
+          \]
+        </div>
+        <table>
+          <colgroup>
+            <col style="width: 15%;">
+            <col style="width: 40%;">
+            <col style="width: 45%;">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>符号</th>
+              <th>含义</th>
+              <th>考试解释</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>\(y_{it}\)</td>
+              <td>第 \(i\) 个个体在第 \(t\) 期的被解释变量</td>
+              <td>如工资、收入、企业绩效、污染水平</td>
+            </tr>
+            <tr>
+              <td>\(x_{it}\)</td>
+              <td>核心解释变量</td>
+              <td>题目真正关心的影响因素</td>
+            </tr>
+            <tr>
+              <td>\(Controls_{it}\)</td>
+              <td>控制变量</td>
+              <td>其他可能影响 \(y\) 的变量</td>
+            </tr>
+            <tr>
+              <td>\(\alpha_i\)</td>
+              <td>个体固定效应</td>
+              <td>控制不随时间变化的个体差异</td>
+            </tr>
+            <tr>
+              <td>\(\lambda_t\)</td>
+              <td>时间固定效应</td>
+              <td>控制所有个体共同面对的年份冲击</td>
+            </tr>
+            <tr>
+              <td>\(\beta_1\)</td>
+              <td>核心解释变量系数</td>
+              <td>经济意义解释的核心</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2 class="sub-title">1.3 为什么不直接用混合 OLS</h2>
+        <p>混合 OLS 把所有个体和所有时间的数据直接合并回归，相当于忽略个体差异：</p>
+        <div class="formula">
+          \[
+          y_{it}=\alpha+\beta x_{it}+v_{it},\qquad v_{it}=\alpha_i+\varepsilon_{it}
+          \]
+        </div>
+        <p>如果个体效应 \(\alpha_i\) 与解释变量 \(x_{it}\) 相关，即：</p>
+        <div class="formula">
+          \[
+          Cov(x_{it},\alpha_i)\neq 0
+          \]
+        </div>
+        <p>那么混合 OLS 会因为遗漏个体异质性而有偏且不一致。固定效应模型允许 \(\alpha_i\) 与 \(x_{it}\) 相关，因此更适合处理这类面板数据问题。</p>
+
+        <div class="grid">
+          <div class="card">
+            <h3>混合模型</h3>
+            <p>假设所有个体截距相同：</p>
+            <div class="formula">\[y_{it}=\alpha+\beta x_{it}+\varepsilon_{it}\]</div>
+            <p>如果个体差异很重要，这个模型容易漏掉关键因素。</p>
+          </div>
+          <div class="card">
+            <h3>固定效应模型</h3>
+            <p>允许每个个体有自己的截距：</p>
+            <div class="formula">\[y_{it}=\alpha_i+\beta x_{it}+\varepsilon_{it}\]</div>
+            <p>重点利用同一个体内部随时间变化的信息识别 \(\beta\)。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">1.4 估计方法：Within 与 LSDV</h2>
+        <h3>1. Within 估计</h3>
+        <p>固定效应模型的核心是把每个变量减去该个体的时间平均值，从而消去 \(\alpha_i\)。</p>
+        <div class="formula">
+          \[
+          y_{it}-\bar{y}_i=\beta(x_{it}-\bar{x}_i)+(\varepsilon_{it}-\bar{\varepsilon}_i)
+          \]
+        </div>
+        <p>这说明固定效应估计本质上比较的是“同一个个体自身随时间变化时，\(x\) 的变化如何对应 \(y\) 的变化”。</p>
+
+        <h3>2. LSDV 估计</h3>
+        <p>LSDV 是 Least Squares Dummy Variable，即加入个体虚拟变量来估计固定效应：</p>
+        <div class="formula">
+          \[
+          y_{it}=\alpha_1D_{1i}+\alpha_2D_{2i}+\cdots+\alpha_ND_{Ni}+\beta x_{it}+\varepsilon_{it}
+          \]
+        </div>
+        <p>如果还控制年份效应，则再加入年份虚拟变量 \(D_t\)。实际软件中，<code>xtreg, fe</code> 通常用 Within 思路；<code>reg ... i.id i.year</code> 是 LSDV 思路。</p>
+      </section>
+
+      <section>
+        <h2 class="sub-title">1.5 Stata 命令：基准面板模型怎么写</h2>
+        <h3>1. 设定面板数据</h3>
+        <pre><code>xtset id year</code></pre>
+        <p>其中 <code>id</code> 是个体编号，<code>year</code> 是时间变量。</p>
+
+        <h3>2. 个体固定效应</h3>
+        <pre><code>xtreg y x controls, fe vce(cluster id)</code></pre>
+
+        <h3>3. 双向固定效应</h3>
+        <pre><code>xtreg y x controls i.year, fe vce(cluster id)</code></pre>
+        <p>如果可以使用高维固定效应命令，也可以写：</p>
+        <pre><code>reghdfe y x controls, absorb(id year) vce(cluster id)</code></pre>
+
+        <h3>4. LSDV 写法</h3>
+        <pre><code>reg y x controls i.id i.year, vce(cluster id)</code></pre>
+
+        <div class="note warn">
+          <strong>注意：</strong>个体固定效应会吸收所有“不随时间变化”的变量。因此像性别、民族、出生地这类时间不变变量，在固定效应模型里通常无法单独估计系数。
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">1.6 模型选择检验：什么时候写 F 检验和 Hausman</h2>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 24%;">检验</th>
+              <th>原假设</th>
+              <th>拒绝原假设时</th>
+              <th style="width: 26%;">考试写法</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>混合模型 vs. 固定效应模型</td>
+              <td>\(H_0:\alpha_i=\alpha\)，即不存在个体异质性</td>
+              <td>说明存在个体异质性，应拒绝混合模型，考虑 FE 或 RE</td>
+              <td>用 F 检验判断是否需要固定效应</td>
+            </tr>
+            <tr>
+              <td>随机效应 vs. 固定效应</td>
+              <td>\(H_0:Cov(x_{it},\alpha_i)=0\)，随机效应一致</td>
+              <td>说明随机效应不合适，应选择固定效应</td>
+              <td>用 Hausman 检验选择 FE 或 RE</td>
+            </tr>
+          </tbody>
+        </table>
+        <pre><code>xtreg y x controls i.year, fe
+est store fe
+xtreg y x controls i.year, re
+est store re
+hausman fe re, constant sigmamore</code></pre>
+        <div class="note exam">
+          <strong>考场处理：</strong>如果题目只要求“建立主模型”，直接写双向固定效应即可；如果题目问“如何选择面板模型”，再补充 F 检验和 Hausman 检验。
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">1.7 课件例子：新就业人群的薪资影响因素分析</h2>
+        <p class="source">参考课件《高级计量经济学(II)》第二部分“面板数据回归模型”，工资案例页。</p>
+
+        <h3>1. 研究问题</h3>
+        <p>研究新就业人群中，婚姻状态、是否加入工会、工作经验等因素是否影响工资。数据为个人-年份面板数据。</p>
+        <div>
+          <span class="tag">个体：nr</span>
+          <span class="tag">时间：year</span>
+          <span class="tag">被解释变量：lwage</span>
+          <span class="tag">核心变量：married, union, exper, expersq</span>
+        </div>
+
+        <h3>2. 模型设定</h3>
+        <div class="formula">
+          \[
+          \log(wage)_{it}
+          =\alpha_i+\beta_1married_{it}+\beta_2union_{it}
+          +\beta_3exper_{it}+\beta_4exper_{it}^{2}
+          +\lambda_t+\varepsilon_{it}
+          \]
+        </div>
+        <ul>
+          <li>\(\alpha_i\)：个人固定效应，控制个人能力、家庭背景、稳定性格等不随时间变化的因素。</li>
+          <li>\(\lambda_t\)：年份固定效应，控制不同年份共同的宏观经济环境。</li>
+          <li>\(\log(wage)\)：工资取对数，因此虚拟变量系数要按半弹性解释。</li>
+        </ul>
+
+        <h3>3. Stata 命令</h3>
+        <pre><code>xtset nr year
+xtreg lwage married union exper expersq i.year, fe vce(cluster nr)</code></pre>
+        <p>课件中也使用了简写：</p>
+        <pre><code>xtreg lwage married union exper expersq i.year, fe r</code></pre>
+
+        <h3>4. 结果如何解释</h3>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 18%;">变量</th>
+              <th style="width: 18%;">课件系数</th>
+              <th style="width: 18%;">显著性</th>
+              <th>经济含义</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>married</code></td>
+              <td>0.0467</td>
+              <td>5% 水平显著</td>
+              <td>在控制个人固定效应、年份固定效应和其他变量后，已婚者工资约比未婚者高 \(e^{0.0467}-1\approx 4.78\%\)。</td>
+            </tr>
+            <tr>
+              <td><code>union</code></td>
+              <td>0.0800</td>
+              <td>1% 水平显著</td>
+              <td>加入工会者工资约比未加入工会者高 \(e^{0.0800}-1\approx 8.33\%\)。</td>
+            </tr>
+            <tr>
+              <td><code>exper</code></td>
+              <td>0.1321</td>
+              <td>1% 水平显著</td>
+              <td>工作经验对工资有正向影响，但由于加入了经验平方项，边际影响不是常数。</td>
+            </tr>
+            <tr>
+              <td><code>expersq</code></td>
+              <td>-0.00519</td>
+              <td>1% 水平显著</td>
+              <td>经验平方项为负，说明经验对工资的正向作用递减，工资随经验增加先上升后趋缓。</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>5. 工作经验的边际效应</h3>
+        <p>因为模型中有 \(exper\) 和 \(exper^2\)，经验增加一年对 \(\log(wage)\) 的边际影响为：</p>
+        <div class="formula">
+          \[
+          \frac{\partial \log(wage)_{it}}{\partial exper_{it}}
+          =\beta_3+2\beta_4exper_{it}
+          \]
+        </div>
+        <p>代入课件估计值：</p>
+        <div class="formula">
+          \[
+          0.1321+2(-0.00519)exper_{it}
+          \]
+        </div>
+        <p>当边际效应等于 0 时，工资达到经验维度上的峰值：</p>
+        <div class="formula">
+          \[
+          exper^*=-\frac{\beta_3}{2\beta_4}
+          =-\frac{0.1321}{2(-0.00519)}
+          \approx 12.7
+          \]
+        </div>
+        <p>因此可解释为：工作经验增加会提高工资，但这种提高作用逐渐减弱，约在 12.7 年附近达到峰值。</p>
+      </section>
+
+      <section>
+        <h2 class="sub-title">1.8 考场可直接套用的完整答案</h2>
+        <div class="note exam">
+          <p><strong>模型选择：</strong>本题数据包含个体和年份两个维度，属于面板数据。由于不同个体可能存在不随时间变化的不可观测差异，同时不同年份也可能存在共同宏观冲击，因此选择双向固定效应模型。</p>
+          <p><strong>模型设定：</strong></p>
+          <div class="formula">
+            \[
+            y_{it}=\beta_0+\beta_1x_{it}+\gamma'Controls_{it}+\alpha_i+\lambda_t+\varepsilon_{it}
+            \]
+          </div>
+          <p>其中，\(\alpha_i\) 表示个体固定效应，\(\lambda_t\) 表示时间固定效应，\(\beta_1\) 是核心解释变量 \(x_{it}\) 对被解释变量 \(y_{it}\) 的影响。</p>
+          <p><strong>Stata 命令：</strong></p>
+          <pre><code>xtset id year
+xtreg y x controls i.year, fe vce(cluster id)</code></pre>
+          <p>或写：</p>
+          <pre><code>reghdfe y x controls, absorb(id year) vce(cluster id)</code></pre>
+          <p><strong>经济意义：</strong>若 \(\beta_1\) 显著为正，说明在控制其他因素、个体固定效应和年份固定效应后，\(x\) 对 \(y\) 具有显著促进作用；若 \(\beta_1\) 显著为负，则说明 \(x\) 对 \(y\) 具有显著抑制作用。若 \(y\) 为对数形式，则 \(x\) 增加 1 个单位会使 \(y\) 约变化 \(100\beta_1\%\)；若 \(x\) 为 0/1 变量，则参与组相对未参与组的变化约为 \(e^{\beta_1}-1\)。</p>
+        </div>
+      </section>
+
+      <section id="model-2">
+        <h2 class="model-title">模型二：GMM 动态面板模型</h2>
+        <h2 class="sub-title">2.1 什么时候从基准面板转向动态面板</h2>
+        <p>GMM 在这里主要指短面板动态面板模型中的差分 GMM 和系统 GMM。它适用于题目明确提示“历史的被解释变量会影响当期被解释变量”，或普通固定效应模型可能存在动态内生性、遗漏重要变量等问题。</p>
+
+        <div class="note exam">
+          <strong>识别触发词：</strong>
+          长期影响、短期影响、动态影响、滞后效应、路径依赖、惯性、上一期 \(y\) 会影响本期 \(y\)、模型可能存在内生性、普通面板模型遗漏重要变量。
+        </div>
+
+        <h3>1. 从普通面板模型到动态面板模型</h3>
+        <p>普通固定效应模型只写当期解释变量：</p>
+        <div class="formula">
+          \[
+          y_{it}=\alpha_i+x_{it}'\beta+\varepsilon_{it}
+          \]
+        </div>
+        <p>动态面板模型在右边加入被解释变量的滞后项：</p>
+        <div class="formula">
+          \[
+          y_{it}=\alpha_i+\gamma y_{i,t-1}+x_{it}'\beta+\varepsilon_{it}
+          \]
+        </div>
+        <p>如果考虑 \(p\) 阶滞后，可以写成：</p>
+        <div class="formula">
+          \[
+          y_{it}=\alpha_i+\gamma_1y_{i,t-1}+\cdots+\gamma_py_{i,t-p}+x_{it}'\beta+\varepsilon_{it}
+          \]
+        </div>
+        <ul>
+          <li>\(\gamma\)：动态效应，表示上一期 \(y\) 对本期 \(y\) 的影响。</li>
+          <li>\(x_{it}'\beta\)：其他解释变量和控制变量的影响。</li>
+          <li>\(\alpha_i\)：个体固定效应，控制不随时间变化的个体异质性。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="sub-title">2.2 为什么动态面板不能直接用普通 FE</h2>
+        <p>动态面板中，\(y_{i,t-1}\) 与个体固定效应 \(\alpha_i\) 相关。即使用差分消去 \(\alpha_i\)，也会产生新的内生性问题。</p>
+        <div class="formula">
+          \[
+          \Delta y_{it}
+          =\gamma \Delta y_{i,t-1}+\Delta x_{it}'\beta+\Delta\varepsilon_{it}
+          \]
+        </div>
+        <p>其中：</p>
+        <div class="formula">
+          \[
+          Cov(\Delta y_{i,t-1},\Delta\varepsilon_{it})
+          =
+          Cov(y_{i,t-1}-y_{i,t-2},\varepsilon_{it}-\varepsilon_{i,t-1})
+          \neq 0
+          \]
+        </div>
+        <p>原因是 \(\Delta y_{i,t-1}\) 中含有 \(y_{i,t-1}\)，而 \(y_{i,t-1}\) 与 \(\varepsilon_{i,t-1}\) 有关；\(\Delta\varepsilon_{it}\) 又包含 \(-\varepsilon_{i,t-1}\)。因此，差分后的滞后因变量仍然内生。</p>
+
+        <div class="note warn">
+          <strong>考场重点：</strong>
+          动态面板不是简单地在固定效应模型里加 \(L.y\) 就结束。加入滞后被解释变量后，普通 FE/Within 估计会有动态面板偏误，因此需要用工具变量思想下的 GMM。
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">2.3 差分 GMM：Arellano-Bond 估计</h2>
+        <p>差分 GMM 的思路是先对模型做一阶差分消去个体固定效应，再使用更早期的被解释变量滞后值作为工具变量。</p>
+        <div class="formula">
+          \[
+          y_{it}=\alpha_i+\gamma y_{i,t-1}+x_{it}'\beta+\varepsilon_{it}
+          \]
+        </div>
+        <div class="formula">
+          \[
+          \Delta y_{it}
+          =\gamma \Delta y_{i,t-1}+\Delta x_{it}'\beta+\Delta\varepsilon_{it}
+          \]
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 24%;">方法</th>
+              <th>工具变量思想</th>
+              <th style="width: 30%;">考试记法</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Anderson-Hsiao</td>
+              <td>使用 \(y_{i,t-2}\) 作为 \(\Delta y_{i,t-1}\) 的工具变量，进行 2SLS 估计。</td>
+              <td>早期方法，工具变量较少。</td>
+            </tr>
+            <tr>
+              <td>Arellano-Bond 差分 GMM</td>
+              <td>使用 \(y_{i,t-2},y_{i,t-3},y_{i,t-4},\ldots\) 作为 \(\Delta y_{i,t-1}\) 的工具变量，进行 GMM 估计。</td>
+              <td>短面板动态模型常用方法。</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>差分 GMM 的条件与局限</h3>
+        <ul>
+          <li>要求原模型扰动项 \(\varepsilon_{it}\) 不存在自相关。</li>
+          <li>差分后不随时间变化的解释变量会被消掉，因此无法估计其系数。</li>
+          <li>当 \(T\) 较大时，滞后工具变量数量会快速增加，容易出现工具变量膨胀问题。</li>
+          <li>当被解释变量具有较强持续性时，滞后水平值对差分变量的解释力可能较弱，从而产生弱工具变量问题。</li>
+          <li>若其他解释变量是前定变量或内生变量，需要额外使用其滞后项作为工具变量。</li>
+        </ul>
+
+        <h3>Stata 命令</h3>
+        <pre><code>xtabond depvar indepvars, lags(p) maxldep(q) twostep vce(robust)</code></pre>
+        <div class="note exam">
+          <strong>命令记忆：</strong><code>xtabond</code> 可以拆成 <code>xt</code> + <code>Arellano-Bond</code>，看到 <code>Bond</code> 就记差分 GMM。
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 24%;">选项</th>
+              <th>含义</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>lags(p)</code></td>
+              <td>动态面板模型滞后阶数，默认通常为 1 阶。</td>
+            </tr>
+            <tr>
+              <td><code>maxldep(q)</code></td>
+              <td>最多使用 \(q\) 个被解释变量滞后项作为 GMM 工具变量。若模型加入一阶滞后因变量 <code>lag(1)</code>，差分方程中通常从 \(L2.y\) 开始使用工具变量，例如 <code>maxldep(4)</code> 可能对应 \(L(2/5).y\)。</td>
+            </tr>
+            <tr>
+              <td><code>twostep</code></td>
+              <td>使用两步 GMM；若不加该选项，通常为一步 GMM。两步 GMM 在渐近意义下更有效，但标准误通常需要稳健修正。</td>
+            </tr>
+            <tr>
+              <td><code>vce(robust)</code></td>
+              <td>使用稳健标准误。注意做 Sargan 检验时课件提示需要去掉该选项。</td>
+            </tr>
+            <tr>
+              <td><code>pre(varlist)</code></td>
+              <td>指定前定变量，即可能与过去扰动项相关但不与当前扰动项相关的变量。</td>
+            </tr>
+            <tr>
+              <td><code>endogenous(varlist)</code></td>
+              <td>指定内生解释变量。</td>
+            </tr>
+            <tr>
+              <td><code>inst(varlist)</code></td>
+              <td>指定额外工具变量。</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2 class="sub-title">2.4 水平 GMM 与系统 GMM：Blundell-Bond 估计</h2>
+        <h3>1. 水平 GMM 的基本思想</h3>
+        <p>水平 GMM 是保留原来的水平方程，并使用滞后差分项作为工具变量。单独的水平 GMM 在考试和实证中较少单独报告，更多是作为系统 GMM 的一部分出现。</p>
+        <div class="formula">
+          \[
+          y_{it}=\alpha_i+\gamma y_{i,t-1}+x_{it}'\beta+\varepsilon_{it}
+          \]
+        </div>
+        <p>水平方程中常用的工具变量是滞后差分项，例如：</p>
+        <div class="formula">
+          \[
+          \Delta y_{i,t-1},\Delta y_{i,t-2},\ldots
+          \]
+        </div>
+
+        <h3>2. 系统 GMM 的基本思想</h3>
+        <p>系统 GMM 是在差分 GMM 的基础上，把差分方程和水平方程合在一起作为一个系统进行估计。它通常比单纯差分 GMM 更有效，可以理解为“差分 GMM + 水平 GMM”。</p>
+        <div class="formula">
+          \[
+          \begin{cases}
+          \Delta y_{it}
+          =\gamma \Delta y_{i,t-1}+\Delta x_{it}'\beta+\Delta\varepsilon_{it} \\
+          y_{it}
+          =\alpha_i+\gamma y_{i,t-1}+x_{it}'\beta+\varepsilon_{it}
+          \end{cases}
+          \]
+        </div>
+        <ul>
+          <li>差分方程中，用水平滞后项作为工具变量。</li>
+          <li>水平方程中，用差分滞后项作为工具变量。</li>
+          <li>系统 GMM 能提高估计效率，并可估计部分不随时间变化解释变量的系数。</li>
+          <li>前提仍然是原模型扰动项不存在自相关，且工具变量有效。</li>
+        </ul>
+
+        <h3>Stata 命令</h3>
+        <pre><code>xtdpdsys depvar indepvars, lags(p) maxldep(q) twostep vce(robust)</code></pre>
+
+        <div class="note exam">
+          <strong>命令记忆：</strong><code>xtdpdsys</code> 可以拆成 dynamic panel data system，看到 <code>sys</code> 就记系统 GMM。
+        </div>
+
+        <div class="note exam">
+          <strong>考场区分：</strong>
+          差分 GMM 是“先差分，再用更早的水平滞后项作工具变量”；系统 GMM 是“差分方程 + 水平方程一起估计”，通常效率更高。
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">2.5 课件例子：工资动态面板 GMM</h2>
+        <p class="source">参考课件《高级计量经济学(II)》动态面板回归模型中“新就业人群的薪资影响因素分析”。</p>
+
+        <h3>1. 研究设定</h3>
+        <p>在基准工资模型的基础上，加入上一期工资，考察工资是否存在动态惯性。</p>
+        <div class="formula">
+          \[
+          \log(wage)_{it}
+          =\alpha_i+\gamma \log(wage)_{i,t-1}
+          +\beta_1married_{it}+\beta_2union_{it}
+          +\beta_3exper_{it}+\beta_4exper_{it}^{2}
+          +\varepsilon_{it}
+          \]
+        </div>
+
+        <h3>2. 差分 GMM 命令</h3>
+        <pre><code>xtabond lwage married union exper expersq, lag(1) maxldep(4) twostep vce(robust)</code></pre>
+        <p>课件结果中，滞后一期工资 \(L1.lwage\) 的系数约为 0.1328，且在 1% 水平显著。这说明上一期工资对当期工资存在显著正向影响，即工资具有动态惯性。</p>
+
+        <h3>3. 系统 GMM 命令</h3>
+        <pre><code>xtdpdsys lwage black hisp married educ union exper expersq, lag(1) maxldep(4) twostep vce(robust)</code></pre>
+        <p>课件结果中，系统 GMM 下 \(L1.lwage\) 的系数约为 0.1444，且显著为正。可以解释为：在控制其他因素后，上一期工资越高，当期工资也越高，工资水平存在持续性。</p>
+
+        <h3>4. 系数含义怎么写</h3>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 18%;">变量</th>
+              <th style="width: 22%;">含义</th>
+              <th>解释模板</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>\(L.y\)</td>
+              <td>滞后一期被解释变量</td>
+              <td>若 \(\gamma>0\) 且显著，说明被解释变量存在动态惯性，上一期水平越高，本期水平也越高。</td>
+            </tr>
+            <tr>
+              <td>\(x\)</td>
+              <td>核心解释变量</td>
+              <td>\(\beta\) 表示在控制滞后被解释变量和其他变量后，\(x\) 对 \(y\) 的短期影响。</td>
+            </tr>
+            <tr>
+              <td>长期效应</td>
+              <td>动态模型中的累计影响</td>
+              <td>若模型为 AR(1)，且 \(|\gamma|<1\)，\(x\) 的长期效应可写为 \(\frac{\beta}{1-\gamma}\)。</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2 class="sub-title">2.6 动态效应：短期效应与长期效应</h2>
+        <p>动态面板模型中，解释变量的影响通常分为短期效应和长期效应。设一阶动态模型为：</p>
+        <div class="formula">
+          \[
+          y_{it}=\gamma y_{i,t-1}+\beta x_{it}+u_{it}
+          \]
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 22%;">效应类型</th>
+              <th style="width: 28%;">公式</th>
+              <th>考试解释</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>短期效应</td>
+              <td>\(\beta\)</td>
+              <td>表示 \(x\) 增加 1 个单位对当期 \(y\) 的直接影响。</td>
+            </tr>
+            <tr>
+              <td>长期效应</td>
+              <td>\(\dfrac{\beta}{1-\gamma}\)</td>
+              <td>表示 \(x\) 的影响通过滞后因变量逐期传导后的累计影响，前提是 \(|\gamma|<1\)。</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note exam">
+          <strong>考场记忆：</strong>短期看 \(x\) 的系数，长期看 \(x\) 的系数除以 \(1-\) 滞后因变量系数。
+        </div>
+        <p>例如，若估计结果为 \(y_{it}=0.6y_{i,t-1}+2x_{it}+u_{it}\)，则短期效应为 \(2\)，长期效应为：</p>
+        <div class="formula">
+          \[
+          \frac{2}{1-0.6}=5
+          \]
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">2.7 GMM 模型检验：自相关检验与 Sargan 检验</h2>
+        <h3>1. 扰动项自相关检验</h3>
+        <p>差分 GMM 和系统 GMM 都要求原模型扰动项不存在自相关。课件强调，可以通过检验差分模型扰动项的自相关，来判断原模型扰动项是否满足 GMM 的矩条件要求。</p>
+        <pre><code>estat abond
+estat abond, artests(3)</code></pre>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 24%;">检验对象</th>
+              <th>怎么看</th>
+              <th style="width: 32%;">考试解释</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AR(1)</td>
+              <td>差分扰动项通常会存在一阶自相关。</td>
+              <td>AR(1) 显著通常不是关键问题。</td>
+            </tr>
+            <tr>
+              <td>AR(2)</td>
+              <td>重点看二阶自相关是否显著。</td>
+              <td>若 AR(2) 不显著，说明差分扰动项不存在二阶自相关，支持 GMM 工具变量设定。</td>
+            </tr>
+            <tr>
+              <td>AR(3)</td>
+              <td>可根据需要进一步检查。</td>
+              <td>若更高阶也不显著，说明自相关问题较弱。</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note exam">
+          <strong>考场记忆：</strong>AR(1) 显著通常正常，AR(2) 不显著才是关键。AR(2) 不显著说明滞后变量作为工具变量较为合理。
+        </div>
+
+        <h3>2. 工具变量有效性 Sargan 检验</h3>
+        <p>GMM 依赖工具变量，因此必须检验工具变量是否有效。Sargan 检验本质上是过度识别检验。</p>
+        <pre><code>quietly xtabond lwage married union exper expersq, lag(1) maxldep(4) twostep
+estat sargan</code></pre>
+        <div class="note warn">
+          <strong>注意：</strong>
+          课件中提示，做 Sargan 检验时需要去掉 <code>vce(robust)</code> 选项。Sargan 检验的原假设是“过度识别约束有效”，也就是工具变量整体有效。若使用稳健标准误或两步稳健 GMM，很多资料会同时关注 Hansen 检验；但按本课件复习要求，考试中掌握 Sargan 检验即可。
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 22%;">结果</th>
+              <th>含义</th>
+              <th style="width: 34%;">考试写法</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>不拒绝原假设</td>
+              <td>没有证据表明工具变量无效。</td>
+              <td>工具变量整体上可以认为有效。</td>
+            </tr>
+            <tr>
+              <td>拒绝原假设</td>
+              <td>工具变量可能不外生或过度识别约束不成立。</td>
+              <td>模型设定或工具变量选择存在问题。</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2 class="sub-title">2.8 GMM 考场完整答题模板</h2>
+        <div class="note exam">
+          <p><strong>模型选择：</strong>本题为面板数据，且题目提示被解释变量存在动态惯性，上一期 \(y\) 会影响当期 \(y\)，或模型可能存在内生性问题。因此在基准固定效应模型基础上加入被解释变量滞后项，构建动态面板模型，并采用 GMM 方法估计。</p>
+          <p><strong>模型设定：</strong></p>
+          <div class="formula">
+            \[
+            y_{it}=\alpha_i+\gamma y_{i,t-1}+\beta_1x_{it}+\delta'Controls_{it}+\varepsilon_{it}
+            \]
+          </div>
+          <p>其中，\(\gamma\) 衡量 \(y\) 的动态持续性，\(\beta_1\) 衡量核心解释变量 \(x\) 对 \(y\) 的短期影响。</p>
+          <p><strong>Stata 命令：</strong></p>
+          <pre><code>xtset id year
+xtabond y x controls, lag(1) maxldep(4) twostep vce(robust)</code></pre>
+          <p>或使用系统 GMM：</p>
+          <pre><code>xtdpdsys y x controls, lag(1) maxldep(4) twostep vce(robust)</code></pre>
+          <p><strong>模型检验：</strong>使用 <code>estat abond</code> 检验扰动项自相关，重点要求 AR(2) 不显著；使用 <code>estat sargan</code> 检验工具变量有效性，原假设为工具变量有效，若不拒绝原假设，则说明工具变量整体可接受。</p>
+          <p><strong>经济意义：</strong>若滞后项系数 \(\gamma\) 显著为正，说明被解释变量存在动态惯性；若核心解释变量系数 \(\beta_1\) 显著为正，说明 \(x\) 在短期内显著促进 \(y\)。若需要解释长期效应，在 AR(1) 模型中可写为 \(\frac{\beta_1}{1-\gamma}\)。</p>
+        </div>
+      </section>
+      <section id="model-3">
+        <h1 class="model-title">模型三：面板门限模型</h1>
+        <h2 class="sub-title">3.1 什么时候使用面板门限模型</h2>
+        <p>面板门限模型用于考察核心解释变量对被解释变量的影响是否会随着某个门限变量的水平不同而发生变化。题目中如果出现“非线性影响”“阶段性影响”“超过某一水平后影响增强或减弱”“门限效应”“区间差异”等表述，通常可以考虑门限模型。</p>
+        <div class="note exam">
+          <strong>考场识别：</strong>如果题目不是只问 \(x\) 对 \(y\) 的平均影响，而是问“在低水平和高水平条件下影响是否不同”，就要想到面板门限模型。
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 24%;">关键词</th>
+              <th style="width: 34%;">模型含义</th>
+              <th>答题方向</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>门限效应</td>
+              <td>样本按门限变量 \(q_{it}\) 分为不同区间。</td>
+              <td>估计门限值 \(\gamma\)，比较不同区间的系数。</td>
+            </tr>
+            <tr>
+              <td>非线性影响</td>
+              <td>\(x\) 对 \(y\) 的影响不是固定不变的。</td>
+              <td>检验 \(\beta_1\) 和 \(\beta_2\) 是否存在显著差异。</td>
+            </tr>
+            <tr>
+              <td>阶段性特征</td>
+              <td>在低水平、中等水平、高水平阶段影响不同。</td>
+              <td>可设定单门限、双门限或多门限模型。</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2 class="sub-title">3.2 单门限模型设定</h2>
+        <p>设 \(y_{it}\) 为被解释变量，\(x_{it}\) 为核心解释变量，\(q_{it}\) 为门限变量，\(\gamma\) 为待估计的门限值。单门限面板模型可写为：</p>
+        <div class="formula">
+          \[
+          y_{it}
+          =\mu_i+\beta_1x_{it}I(q_{it}\le \gamma)
+          +\beta_2x_{it}I(q_{it}\gt \gamma)
+          +\delta'Controls_{it}
+          +\varepsilon_{it}
+          \]
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 20%;">符号</th>
+              <th style="width: 36%;">含义</th>
+              <th>考试解释</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>\(q_{it}\)</td>
+              <td>门限变量</td>
+              <td>决定样本落入低门限区间还是高门限区间。</td>
+            </tr>
+            <tr>
+              <td>\(\gamma\)</td>
+              <td>门限值</td>
+              <td>由数据估计得到，用于划分不同影响区间。</td>
+            </tr>
+            <tr>
+              <td>\(I(\cdot)\)</td>
+              <td>示性函数</td>
+              <td>条件成立时取 1，否则取 0。</td>
+            </tr>
+            <tr>
+              <td>\(\beta_1\)</td>
+              <td>低门限区间的影响</td>
+              <td>表示当 \(q_{it}\le\gamma\) 时，\(x_{it}\) 对 \(y_{it}\) 的边际影响。</td>
+            </tr>
+            <tr>
+              <td>\(\beta_2\)</td>
+              <td>高门限区间的影响</td>
+              <td>表示当 \(q_{it}\gt\gamma\) 时，\(x_{it}\) 对 \(y_{it}\) 的边际影响。</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note exam">
+          <strong>系数解释核心：</strong>如果 \(\beta_1\) 与 \(\beta_2\) 的大小或显著性不同，说明核心解释变量 \(x\) 对 \(y\) 的影响存在门限特征；如果 \(\beta_2\gt\beta_1\)，说明跨过门限后影响增强。
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">3.3 双门限与多门限模型</h2>
+        <p>如果影响机制可能存在三个阶段，可以设定双门限模型。设两个门限值为 \(\gamma_1\) 和 \(\gamma_2\)，且 \(\gamma_1\lt\gamma_2\)，模型为：</p>
+        <div class="formula">
+          \[
+          y_{it}
+          =\mu_i+\beta_1x_{it}I(q_{it}\le\gamma_1)
+          +\beta_2x_{it}I(\gamma_1\lt q_{it}\le\gamma_2)
+          +\beta_3x_{it}I(q_{it}\gt\gamma_2)
+          +\delta'Controls_{it}
+          +\varepsilon_{it}
+          \]
+        </div>
+        <p>双门限模型将样本分为低水平区间、中等水平区间和高水平区间。考试中重点不是机械背诵多个门限，而是说明每个区间中 \(x\) 对 \(y\) 的影响由对应的 \(\beta_j\) 表示。</p>
+        <div class="grid">
+          <div class="card">
+            <h3>低区间</h3>
+            <p>\(q_{it}\le\gamma_1\)，影响为 \(\beta_1\)。</p>
+          </div>
+          <div class="card">
+            <h3>中区间</h3>
+            <p>\(\gamma_1\lt q_{it}\le\gamma_2\)，影响为 \(\beta_2\)。</p>
+          </div>
+          <div class="card">
+            <h3>高区间</h3>
+            <p>\(q_{it}\gt\gamma_2\)，影响为 \(\beta_3\)。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">3.4 Stata 命令</h2>
+        <p>面板门限模型常见写法是先设定面板数据结构，再使用门限面板命令估计门限值和分区间系数。不同 Stata 版本或用户命令写法可能略有差异，复习时重点掌握命令逻辑。</p>
+        <pre><code>xtset id year
+xthreg y x controls, rx(x) qx(q) thnum(1) trim(0.01) grid(300) bs(300)</code></pre>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 24%;">命令或选项</th>
+              <th style="width: 36%;">含义</th>
+              <th>考试写法</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>xtset id year</code></td>
+              <td>声明面板数据结构。</td>
+              <td>先告诉 Stata 个体变量和时间变量。</td>
+            </tr>
+            <tr>
+              <td><code>rx(x)</code></td>
+              <td>设定分区间系数变量。</td>
+              <td>表示 \(x\) 的系数允许在不同门限区间变化。</td>
+            </tr>
+            <tr>
+              <td><code>qx(q)</code></td>
+              <td>设定门限变量。</td>
+              <td>用 \(q\) 的取值划分样本区间。</td>
+            </tr>
+            <tr>
+              <td><code>thnum(1)</code></td>
+              <td>设定门限个数。</td>
+              <td>1 表示单门限；如果是双门限可写为 <code>thnum(2)</code>。</td>
+            </tr>
+            <tr>
+              <td><code>trim(0.01)</code></td>
+              <td>剔除两端极少数观测。</td>
+              <td>避免某一区间观测值过少导致估计不稳定。</td>
+            </tr>
+            <tr>
+              <td><code>grid(300)</code></td>
+              <td>门限值网格搜索次数。</td>
+              <td>在候选门限值中搜索使残差平方和最小的门限。</td>
+            </tr>
+            <tr>
+              <td><code>bs(300)</code></td>
+              <td>Bootstrap 重复次数。</td>
+              <td>用于检验门限效应是否显著。</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>如果题目已经给出估计出的门限值 \(\hat{\gamma}\)，也可以手动构造分区间变量，再用固定效应模型解释：</p>
+        <pre><code>gen low  = x*(q &lt;= gamma_hat)
+gen high = x*(q &gt; gamma_hat)
+xtreg y low high controls i.year, fe vce(cluster id)</code></pre>
+      </section>
+
+      <section>
+        <h2 class="sub-title">3.5 例子：数字金融对企业创新的门限效应</h2>
+        <p>假设研究数字金融发展 \(df_{it}\) 对企业创新 \(innovation_{it}\) 的影响，并认为融资约束 \(finance_{it}\) 可能是门限变量。可以设定：</p>
+        <div class="formula">
+          \[
+          innovation_{it}
+          =\mu_i+\beta_1df_{it}I(finance_{it}\le\gamma)
+          +\beta_2df_{it}I(finance_{it}\gt\gamma)
+          +\delta'Controls_{it}
+          +\varepsilon_{it}
+          \]
+        </div>
+        <p>对应 Stata 命令可写为：</p>
+        <pre><code>xtset firm year
+xthreg innovation df size lev roa age, rx(df) qx(finance) thnum(1) trim(0.01) grid(300) bs(300)</code></pre>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 22%;">估计结果示例</th>
+              <th style="width: 34%;">含义</th>
+              <th>考试解释</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>\(\hat{\gamma}=0.45\)</td>
+              <td>融资约束门限值为 0.45。</td>
+              <td>样本可按 \(finance_{it}\le0.45\) 和 \(finance_{it}\gt0.45\) 分为两个区间。</td>
+            </tr>
+            <tr>
+              <td>\(\beta_1=0.08\)</td>
+              <td>低门限区间的数字金融影响。</td>
+              <td>当融资约束变量较低时，数字金融对创新具有正向影响，但强度较弱。</td>
+            </tr>
+            <tr>
+              <td>\(\beta_2=0.21\)</td>
+              <td>高门限区间的数字金融影响。</td>
+              <td>当跨过门限值后，数字金融对创新的促进作用明显增强。</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note exam">
+          <strong>结论句：</strong>数字金融对企业创新的影响并非简单线性关系，而是会随着融资约束水平的变化呈现门限特征；当门限变量超过临界值后，数字金融的边际促进作用更强。
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">3.6 面板门限模型考场完整答题模板</h2>
+        <div class="note exam">
+          <p><strong>模型选择：</strong>本题为面板数据，且题目关注核心解释变量 \(x\) 对被解释变量 \(y\) 的影响是否会随着门限变量 \(q\) 的不同水平而变化，因此可以采用面板门限模型。</p>
+          <p><strong>模型设定：</strong></p>
+          <div class="formula">
+            \[
+            y_{it}=\mu_i+\beta_1x_{it}I(q_{it}\le\gamma)
+            +\beta_2x_{it}I(q_{it}\gt\gamma)
+            +\delta'Controls_{it}
+            +\varepsilon_{it}
+            \]
+          </div>
+          <p>其中，\(\gamma\) 为待估计门限值，\(I(\cdot)\) 为示性函数，\(\beta_1\) 和 \(\beta_2\) 分别表示低门限区间和高门限区间中 \(x\) 对 \(y\) 的影响。</p>
+          <p><strong>Stata 命令：</strong></p>
+          <pre><code>xtset id year
+xthreg y x controls, rx(x) qx(q) thnum(1) trim(0.01) grid(300) bs(300)</code></pre>
+          <p><strong>检验与解释：</strong>通过 Bootstrap 检验判断门限效应是否显著；如果门限效应显著，说明样本确实可以按照 \(q\) 的门限值分为不同区间。若 \(\beta_2\gt\beta_1\)，说明 \(q\) 超过门限值后，\(x\) 对 \(y\) 的促进作用增强；若 \(\beta_2\lt\beta_1\)，说明跨过门限后影响减弱。</p>
+        </div>
+      </section>
+
+      <section id="model-4">
+        <h1 class="model-title">模型四：面板分位数模型</h1>
+        <h2 class="sub-title">4.1 什么时候使用分位数模型</h2>
+        <p>普通 OLS 或固定效应模型主要解释“平均意义上”的影响，而分位数模型关注解释变量在被解释变量不同分位点上的影响差异。题目中如果强调“异质性”“低水平与高水平样本差异”“分布尾部”“不同分位点影响是否不同”，可以考虑分位数模型。</p>
+        <div class="grid">
+          <div class="card">
+            <h3>低分位点</h3>
+            <p>如 \(\tau=0.25\)，考察低水平 \(y\) 群体中的影响。</p>
+          </div>
+          <div class="card">
+            <h3>中位数</h3>
+            <p>如 \(\tau=0.50\)，考察中位水平群体中的影响。</p>
+          </div>
+          <div class="card">
+            <h3>高分位点</h3>
+            <p>如 \(\tau=0.75\)，考察高水平 \(y\) 群体中的影响。</p>
+          </div>
+        </div>
+        <div class="note exam">
+          <strong>考场识别：</strong>如果题目要求比较“低水平企业、中等水平企业和高水平企业中核心变量影响是否不同”，分位数模型比普通均值回归更合适。
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">4.2 模型设定</h2>
+        <p>面板分位数模型可写为条件分位数形式：</p>
+        <div class="formula">
+          \[
+          Q_{\tau}(y_{it}\mid x_{it},Controls_{it},\alpha_i)
+          =\alpha_i(\tau)+\beta_{\tau}x_{it}
+          +\delta_{\tau}'Controls_{it}
+          \]
+        </div>
+        <p>其中，\(Q_{\tau}(y_{it}\mid \cdot)\) 表示在给定解释变量条件下 \(y_{it}\) 的第 \(\tau\) 个条件分位数，\(\tau\) 通常取 \(0.25\)、\(0.50\)、\(0.75\) 等。</p>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 22%;">符号</th>
+              <th style="width: 36%;">含义</th>
+              <th>考试解释</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>\(\tau\)</td>
+              <td>分位点</td>
+              <td>表示关注被解释变量分布中的哪个位置。</td>
+            </tr>
+            <tr>
+              <td>\(Q_{\tau}(y_{it}\mid\cdot)\)</td>
+              <td>条件分位数</td>
+              <td>不是 \(y\) 的均值，而是 \(y\) 在某一分位点的条件水平。</td>
+            </tr>
+            <tr>
+              <td>\(\beta_{\tau}\)</td>
+              <td>第 \(\tau\) 分位点上的核心系数</td>
+              <td>表示在该分位点上，\(x\) 增加 1 个单位对 \(y\) 的影响。</td>
+            </tr>
+            <tr>
+              <td>\(\alpha_i(\tau)\)</td>
+              <td>个体固定效应</td>
+              <td>控制不随时间变化的个体异质性，并允许其在分位点上体现。</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note warn">
+          <strong>注意：</strong>\(\beta_{\tau}\) 解释的是“第 \(\tau\) 分位点上的边际影响”，不是全样本平均影响。不要把分位数回归结果直接说成平均效应。
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">4.3 与 OLS / 固定效应模型的区别</h2>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 22%;">模型</th>
+              <th style="width: 34%;">估计对象</th>
+              <th>适用解释</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>OLS / 固定效应模型</td>
+              <td>条件均值 \(E(y_{it}\mid X_{it})\)</td>
+              <td>回答“平均来看，\(x\) 对 \(y\) 有什么影响”。</td>
+            </tr>
+            <tr>
+              <td>分位数模型</td>
+              <td>条件分位数 \(Q_{\tau}(y_{it}\mid X_{it})\)</td>
+              <td>回答“在低分位、中位数和高分位群体中，\(x\) 的影响是否不同”。</td>
+            </tr>
+            <tr>
+              <td>面板分位数模型</td>
+              <td>带有个体效应的条件分位数</td>
+              <td>既考虑面板数据个体异质性，又考察分布不同位置的影响差异。</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note exam">
+          <strong>考试表达：</strong>固定效应模型只能给出平均效应，分位数模型可以揭示核心解释变量在被解释变量不同分布位置上的异质性影响。
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">4.4 Stata 命令</h2>
+        <p>如果是普通分位数回归，可以使用 <code>qreg</code> 分别估计不同分位点：</p>
+        <pre><code>qreg y x controls, quantile(0.25) vce(robust)
+qreg y x controls, quantile(0.50) vce(robust)
+qreg y x controls, quantile(0.75) vce(robust)</code></pre>
+        <p>如果要同时估计多个分位点并比较系数，可以使用 <code>sqreg</code>：</p>
+        <pre><code>sqreg y x controls, q(0.25 0.50 0.75) reps(300)</code></pre>
+        <p>如果题目强调面板数据，可以加入个体和时间虚拟变量，或者使用课程中指定的面板分位数命令：</p>
+        <pre><code>qreg y x controls i.id i.year, quantile(0.50) vce(robust)</code></pre>
+        <pre><code>xtqreg y x controls i.year, quantile(0.50)</code></pre>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 22%;">命令</th>
+              <th style="width: 34%;">用途</th>
+              <th>考试写法</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>qreg</code></td>
+              <td>估计单个分位点。</td>
+              <td>适合分别报告 25%、50%、75% 分位点结果。</td>
+            </tr>
+            <tr>
+              <td><code>sqreg</code></td>
+              <td>同时估计多个分位点。</td>
+              <td>适合比较不同分位点之间系数差异。</td>
+            </tr>
+            <tr>
+              <td><code>i.id i.year</code></td>
+              <td>加入个体和时间虚拟变量。</td>
+              <td>在答题中表示控制个体效应和时间效应。</td>
+            </tr>
+            <tr>
+              <td><code>xtqreg</code></td>
+              <td>面板分位数回归命令。</td>
+              <td>如果课程材料采用该命令，可直接写作面板分位数估计。</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2 class="sub-title">4.5 例子：教育回报在工资分布中的异质性</h2>
+        <p>假设研究教育年限 \(educ_{it}\) 对工资水平 \(\ln wage_{it}\) 的影响，并关心这种影响在低工资、中等工资和高工资群体中是否不同。模型可写为：</p>
+        <div class="formula">
+          \[
+          Q_{\tau}(\ln wage_{it}\mid educ_{it},X_{it},\alpha_i)
+          =\alpha_i(\tau)+\beta_{\tau}educ_{it}
+          +\delta_{\tau}'X_{it}
+          \]
+        </div>
+        <p>Stata 命令示例：</p>
+        <pre><code>sqreg lwage educ exper expersq union married, q(0.25 0.50 0.75) reps(300)</code></pre>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 22%;">估计结果示例</th>
+              <th style="width: 34%;">含义</th>
+              <th>考试解释</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>\(\beta_{0.25}=0.03\)</td>
+              <td>低工资分位点的教育回报。</td>
+              <td>在低工资群体中，教育年限增加 1 年，工资约提高 3%。</td>
+            </tr>
+            <tr>
+              <td>\(\beta_{0.50}=0.06\)</td>
+              <td>中位数工资群体的教育回报。</td>
+              <td>在中位工资群体中，教育回报约为 6%。</td>
+            </tr>
+            <tr>
+              <td>\(\beta_{0.75}=0.10\)</td>
+              <td>高工资分位点的教育回报。</td>
+              <td>在高工资群体中，教育回报约为 10%。</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note exam">
+          <strong>结论句：</strong>由于 \(\beta_{0.75}\gt\beta_{0.50}\gt\beta_{0.25}\)，说明教育对工资的影响在工资分布高端更强，教育回报存在明显的分位数异质性。
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">4.6 系数解释模板</h2>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 24%;">系数</th>
+              <th style="width: 34%;">含义</th>
+              <th>考试解释句</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>\(\beta_{0.25}\)</td>
+              <td>第 25 分位点上的影响</td>
+              <td>表示在被解释变量较低水平群体中，\(x\) 对 \(y\) 的边际影响。</td>
+            </tr>
+            <tr>
+              <td>\(\beta_{0.50}\)</td>
+              <td>第 50 分位点上的影响</td>
+              <td>表示在中位水平群体中，\(x\) 对 \(y\) 的边际影响。</td>
+            </tr>
+            <tr>
+              <td>\(\beta_{0.75}\)</td>
+              <td>第 75 分位点上的影响</td>
+              <td>表示在被解释变量较高水平群体中，\(x\) 对 \(y\) 的边际影响。</td>
+            </tr>
+            <tr>
+              <td>系数递增</td>
+              <td>\(\beta_{0.75}\gt\beta_{0.50}\gt\beta_{0.25}\)</td>
+              <td>说明 \(x\) 对高分位群体的影响更强。</td>
+            </tr>
+            <tr>
+              <td>系数递减</td>
+              <td>\(\beta_{0.75}\lt\beta_{0.50}\lt\beta_{0.25}\)</td>
+              <td>说明 \(x\) 对低分位群体的影响更强。</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2 class="sub-title">4.7 面板分位数模型考场完整答题模板</h2>
+        <div class="note exam">
+          <p><strong>模型选择：</strong>本题关注核心解释变量 \(x\) 对被解释变量 \(y\) 的影响是否在不同分位点上存在差异。普通固定效应模型只能解释平均影响，无法揭示分布不同位置的异质性，因此可以采用面板分位数模型。</p>
+          <p><strong>模型设定：</strong></p>
+          <div class="formula">
+            \[
+            Q_{\tau}(y_{it}\mid x_{it},Controls_{it},\alpha_i)
+            =\alpha_i(\tau)+\beta_{\tau}x_{it}
+            +\delta_{\tau}'Controls_{it}
+            \]
+          </div>
+          <p>其中，\(\tau\) 表示分位点，常取 \(0.25\)、\(0.50\)、\(0.75\)；\(\beta_{\tau}\) 表示在第 \(\tau\) 分位点上 \(x\) 对 \(y\) 的影响。</p>
+          <p><strong>Stata 命令：</strong></p>
+          <pre><code>qreg y x controls, quantile(0.25) vce(robust)
+qreg y x controls, quantile(0.50) vce(robust)
+qreg y x controls, quantile(0.75) vce(robust)</code></pre>
+          <p>或同时估计多个分位点：</p>
+          <pre><code>sqreg y x controls, q(0.25 0.50 0.75) reps(300)</code></pre>
+          <p><strong>经济含义：</strong>若 \(\beta_{0.75}\gt\beta_{0.25}\)，说明核心解释变量 \(x\) 对高分位样本的影响更强；若 \(\beta_{0.25}\gt\beta_{0.75}\)，说明 \(x\) 对低分位样本的影响更强。不同分位点系数存在差异，表明 \(x\) 对 \(y\) 的影响具有异质性。</p>
+        </div>
+      </section>
+
+      <section id="model-5">
+        <h1 class="model-title">模型五：空间面板模型</h1>
+        <h2 class="sub-title">5.1 什么时候使用空间面板模型</h2>
+        <p>空间面板模型适用于题目给出“地区 \(i\) - 时间 \(t\)”面板数据，并且研究对象之间存在地理邻近、经济联系或政策扩散关系的情形。它比普通面板模型多考虑一个核心问题：一个地区的 \(y\) 不仅受本地区 \(x\) 影响，也可能受邻近地区 \(y\)、邻近地区 \(x\) 或邻近地区未观测冲击的影响。</p>
+        <div class="note exam">
+          <p><strong>考试识别信号：</strong>题干出现“空间相关”“空间溢出”“邻近地区影响”“地区联动”“集聚效应”“扩散效应”“省份/城市/地区面板数据”等关键词时，应优先考虑空间面板模型。</p>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <h3>空间相关性</h3>
+            <p>指本地区的经济变量与邻近地区相关，即可以从一个地区的表现推估周边地区的表现。例如一个城市的创新水平可能受周边城市创新活动影响。</p>
+          </div>
+          <div class="card">
+            <h3>空间异质性</h3>
+            <p>指变量关系在不同地区不稳定，同一个解释变量在东部、中部和西部地区可能表现出不同影响。空间面板模型主要处理空间相关性，异质性可结合分组、交互项或地理加权回归讨论。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">5.2 空间权重矩阵 \(W\)：空间模型比普通面板多了什么</h2>
+        <p>空间面板模型必须先给定空间权重矩阵 \(W=(w_{ij})\)，用于刻画“谁和谁相邻”以及相邻关系的强弱。\(W\) 通常是 \(N\times N\) 矩阵，其中 \(N\) 是地区或空间单元数量。</p>
+        <table>
+          <colgroup>
+            <col style="width:22%">
+            <col style="width:42%">
+            <col style="width:36%">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>类型</th>
+              <th>设定方式</th>
+              <th>考试写法</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>邻接矩阵</strong></td>
+              <td>若地区 \(i\) 与地区 \(j\) 相邻，则 \(w_{ij}=1\)；否则 \(w_{ij}=0\)。</td>
+              <td>对角线元素恒为 0，即 \(w_{ii}=0\)，因为一个地区不作为自己的邻居。</td>
+            </tr>
+            <tr>
+              <td><strong>距离矩阵</strong></td>
+              <td>常用距离倒数设定，如 \(w_{ij}=1/d_{ij}\)，距离越近权重越大。</td>
+              <td>距离可以是地理距离、经济距离或社会网络距离。</td>
+            </tr>
+            <tr>
+              <td><strong>行标准化</strong></td>
+              <td>将每一行元素除以该行之和，使每行权重和为 1。</td>
+              <td>\(Wy\) 可解释为邻近地区 \(y\) 的加权平均值，即空间滞后项。</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="formula">
+          \[
+          (Wy)_{it}=\sum_{j=1}^{N}w_{ij}y_{jt}
+          \]
+        </div>
+        <p>其中，\((Wy)_{it}\) 表示地区 \(i\) 在时期 \(t\) 的邻近地区被解释变量加权平均值。只要模型中出现 \(Wy\)、\(WX\) 或 \(Wu\)，就说明已经把邻近地区的信息纳入回归。</p>
+      </section>
+
+      <section>
+        <h2 class="sub-title">5.3 四类常见空间面板模型：SAR、SDM、SEM、SAC</h2>
+        <p>空间模型的核心区别在于空间效应进入哪里：进入被解释变量 \(y\)、解释变量 \(X\)、还是误差项 \(u\)。考试中最常见的是 SAR 和 SDM，SEM 与 SAC 主要用于模型识别和选择。</p>
+        <table>
+          <colgroup>
+            <col style="width:16%">
+            <col style="width:30%">
+            <col style="width:34%">
+            <col style="width:20%">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>模型</th>
+              <th>模型设定</th>
+              <th>含义</th>
+              <th>记忆方式</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>SAR</strong><br>空间自回归模型</td>
+              <td>\[
+                y_{it}=\rho\sum_j w_{ij}y_{jt}+x_{it}'\beta+\mu_i+\lambda_t+\varepsilon_{it}
+              \]</td>
+              <td>本地区 \(y\) 受到邻近地区 \(y\) 的影响，刻画被解释变量的空间滞后。</td>
+              <td>\(Wy\)</td>
+            </tr>
+            <tr>
+              <td><strong>SDM</strong><br>空间杜宾模型</td>
+              <td>\[
+                y_{it}=\rho Wy_{it}+x_{it}'\beta+(Wx_{it})'\theta+\mu_i+\lambda_t+\varepsilon_{it}
+              \]</td>
+              <td>在 SAR 基础上加入邻近地区 \(X\) 的影响，可同时分析本地影响和邻近地区解释变量的溢出影响。</td>
+              <td>\(Wy+WX\)</td>
+            </tr>
+            <tr>
+              <td><strong>SEM</strong><br>空间误差模型</td>
+              <td>\[
+                y_{it}=x_{it}'\beta+\mu_i+\lambda_t+u_{it},\quad
+                u_{it}=\rho\sum_j w_{ij}u_{jt}+\varepsilon_{it}
+              \]</td>
+              <td>空间相关性体现在遗漏因素或扰动项中，本地区未观测冲击会受邻近地区未观测冲击影响。</td>
+              <td>\(Wu\)</td>
+            </tr>
+            <tr>
+              <td><strong>SAC</strong><br>空间自相关模型</td>
+              <td>\[
+                y_{it}=\rho Wy_{it}+x_{it}'\beta+\mu_i+\lambda_t+u_{it},\quad
+                u_{it}=\eta Wu_{it}+\varepsilon_{it}
+              \]</td>
+              <td>同时包含被解释变量空间滞后和误差项空间相关，是 SAR 与 SEM 的结合。</td>
+              <td>\(Wy+Wu\)</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note">
+          <p><strong>默认答题策略：</strong>如果题目只说“空间溢出”而没有明确给出误差项空间相关，一般先写 SAR 或 SDM。若题目特别强调邻近地区解释变量 \(X\) 的影响，应写 SDM；若强调遗漏因素或扰动项相关，应写 SEM。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">5.4 Stata 命令：空间面板模型怎么估计</h2>
+        <p>空间面板常用命令是 <code>xsmle</code>。其基本思路是先设定面板，再指定空间权重矩阵、模型类型、固定效应类型，并用 <code>effects</code> 输出直接效应、间接效应和总效应。</p>
+        <pre><code>* 1. 设定面板数据
+xtset id year
+
+* 2. SAR：被解释变量存在空间滞后
+xsmle y x1 x2 controls, wmat(W) model(sar) fe type(both) effects nolog
+
+* 3. SDM：被解释变量和解释变量都存在空间效应
+xsmle y x1 x2 controls, wmat(W) dmat(W) model(sdm) fe type(both) effects nolog
+
+* 4. SEM：误差项存在空间相关
+xsmle y x1 x2 controls, emat(W) model(sem) fe type(both) nolog
+
+* 5. SAC：被解释变量和误差项都存在空间相关
+xsmle y x1 x2 controls, wmat(W) emat(W) model(sac) fe type(both) nolog</code></pre>
+        <table>
+          <colgroup>
+            <col style="width:24%">
+            <col style="width:76%">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>命令选项</th>
+              <th>含义</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>wmat(W)</code></td>
+              <td>指定被解释变量空间滞后项 \(Wy\) 的权重矩阵。</td>
+            </tr>
+            <tr>
+              <td><code>dmat(W)</code></td>
+              <td>指定解释变量空间滞后项 \(WX\) 的权重矩阵，SDM 中常用。</td>
+            </tr>
+            <tr>
+              <td><code>emat(W)</code></td>
+              <td>指定误差项空间相关 \(Wu\) 的权重矩阵，SEM 或 SAC 中常用。</td>
+            </tr>
+            <tr>
+              <td><code>model()</code></td>
+              <td>指定模型类型，可选 <code>sar</code>、<code>sdm</code>、<code>sem</code>、<code>sac</code>。</td>
+            </tr>
+            <tr>
+              <td><code>type(both)</code></td>
+              <td>控制双向固定效应，即同时控制个体效应 \(\mu_i\) 与时间效应 \(\lambda_t\)。</td>
+            </tr>
+            <tr>
+              <td><code>effects</code></td>
+              <td>输出直接效应、间接效应和总效应。解释空间溢出时必须看这个结果，而不是只看原始 \(\beta\)。</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note warn">
+          <p><strong>注意：</strong>SEM 的空间相关性在误差项中，通常不用于解释 \(X\) 的直接效应和间接效应；SAC 模型参数较多，部分设定下只能做固定效应，不一定适合 Hausman 检验。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">5.5 例子：数字金融对城市绿色创新的空间溢出效应</h2>
+        <h3>1. 研究问题</h3>
+        <p>假设研究数字金融发展水平 \(dfi_{it}\) 是否提高城市绿色创新 \(green_{it}\)，并且考虑相邻城市之间存在知识扩散、产业关联和政策模仿，因此绿色创新可能具有空间溢出效应。</p>
+        <h3>2. SAR 模型设定</h3>
+        <div class="formula">
+          \[
+          green_{it}=\rho\sum_j w_{ij}green_{jt}
+          +\beta dfi_{it}
+          +\delta'Controls_{it}
+          +\mu_i+\lambda_t+\varepsilon_{it}
+          \]
+        </div>
+        <p>其中，\(\rho\) 衡量邻近城市绿色创新对本城市绿色创新的影响；\(\beta\) 衡量本城市数字金融对本城市绿色创新的影响；\(\mu_i\) 控制城市固定效应，\(\lambda_t\) 控制年份固定效应。</p>
+        <h3>3. SDM 模型设定</h3>
+        <div class="formula">
+          \[
+          green_{it}=\rho Wgreen_{it}
+          +\beta dfi_{it}
+          +\theta Wdfi_{it}
+          +\delta'Controls_{it}
+          +\mu_i+\lambda_t+\varepsilon_{it}
+          \]
+        </div>
+        <p>若题目更关心“周边城市数字金融是否影响本城市绿色创新”，则应使用 SDM，因为它把 \(Wdfi_{it}\) 放入模型。</p>
+        <h3>4. Stata 命令</h3>
+        <pre><code>xtset city year
+xsmle green dfi rd gdp industry, wmat(W) model(sar) fe type(both) effects nolog
+
+xsmle green dfi rd gdp industry, wmat(W) dmat(W) model(sdm) fe type(both) effects nolog</code></pre>
+      </section>
+
+      <section>
+        <h2 class="sub-title">5.6 系数含义与效应分解：空间模型最容易丢分的地方</h2>
+        <p>空间模型中不能直接把 \(\beta\) 当作普通边际效应解释。原因是模型含有 \(Wy\)，本地区 \(x\) 的变化会先影响本地区 \(y\)，再通过空间网络影响其他地区，其他地区变化后又可能反过来影响本地区，形成反馈回路。</p>
+        <div class="formula">
+          \[
+          y=(I-\rho W)^{-1}X\beta+(I-\rho W)^{-1}\varepsilon
+          \]
+        </div>
+        <p>因此，解释经济含义时要看 <code>effects</code> 输出的三类效应：</p>
+        <table>
+          <colgroup>
+            <col style="width:24%">
+            <col style="width:40%">
+            <col style="width:36%">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>效应</th>
+              <th>含义</th>
+              <th>考试解释模板</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>直接效应</strong><br>Direct effect</td>
+              <td>本地区 \(x\) 对本地区 \(y\) 的影响，包含空间反馈后的本地影响。</td>
+              <td>固定其他因素不变，本地区 \(x\) 每增加 1 个单位，平均来说，本地区 \(y\) 增加 \(a\) 个单位。</td>
+            </tr>
+            <tr>
+              <td><strong>间接效应</strong><br>Indirect effect</td>
+              <td>本地区 \(x\) 对其他地区 \(y\) 的影响，或周边地区 \(x\) 通过空间网络对本地区 \(y\) 的影响。</td>
+              <td>固定其他因素不变，本地区 \(x\) 每增加 1 个单位，平均来说，周边地区 \(y\) 增加 \(b\) 个单位，说明存在空间溢出效应。</td>
+            </tr>
+            <tr>
+              <td><strong>总效应</strong><br>Total effect</td>
+              <td>直接效应与间接效应之和。</td>
+              <td>固定其他因素不变，本地区 \(x\) 每增加 1 个单位，对所有地区 \(y\) 的总影响为 \(a+b\)。</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note exam">
+          <p><strong>若 \(x\) 和 \(y\) 取对数：</strong>直接效应、间接效应和总效应都按弹性解释。例如间接效应为 0.12，可写为：本地区 \(x\) 增加 1%，平均来说，周边地区 \(y\) 增加 0.12%。</p>
+          <p><strong>若只有 \(y\) 取对数：</strong>效应值按半弹性解释。例如直接效应为 0.08，可写为：本地区 \(x\) 每增加 1 个单位，本地区 \(y\) 平均增加约 8%。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">5.7 空间相关检验与模型选择</h2>
+        <h3>1. Moran's I：先判断有没有空间相关</h3>
+        <p>Moran's I 用于检验变量是否存在空间自相关。若 \(I\gt0\) 且显著，说明相似地区在空间上集聚；若 \(I\lt0\) 且显著，说明存在负空间相关；若不显著，则空间相关证据不足。</p>
+        <div class="formula">
+          \[
+          I=\frac{N}{S_0}\frac{\sum_i\sum_jw_{ij}(x_i-\bar{x})(x_j-\bar{x})}
+          {\sum_i(x_i-\bar{x})^2},\qquad
+          S_0=\sum_i\sum_jw_{ij}
+          \]
+        </div>
+        <div class="note warn">
+          <p><strong>易错点：</strong>无空间自相关时，Moran's I 的期望不是 0，而是 \(E(I)=-1/(N-1)\)，当 \(N\) 很大时才接近 0。</p>
+        </div>
+        <h3>2. LM、LR、Wald 与 Hausman 检验</h3>
+        <table>
+          <colgroup>
+            <col style="width:28%">
+            <col style="width:36%">
+            <col style="width:36%">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>检验</th>
+              <th>解决的问题</th>
+              <th>答题口径</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Moran's I</strong></td>
+              <td>是否存在空间自相关。</td>
+              <td>若显著，说明应考虑空间计量模型。</td>
+            </tr>
+            <tr>
+              <td><strong>LM-lag / LM-error</strong></td>
+              <td>空间滞后在 \(y\) 中还是在误差项中。</td>
+              <td>LM-lag 显著偏向 SAR，LM-error 显著偏向 SEM；稳健 LM 更常用于比较。</td>
+            </tr>
+            <tr>
+              <td><strong>LR / Wald</strong></td>
+              <td>SDM 能否简化为 SAR 或 SEM。</td>
+              <td>若拒绝约束，说明 SDM 不能简化，应保留更一般的 SDM。</td>
+            </tr>
+            <tr>
+              <td><strong>Hausman</strong></td>
+              <td>固定效应还是随机效应。</td>
+              <td>若显著，拒绝随机效应，选择固定效应。</td>
+            </tr>
+          </tbody>
+        </table>
+        <pre><code>* 嵌套约束检验示意
+estimates store sdm
+estimates store sar
+lrtest sdm sar
+
+* 若 p 值显著，说明 SDM 不能简化为 SAR，解释变量空间滞后项具有必要性。</code></pre>
+        <div class="note">
+          <p><strong>模型选择记忆：</strong>\(y\) 存在空间效应选 SAR；\(y\) 和 \(x\) 都存在空间效应选 SDM；误差项存在空间效应选 SEM；\(y\) 和误差项都存在空间效应选 SAC。若 \(x\)、\(y\)、\(\varepsilon\) 均存在空间效应，SDM 或 SAC 都可作为候选，但实证题中通常优先解释 SDM 的空间溢出效应。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">5.8 空间面板模型考场完整答题模板</h2>
+        <div class="note exam">
+          <p><strong>模型选择：</strong>本题研究地区 \(i\) 在时期 \(t\) 的 \(y_{it}\) 受核心解释变量 \(x_{it}\) 的影响，同时题干强调邻近地区之间存在空间相关或空间溢出。普通面板模型无法刻画邻近地区之间的相互影响，因此应采用空间面板模型。</p>
+          <p><strong>空间权重矩阵：</strong>设定空间权重矩阵 \(W=(w_{ij})\)，用邻接关系或距离倒数刻画地区间联系，并进行行标准化，使 \(Wy\) 表示邻近地区 \(y\) 的加权平均值。</p>
+          <p><strong>模型设定：</strong>若主要考虑被解释变量的空间滞后，可设定 SAR 模型：</p>
+          <div class="formula">
+            \[
+            y_{it}=\rho\sum_j w_{ij}y_{jt}
+            +\beta x_{it}+\delta'Controls_{it}
+            +\mu_i+\lambda_t+\varepsilon_{it}
+            \]
+          </div>
+          <p>若进一步考虑邻近地区解释变量的影响，可设定 SDM 模型：</p>
+          <div class="formula">
+            \[
+            y_{it}=\rho Wy_{it}+\beta x_{it}+\theta Wx_{it}
+            +\delta'Controls_{it}+\mu_i+\lambda_t+\varepsilon_{it}
+            \]
+          </div>
+          <p><strong>Stata 命令：</strong></p>
+          <pre><code>xtset id year
+xsmle y x controls, wmat(W) model(sar) fe type(both) effects nolog
+xsmle y x controls, wmat(W) dmat(W) model(sdm) fe type(both) effects nolog</code></pre>
+          <p><strong>结果解释：</strong>空间模型存在反馈机制，不能直接把 \(\beta\) 当作边际效应解释，应根据 <code>effects</code> 输出解释直接效应、间接效应和总效应。直接效应表示本地区 \(x\) 对本地区 \(y\) 的影响；间接效应表示本地区 \(x\) 对周边地区 \(y\) 的影响，即空间溢出效应；总效应为二者之和。</p>
+          <p><strong>检验说明：</strong>可先用 Moran's I 判断是否存在空间自相关，再通过 LM 检验判断空间滞后或空间误差形式，通过 LR/Wald 检验判断 SDM 是否可简化为 SAR 或 SEM，并通过 Hausman 检验选择固定效应或随机效应。</p>
+        </div>
+      </section>
+
+      <section id="model-6">
+        <h1 class="model-title">模型六：二项选择模型</h1>
+        <h2 class="sub-title">6.1 什么时候使用二项选择模型</h2>
+        <p>二项选择模型用于被解释变量只有两个互斥结果的情形，即 \(Y_i\in\{0,1\}\)。题目中如果出现“是否参与”“是否就业”“是否出口”“是否违约”“是否购买”“是否持有风险资产”等表述，就应优先考虑二项选择模型。</p>
+        <div class="note exam">
+          <p><strong>考试识别信号：</strong>只要 \(Y\) 是 0/1 变量，模型名称通常写二项选择模型，具体估计方法可写 Logit 或 Probit。第一问要补一句：线性概率模型 LPM 可能导致预测概率超出 \([0,1]\)，且误差项存在异方差，因此更适合使用非线性的 Logit/Probit 模型。</p>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <h3>Logit</h3>
+            <p>假定潜在误差服从逻辑分布，概率函数有闭式表达。优点是可以解释优势比 \(e^{\beta}\)。</p>
+          </div>
+          <div class="card">
+            <h3>Probit</h3>
+            <p>假定潜在误差服从标准正态分布，概率函数用标准正态分布函数 \(\Phi(\cdot)\) 表示。适合潜变量和联合正态设定。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">6.2 潜变量设定与概率模型</h2>
+        <p>二项选择模型通常先设定一个不能直接观测的潜变量 \(Y_i^*\)，它表示个体选择 \(Y=1\) 的倾向或净效用。</p>
+        <div class="formula">
+          \[
+          Y_i^*=\alpha+X_i'\beta+u_i,\qquad
+          Y_i=
+          \begin{cases}
+          1,&Y_i^*>0\\
+          0,&Y_i^*\le 0
+          \end{cases}
+          \]
+        </div>
+        <p>如果 \(u_i\) 服从逻辑分布，得到 Logit 模型：</p>
+        <div class="formula">
+          \[
+          P(Y_i=1\mid X_i)=
+          \frac{\exp(\alpha+X_i'\beta)}
+          {1+\exp(\alpha+X_i'\beta)}
+          \]
+        </div>
+        <p>如果 \(u_i\) 服从标准正态分布，得到 Probit 模型：</p>
+        <div class="formula">
+          \[
+          P(Y_i=1\mid X_i)=\Phi(\alpha+X_i'\beta)
+          \]
+        </div>
+        <div class="note">
+          <p><strong>记忆：</strong>Logit 是逻辑分布，概率有显式闭式；Probit 是正态分布，概率通过 \(\Phi(\cdot)\) 表示。二者系数大小不能直接比较，但边际效应通常较接近。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">6.3 Stata 命令：二项选择模型怎么写</h2>
+        <p>截面数据常用 <code>logit</code>、<code>probit</code>，面板数据可用 <code>xtlogit</code> 或 <code>xtprobit</code>。</p>
+        <pre><code>* 1. 截面 Logit / Probit
+logit y x controls, vce(robust)
+probit y x controls, vce(robust)
+
+* 2. Logit 报告优势比
+logit y x controls, or vce(robust)
+logit, or
+
+* 3. 平均边际效应
+margins, dydx(*)
+
+* 4. 面板二项选择
+xtset id year
+xtlogit y x controls, fe vce(cluster id)
+xtprobit y x controls, re vce(bootstrap)</code></pre>
+        <table>
+          <colgroup>
+            <col style="width:22%">
+            <col style="width:39%">
+            <col style="width:39%">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>命令</th>
+              <th>适用场景</th>
+              <th>考试提醒</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>logit</code></td>
+              <td>截面二值选择，常报告优势比和边际效应。</td>
+              <td><code>or</code> 只是显示 \(e^\beta\)，不改变模型估计。</td>
+            </tr>
+            <tr>
+              <td><code>probit</code></td>
+              <td>截面二值选择，潜变量误差服从标准正态。</td>
+              <td>没有优势比，重点解释边际效应或潜变量倾向。</td>
+            </tr>
+            <tr>
+              <td><code>xtlogit, fe</code></td>
+              <td>面板二值选择且需要控制个体固定效应。</td>
+              <td>固定效应 Logit 是条件 Logit，标准误通常按个体聚类。</td>
+            </tr>
+            <tr>
+              <td><code>xtprobit, re</code></td>
+              <td>面板二值选择且采用随机效应。</td>
+              <td>面板 Probit 通常只有随机效应，没有真正的固定效应 Probit。</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2 class="sub-title">6.4 系数含义：不要把系数直接当概率变化</h2>
+        <div class="note warn">
+          <p><strong>铁律：</strong>Logit/Probit 都是非线性模型，原始系数 \(\beta\) 不等于概率边际效应，不能直接写“\(x\) 增加 1 单位，概率增加 \(\beta\)” 。</p>
+        </div>
+        <h3>1. 平均边际效应 AME</h3>
+        <p>二项选择模型最稳妥的解释口径是边际效应：</p>
+        <div class="formula">
+          \[
+          \frac{\partial P(Y=1\mid X)}{\partial X_j}
+          =g'(X'\beta)\beta_j
+          \]
+        </div>
+        <p>其中 \(g(\cdot)\) 是 Logit 或 Probit 的概率函数。实际论文和考试中常报告平均边际效应：</p>
+        <div class="formula">
+          \[
+          AME_j=\frac{1}{n}\sum_{i=1}^n g'(X_i'\hat\beta)\hat\beta_j
+          \]
+        </div>
+        <div class="note exam">
+          <p><strong>例子：</strong>若教育变量的 AME 为 0.0499，可解释为：在其他变量不变时，教育水平每提高 1 个单位，个体选择 \(Y=1\) 的概率平均提高约 4.99 个百分点。</p>
+        </div>
+        <h3>2. Logit 的优势比</h3>
+        <p>Logit 模型可写成对数优势形式：</p>
+        <div class="formula">
+          \[
+          \ln\frac{p_i}{1-p_i}=\alpha+X_i'\beta
+          \]
+        </div>
+        <p>因此 \(e^{\beta_j}\) 表示 \(X_j\) 增加 1 单位时，选择 \(Y=1\) 的机会 odds 变为原来的 \(e^{\beta_j}\) 倍。</p>
+        <div class="note">
+          <p><strong>例子：</strong>若 \(\hat\beta=0.45\)，则 \(e^{0.45}\approx1.57\)，表示 \(x\) 增加 1 单位后，选择 \(Y=1\) 的机会变为原来的 1.57 倍。注意这是机会倍数，不是概率增加 57%。</p>
+        </div>
+        <h3>3. Probit 的潜变量解释</h3>
+        <p>Probit 中 \(\beta_j\) 可解释为 \(X_j\) 对潜在选择倾向 \(Y^*\) 的影响。若 \(\hat\beta_j>0\)，说明 \(X_j\) 提高选择 \(Y=1\) 的潜在倾向；具体概率变化仍应看 <code>margins</code> 输出的边际效应。</p>
+      </section>
+
+      <section>
+        <h2 class="sub-title">6.5 检验、拟合优度与预测</h2>
+        <ul>
+          <li><strong>估计方法：</strong>Logit/Probit 通常用最大似然估计 MLE。由于似然函数非线性，通常通过数值迭代求解。</li>
+          <li><strong>单个系数显著性：</strong>MLE 下常用 \(z\) 检验，不再使用 OLS 中的小样本 \(t\) 检验。</li>
+          <li><strong>联合显著性：</strong>可用 LR、Wald、LM 三类检验，渐近服从 \(\chi^2\) 分布。</li>
+          <li><strong>拟合优度：</strong>常见 McFadden 伪 \(R^2=1-\frac{\ln L}{\ln L_0}\)，它不是 OLS 的 \(R^2\)，数值通常偏小。</li>
+          <li><strong>分类预测：</strong>需要设定概率阈值 \(p_0\)，常用 0.5。若两类错误代价不同，阈值可以调整。</li>
+        </ul>
+        <div class="note">
+          <p><strong>易混点：</strong>LPM 的问题主要是预测概率可能超出 \([0,1]\)、误差异方差、误差非正态；但是否存在自相关、多重共线性仍取决于具体数据，不是 LPM 必然违背的假设。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">6.6 二项选择模型考场完整答题模板</h2>
+        <div class="note exam">
+          <p><strong>模型选择：</strong>本题被解释变量表示个体是否发生某种行为，取值为 0 或 1，属于二项选择问题。若直接使用线性概率模型，可能导致预测概率超出 \([0,1]\)，且误差项存在异方差，因此采用 Logit 或 Probit 模型。</p>
+          <p><strong>模型设定：</strong>设潜在选择倾向为 \(Y_i^*=\alpha+X_i'\beta+u_i\)，当 \(Y_i^*>0\) 时 \(Y_i=1\)，否则 \(Y_i=0\)。若采用 Logit，则：</p>
+          <div class="formula">
+            \[
+            P(Y_i=1\mid X_i)=
+            \frac{\exp(\alpha+X_i'\beta)}
+            {1+\exp(\alpha+X_i'\beta)}
+            \]
+          </div>
+          <p><strong>Stata 命令：</strong></p>
+          <pre><code>logit y x controls, vce(robust)
+margins, dydx(*)</code></pre>
+          <p><strong>结果解释：</strong>若核心解释变量 \(x\) 的平均边际效应显著为正，说明在控制其他因素后，\(x\) 的增加会显著提高 \(Y=1\) 的发生概率。若报告 Logit 优势比 \(e^\beta\)，则解释为 \(x\) 增加 1 单位时，选择 \(Y=1\) 的机会变为原来的 \(e^\beta\) 倍。</p>
+        </div>
+      </section>
+
+      <section id="model-7">
+        <h1 class="model-title">模型七：多项选择模型</h1>
+        <h2 class="sub-title">7.1 什么时候使用多项选择模型</h2>
+        <p>多项选择模型用于被解释变量具有三个及以上互斥类别的情形。第一步不是直接写命令，而是判断类别是否存在自然顺序：有顺序用有序选择模型，没有顺序用无序多项选择模型。</p>
+        <table>
+          <colgroup>
+            <col style="width:18%">
+            <col style="width:35%">
+            <col style="width:47%">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>类型</th>
+              <th>识别信号</th>
+              <th>例子</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>有序多项选择</td>
+              <td>类别有高低顺序，但间距不一定相等。</td>
+              <td>满意度：不满意、一般、满意；风险偏好：低、中、高；信用评级；健康状况等级。</td>
+            </tr>
+            <tr>
+              <td>无序多项选择</td>
+              <td>类别之间没有自然大小关系。</td>
+              <td>通勤方式：步行、公交、开车；职业选择；品牌选择；机场选择。</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note exam">
+          <p><strong>考试识别信号：</strong>如果 \(Y\) 是多类别变量，先写“多项选择模型”；若类别有自然排序，进一步写“有序 Logit/Probit”；若类别无自然排序，写“多项 Logit 或条件 Logit”。不要把无序类别简单编码为 1、2、3 后做 OLS。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">7.2 有序选择模型：Ordered Probit / Ordered Logit</h2>
+        <p>有序模型仍然基于潜变量思想。设 \(Y_i^*\) 表示个体处于更高等级的潜在倾向：</p>
+        <div class="formula">
+          \[
+          Y_i^*=\alpha+X_i'\beta+u_i
+          \]
+        </div>
+        <p>以三类结果为例，通过两个切点 \(C_1,C_2\) 将潜变量划分为不同类别：</p>
+        <div class="formula">
+          \[
+          Y_i=
+          \begin{cases}
+          1,&Y_i^*<C_1\\
+          2,&C_1\le Y_i^*<C_2\\
+          3,&Y_i^*\ge C_2
+          \end{cases}
+          \]
+        </div>
+        <p>若采用 Ordered Probit，则各类别概率为：</p>
+        <div class="formula">
+          \[
+          P(Y_i=1\mid X_i)=\Phi(C_1-X_i'\beta)
+          \]
+          \[
+          P(Y_i=2\mid X_i)=\Phi(C_2-X_i'\beta)-\Phi(C_1-X_i'\beta)
+          \]
+          \[
+          P(Y_i=3\mid X_i)=1-\Phi(C_2-X_i'\beta)
+          \]
+        </div>
+        <div class="note">
+          <p><strong>参数特点：</strong>有序模型只有一套 \(\beta\)，再加 \(m-1\) 个切点。切点负责划分类别，\(\beta\) 反映解释变量对潜在等级倾向 \(Y^*\) 的影响。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">7.3 无序多项选择模型：Multinomial Logit</h2>
+        <p>无序多项选择模型从随机效用角度理解最清楚。个体 \(i\) 选择类别 \(j\) 的效用为：</p>
+        <div class="formula">
+          \[
+          U_{ij}=\alpha_j+X_i'\beta_j+\varepsilon_{ij}
+          \]
+        </div>
+        <p>若误差项独立同分布为 I 型极值分布，可得到多项 Logit 概率：</p>
+        <div class="formula">
+          \[
+          P(Y_i=j\mid X_i)=
+          \frac{\exp(\alpha_j+X_i'\beta_j)}
+          {\sum_{\ell=1}^m\exp(\alpha_\ell+X_i'\beta_\ell)}
+          \]
+        </div>
+        <p>由于概率只由效用差决定，需要选择一个基础类别进行归一化，通常令基础类的 \(\alpha_1=0,\beta_1=0\)。因此每个非基础类别都有一套相对于基础类别的系数。</p>
+        <div class="note exam">
+          <p><strong>考试解释：</strong>多项 Logit 的系数是“某类别相对于基础类别”的影响。若报告 \(e^{\beta_j}\)，应解释为相对风险比 RRR，即 \(x\) 增加 1 单位时，选择类别 \(j\) 相对于基础类别的机会变为原来的 \(e^{\beta_j}\) 倍。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">7.4 Stata 命令：有序、无序和条件选择</h2>
+        <pre><code>* 1. 有序选择模型
+oprobit y x controls, vce(robust)
+ologit y x controls, vce(robust)
+margins, dydx(*)
+
+* 2. 面板有序模型，随机效应
+meoprobit y x controls || id:
+
+* 3. 无序多项 Logit，设第 1 类为基础类并报告 RRR
+mlogit y x controls, baseoutcome(1) rrr vce(robust)
+margins, dydx(*)
+
+* 4. 条件 Logit：解释变量随选项变化
+asclogit choice price time, case(id) alternatives(alt) casevars(income age)
+
+* 5. 面板/重复选择的混合 Logit
+cmset id alt
+cmxtmixlogit choice price time</code></pre>
+        <table>
+          <thead>
+            <tr>
+              <th>命令</th>
+              <th>使用条件</th>
+              <th>关键点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>oprobit</code>/<code>ologit</code></td>
+              <td>\(Y\) 为有序多类别。</td>
+              <td>解释潜在等级倾向和各类别边际效应。</td>
+            </tr>
+            <tr>
+              <td><code>mlogit</code></td>
+              <td>\(Y\) 为无序多类别，解释变量主要随个体变化。</td>
+              <td>需设基础类别，常报告 RRR 和边际效应。</td>
+            </tr>
+            <tr>
+              <td><code>asclogit</code></td>
+              <td>解释变量随选项变化，如价格、距离、耗时。</td>
+              <td>数据通常是“个体 × 选项”的长数据。</td>
+            </tr>
+            <tr>
+              <td><code>cmxtmixlogit</code></td>
+              <td>重复选择或面板选择，且允许偏好异质性。</td>
+              <td>先用 <code>cmset</code> 声明 choice model 数据结构。</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2 class="sub-title">7.5 系数含义与边际效应</h2>
+        <h3>1. 有序模型的系数解释</h3>
+        <p>有序模型中的 \(\beta_j\) 不是某一类别概率的直接变化，而是 \(X_j\) 对潜在等级倾向 \(Y^*\) 的影响。若 \(\beta_j>0\)，说明 \(X_j\) 增大会提高进入更高类别的倾向。</p>
+        <p>各类别概率的边际效应通常不同，甚至中间类别方向可能不确定，因此考试中如果题目给了 <code>margins</code> 结果，应按每个类别分别解释。</p>
+        <div class="formula">
+          \[
+          \frac{\partial P(Y=1)}{\partial X_j}
+          =-\phi(C_1-X'\beta)\beta_j
+          \]
+          \[
+          \frac{\partial P(Y=3)}{\partial X_j}
+          =\phi(C_2-X'\beta)\beta_j
+          \]
+        </div>
+        <h3>2. 无序多项 Logit 的系数解释</h3>
+        <p>以类别 1 为基础类，多项 Logit 可写成：</p>
+        <div class="formula">
+          \[
+          \ln\frac{P(Y=j\mid X)}{P(Y=1\mid X)}
+          =\alpha_j+X_i'\beta_j
+          \]
+        </div>
+        <p>因此 \(e^{\beta_j}\) 是选择类别 \(j\) 相对于基础类别的相对风险比 RRR。</p>
+        <div class="note exam">
+          <p><strong>例子：</strong>若男性变量在“选择公交”相对于“步行”的方程中 \(RRR=1.30\)，可解释为：在其他变量不变时，男性选择公交而非步行的相对机会是女性的 1.30 倍。若 AME 为 0.04，则解释为男性选择公交的概率平均高 4 个百分点。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">7.6 核心假设与模型检验</h2>
+        <table>
+          <colgroup>
+            <col style="width:20%">
+            <col style="width:40%">
+            <col style="width:40%">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>模型</th>
+              <th>核心假设</th>
+              <th>若不满足怎么办</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>有序 Logit/Probit</td>
+              <td>平行回归或比例优势假设：不同切点共用同一套斜率。</td>
+              <td>可考虑广义有序 Logit，或按类别重新设定模型。</td>
+            </tr>
+            <tr>
+              <td>无序 Multinomial Logit</td>
+              <td>IIA 假设：任意两个选项的相对机会不受第三个选项影响。</td>
+              <td>若 IIA 明显不合理，可考虑嵌套 Logit、混合 Logit。</td>
+            </tr>
+            <tr>
+              <td>条件 Logit</td>
+              <td>同样依赖 IIA，并要求选项属性能够解释选择差异。</td>
+              <td>可加入随机系数或使用混合 Logit 缓解偏好异质性。</td>
+            </tr>
+          </tbody>
+        </table>
+        <ul>
+          <li><strong>显著性检验：</strong>仍基于最大似然，可使用 \(z\) 检验、LR/Wald/LM 联合检验。</li>
+          <li><strong>拟合优度：</strong>常看 McFadden 伪 \(R^2\) 和似然值。</li>
+          <li><strong>模型选择：</strong>有序还是无序首先由被解释变量类别含义决定，而不是由显著性决定。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="sub-title">7.7 有序与无序模型的参数个数</h2>
+        <p>设解释变量个数为 \(k\)，类别个数为 \(m\)。考试选择题常考参数个数和边际效应个数。</p>
+        <table>
+          <thead>
+            <tr>
+              <th>模型</th>
+              <th>斜率参数</th>
+              <th>截距/切点</th>
+              <th>合计</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>有序选择模型</td>
+              <td>一套 \(\beta\)，共 \(k\) 个。</td>
+              <td>\(m-1\) 个切点。</td>
+              <td>\(k+(m-1)\)</td>
+            </tr>
+            <tr>
+              <td>无序多项 Logit</td>
+              <td>相对基础类有 \(m-1\) 套 \(\beta_j\)。</td>
+              <td>每个非基础类一个截距。</td>
+              <td>\((m-1)(k+1)\)</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note">
+          <p><strong>边际效应个数：</strong>无论有序还是无序，对于某个解释变量，通常每个类别都有一个概率边际效应，共 \(m\) 个，并且这些类别概率边际效应加总为 0。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">7.8 多项选择模型考场完整答题模板</h2>
+        <div class="note exam">
+          <p><strong>模型选择：</strong>本题被解释变量为多个互斥类别。若类别之间存在自然顺序，如满意度或评级，应采用有序选择模型；若类别之间没有高低顺序，如出行方式或职业类型，应采用无序多项选择模型。</p>
+          <p><strong>有序模型设定：</strong>设潜在等级倾向 \(Y_i^*=\alpha+X_i'\beta+u_i\)，并由切点 \(C_1,C_2,\ldots,C_{m-1}\) 将 \(Y_i^*\) 划分为不同等级。若采用 Ordered Probit，则类别概率由标准正态分布函数 \(\Phi(\cdot)\) 给出。</p>
+          <p><strong>无序模型设定：</strong>设个体 \(i\) 选择类别 \(j\) 的效用为 \(U_{ij}=\alpha_j+X_i'\beta_j+\varepsilon_{ij}\)，并选定一个基础类别，使其参数归一化为 0。多项 Logit 的概率为：</p>
+          <div class="formula">
+            \[
+            P(Y_i=j\mid X_i)=
+            \frac{\exp(\alpha_j+X_i'\beta_j)}
+            {\sum_{\ell=1}^m\exp(\alpha_\ell+X_i'\beta_\ell)}
+            \]
+          </div>
+          <p><strong>Stata 命令：</strong></p>
+          <pre><code>* 有序
+oprobit y x controls, vce(robust)
+margins, dydx(*)
+
+* 无序
+mlogit y x controls, baseoutcome(1) rrr vce(robust)
+margins, dydx(*)</code></pre>
+          <p><strong>结果解释：</strong>有序模型中，核心系数显著为正表示 \(x\) 提高进入更高类别的潜在倾向，具体概率变化应解释各类别边际效应。无序多项 Logit 中，若 \(RRR=e^\beta>1\)，表示 \(x\) 增加会提高选择该类别相对于基础类别的相对机会；若报告 AME，则直接解释为该类别选择概率变化多少个百分点。</p>
+          <p><strong>检验说明：</strong>有序模型需关注平行回归或比例优势假设；无序多项 Logit 需关注 IIA 假设。若 IIA 不合理，可考虑嵌套 Logit 或混合 Logit。</p>
+        </div>
+      </section>
+
+      <section id="model-8">
+        <h1 class="model-title">模型八：截尾与截断模型</h1>
+        <h2 class="sub-title">8.1 什么时候使用截尾、截断、Tobit 与 Heckman</h2>
+        <p>这类模型用于被解释变量受到参与门槛或观测机制限制的情形。题目中若出现大量 0、只观测到参与者、非参与者没有结果变量、样本选择偏误等关键词，就要考虑截尾、截断或样本选择模型。</p>
+        <table>
+          <thead>
+            <tr>
+              <th>情形</th>
+              <th>识别信号</th>
+              <th>常用模型</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>截尾 Censored</td>
+              <td>非参与者仍在样本中，结果变量记为 0 或边界值。</td>
+              <td>Tobit，左截尾常见为 <code>ll(0)</code>。</td>
+            </tr>
+            <tr>
+              <td>截断 Truncated</td>
+              <td>非参与者从样本中消失，只观测到满足条件的样本。</td>
+              <td><code>truncreg</code>。</td>
+            </tr>
+            <tr>
+              <td>样本选择</td>
+              <td>是否参与和参与后的结果由两套机制决定。</td>
+              <td>Heckman 样本选择模型。</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note exam">
+          <p><strong>考场识别：</strong>问“没参与的人还在不在数据里”。在数据里且结果记为 0，是截尾；不在数据里，是截断；如果是否参与和参与后的结果可能由不同因素决定，并且存在选择偏误，用 Heckman。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">8.2 Tobit 模型与 Heckman 模型设定</h2>
+        <h3>1. Tobit：同一潜变量机制</h3>
+        <p>以左截尾于 0 为例，Tobit 认为存在潜在结果 \(Y_i^*\)：</p>
+        <div class="formula">
+          \[
+          Y_i^*=\alpha+X_i'\beta+u_i,\qquad u_i\sim N(0,\sigma^2)
+          \]
+          \[
+          Y_i=
+          \begin{cases}
+          Y_i^*,&Y_i^*>0\\
+          0,&Y_i^*\le 0
+          \end{cases}
+          \]
+        </div>
+        <p>它把“是否参与”和“参与量多少”看作同一个潜变量机制决定，因此只有一套 \(\beta\)。</p>
+        <h3>2. Heckman：选择方程 + 结果方程</h3>
+        <p>Heckman 适用于是否进入样本与结果变量由不同机制决定的样本选择问题：</p>
+        <div class="formula">
+          \[
+          D_i^*=Z_i'\gamma+v_i,\qquad D_i=1(D_i^*>0)
+          \]
+          \[
+          Y_i=X_i'\beta+u_i,\qquad Y_i\ \text{only observed if }D_i=1
+          \]
+        </div>
+        <p>若 \(u_i\) 与 \(v_i\) 相关，直接对被观测样本做 OLS 会有选择偏误，Heckman 通过逆米尔斯比修正该偏误。</p>
+      </section>
+
+      <section>
+        <h2 class="sub-title">8.3 Stata 命令与系数解释</h2>
+        <pre><code>* Tobit：左截尾于 0
+tobit y x controls, ll(0)
+margins, dydx(*)
+
+* 截断回归：样本被截断
+truncreg y x controls, ll(0)
+
+* 面板 Tobit
+xttobit y x controls, ll(0)
+
+* Heckman 样本选择：MLE
+heckman y x controls, select(d = z controls)
+
+* Heckman 两步法
+heckman y x controls, select(d = z controls) twostep</code></pre>
+        <div class="note warn">
+          <p><strong>解释提醒：</strong>Tobit 系数通常不是直接的全样本边际效应。考试若给出 <code>margins</code>，优先解释边际效应；若只给 Tobit 系数，说明它是对潜变量 \(Y^*\) 的影响。</p>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>模型</th>
+              <th>重点解释</th>
+              <th>检验/判断</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tobit</td>
+              <td>潜变量、参与者条件均值、全样本均值三种边际效应不同。</td>
+              <td>依赖正态性和同方差，违背时不稳健。</td>
+            </tr>
+            <tr>
+              <td>Heckman</td>
+              <td>结果方程系数解释为参与者结果变量的影响。</td>
+              <td>\(\rho=0\) 或逆米尔斯比不显著，选择偏误不明显。</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2 class="sub-title">8.4 考场完整答题模板</h2>
+        <div class="note exam">
+          <p><strong>模型选择：</strong>本题被解释变量受到下限约束，非参与者仍保留在样本中并记为 0，因此属于截尾数据。普通 OLS 会忽略边界处的概率堆积，导致估计有偏，应采用 Tobit 模型。若题目中非参与者被排除，则应使用截断回归；若是否参与和参与后的结果由不同机制决定，则使用 Heckman 样本选择模型。</p>
+          <p><strong>模型设定：</strong>设潜变量 \(Y_i^*=\alpha+X_i'\beta+u_i\)，观测变量为 \(Y_i=\max(0,Y_i^*)\)。</p>
+          <p><strong>Stata 命令：</strong></p>
+          <pre><code>tobit y x controls, ll(0)
+margins, dydx(*)</code></pre>
+          <p><strong>结果解释：</strong>若核心变量的边际效应显著为正，说明该变量会显著提高被解释变量的期望水平。若使用 Heckman，还需说明选择方程、结果方程以及逆米尔斯比是否显著，从而判断是否存在样本选择偏误。</p>
+        </div>
+      </section>
+
+      <section id="model-9">
+        <h1 class="model-title">模型九：计数模型</h1>
+        <h2 class="sub-title">9.1 什么时候使用计数模型</h2>
+        <p>计数模型用于被解释变量是非负整数的情形，例如就诊次数、专利数量、事故次数、旅游次数、子女数量、网购次数等。若 \(Y_i=0,1,2,\ldots\)，尤其均值较小且离散性明显，就不宜简单使用 OLS。</p>
+        <div class="note exam">
+          <p><strong>考试识别：</strong>\(Y\) 是“次数/数量”且不能为负，用 Poisson 或负二项模型。若方差明显大于均值，说明存在过度离散，应考虑负二项模型。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">9.2 Poisson 与负二项模型设定</h2>
+        <h3>1. Poisson 模型</h3>
+        <div class="formula">
+          \[
+          Y_i\mid X_i\sim Poisson(\lambda_i),\qquad
+          E(Y_i\mid X_i)=\lambda_i=\exp(\alpha+X_i'\beta)
+          \]
+        </div>
+        <p>Poisson 的核心限制是等均差：</p>
+        <div class="formula">
+          \[
+          Var(Y_i\mid X_i)=E(Y_i\mid X_i)=\lambda_i
+          \]
+        </div>
+        <h3>2. 负二项模型</h3>
+        <p>若数据存在过度离散，即 \(Var(Y_i\mid X_i)>E(Y_i\mid X_i)\)，可使用负二项模型：</p>
+        <div class="formula">
+          \[
+          E(Y_i\mid X_i)=\mu_i=\exp(\alpha+X_i'\beta),\qquad
+          Var(Y_i\mid X_i)=\mu_i(1+\alpha\mu_i)
+          \]
+        </div>
+        <p>当离散参数 \(\alpha=0\) 时，负二项模型退化为 Poisson 模型。</p>
+      </section>
+
+      <section>
+        <h2 class="sub-title">9.3 Stata 命令与经济含义</h2>
+        <pre><code>* Poisson
+poisson y x controls, vce(robust)
+poisson y x controls, irr vce(robust)
+
+* 面板 Poisson
+xtpoisson y x controls, fe vce(robust)
+
+* 负二项
+nbreg y x controls
+nbreg y x controls, irr
+
+* 面板负二项
+xtnbreg y x controls
+
+* 平均边际效应
+margins, dydx(*)</code></pre>
+        <p>计数模型中 \(\beta_j\) 可以解释为条件均值的半弹性：</p>
+        <div class="formula">
+          \[
+          \frac{\partial \ln E(Y\mid X)}{\partial X_j}=\beta_j
+          \]
+        </div>
+        <p>因此 \(X_j\) 增加 1 单位，\(Y\) 的期望次数大约变化 \(100\beta_j\%\)。若报告 \(IRR=e^{\beta_j}\)，则表示发生率变为原来的 \(e^{\beta_j}\) 倍。</p>
+        <div class="note">
+          <p><strong>例子：</strong>若 \(\hat\beta=0.05\)，可解释为 \(x\) 增加 1 单位，事件发生次数的期望值约增加 5%。若 \(IRR=1.05\)，表示发生率变为原来的 1.05 倍。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">9.4 过度离散、超零与答题模板</h2>
+        <ul>
+          <li><strong>等均差：</strong>Poisson 要求条件方差等于条件均值。</li>
+          <li><strong>过度离散：</strong>若方差大于均值，负二项模型更合适；可看 <code>nbreg</code> 中 \(\alpha=0\) 的 LR 检验。</li>
+          <li><strong>超零：</strong>若 0 的比例远高于 Poisson 预测，可考虑零膨胀 Poisson 或零膨胀负二项模型。</li>
+          <li><strong>稳健性：</strong>Poisson 在均值设定正确时可作为 QMLE，过度离散下点估计仍可一致，但标准误要稳健修正。</li>
+        </ul>
+        <div class="note exam">
+          <p><strong>考场模板：</strong>本题被解释变量为非负整数，表示事件发生次数，适合采用计数模型。首先设定 Poisson 模型 \(E(Y_i\mid X_i)=\exp(\alpha+X_i'\beta)\)。若检验发现方差显著大于均值或负二项离散参数显著，则使用负二项模型。系数 \(\beta\) 表示条件均值的半弹性，或用 \(IRR=e^\beta\) 解释为发生率比。</p>
+        </div>
+      </section>
+
+      <section id="model-10">
+        <h1 class="model-title">模型十：生存分析模型</h1>
+        <h2 class="sub-title">10.1 什么时候使用生存分析模型</h2>
+        <p>生存分析模型用于研究某种状态持续多长时间以及状态转变的风险。例如企业存续时间、失业持续时间、婚姻持续时间、客户流失时间、资产持有时长等。</p>
+        <div class="note exam">
+          <p><strong>考试识别：</strong>题干给出持续时间 \(T\)、事件是否发生，以及右截尾信息。观测期结束时事件还没发生的样本不是缺失，而是右截尾。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">10.2 生存函数、风险函数与常见模型</h2>
+        <p>生存分析的三个核心函数为：</p>
+        <div class="formula">
+          \[
+          S(t)=P(T>t),\qquad
+          \lambda(t)=\frac{f(t)}{S(t)},\qquad
+          \Lambda(t)=\int_0^t\lambda(s)ds
+          \]
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>模型</th>
+              <th>风险函数</th>
+              <th>特点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>指数模型</td>
+              <td>\(\lambda(t)=\lambda\)</td>
+              <td>风险恒定。</td>
+            </tr>
+            <tr>
+              <td>Weibull 模型</td>
+              <td>\(\lambda(t)=\alpha t^{\alpha-1}\exp(X'\beta)\)</td>
+              <td>\(\alpha>1\) 风险递增，\(0\lt\alpha\lt1\) 风险递减，\(\alpha=1\) 退化为指数模型。</td>
+            </tr>
+            <tr>
+              <td>Cox 模型</td>
+              <td>\(\lambda(t\mid X)=\lambda_0(t)\exp(X'\beta)\)</td>
+              <td>半参数，不设定基准风险 \(\lambda_0(t)\) 的具体形式。</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2 class="sub-title">10.3 Stata 命令与风险比解释</h2>
+        <pre><code>* 声明生存数据
+stset time, failure(event)
+
+* 参数模型
+streg x controls, dist(exponential)
+streg x controls, dist(weibull)
+
+* Cox 比例风险模型
+stcox x controls
+
+* Kaplan-Meier 生存曲线与 PH 假设检验
+sts graph
+estat phtest</code></pre>
+        <p>Cox 模型中 \(e^{\beta_j}\) 是风险比 HR：</p>
+        <div class="formula">
+          \[
+          HR=e^{\beta_j}
+          \]
+        </div>
+        <ul>
+          <li>\(HR>1\)：风险上升，事件更快发生，生存时间倾向于缩短。</li>
+          <li>\(HR\lt1\)：风险下降，事件更慢发生，生存时间倾向于延长。</li>
+          <li>\(\beta_j\) 是风险的半弹性，不能解释为生存时间的直接变化。</li>
+        </ul>
+        <div class="note warn">
+          <p><strong>易错点：</strong>风险和生存时间方向相反。风险比 0.80 表示事件发生风险降低 20%，通常意味着持续时间更长。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">10.4 比例风险假设与答题模板</h2>
+        <p>Cox 模型核心假设是比例风险假设：不同个体的风险函数之比不随时间变化。如果该假设被拒绝，可考虑分层 Cox 模型或加入时变协变量。</p>
+        <div class="note exam">
+          <p><strong>考场模板：</strong>本题研究某状态持续时间及事件发生风险，且存在右截尾样本，因此采用生存分析模型。先用 <code>stset</code> 声明持续时间和事件变量，再估计 Cox 比例风险模型：\(\lambda(t\mid X)=\lambda_0(t)\exp(X'\beta)\)。若核心变量的风险比 \(e^\beta>1\)，说明该变量提高事件发生风险、缩短持续时间；若 \(e^\beta\lt1\)，说明降低风险、延长持续时间。最后需说明比例风险假设检验。</p>
+        </div>
+      </section>
+
+      <section id="model-11">
+        <h1 class="model-title">模型十一：DID 模型</h1>
+        <h2 class="sub-title">11.1 什么时候使用 DID</h2>
+        <p>DID 用于政策评估或自然实验。题目中若有政策冲击、处理组与控制组、政策前后多个时期，就可考虑双重差分模型。</p>
+        <div class="note exam">
+          <p><strong>识别信号：</strong>某年开始实施政策，部分地区或个体受影响，另一些未受影响，并且可以观察政策前后结果变量变化。DID 比较的是“变化的变化”，不是简单比较水平差异。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">11.2 标准 DID 与多期 DID 设定</h2>
+        <p>标准 DID 可写为：</p>
+        <div class="formula">
+          \[
+          Y_{it}=\alpha+\beta Treat_i+\gamma Post_t
+          +\delta(Treat_i\times Post_t)+\varepsilon_{it}
+          \]
+        </div>
+        <p>在面板或多期数据中，更常写成双向固定效应形式：</p>
+        <div class="formula">
+          \[
+          Y_{it}=\alpha_i+\lambda_t+\delta D_{it}
+          +Controls_{it}'\theta+\varepsilon_{it}
+          \]
+        </div>
+        <p>其中 \(\alpha_i\) 控制个体固定差异，\(\lambda_t\) 控制共同时间冲击，\(\delta\) 是政策处理效应。</p>
+        <div class="formula">
+          \[
+          DID=(\bar Y_{T,post}-\bar Y_{T,pre})
+          -(\bar Y_{C,post}-\bar Y_{C,pre})
+          \]
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">11.3 Stata 命令与平行趋势检验</h2>
+        <pre><code>* 两组两期或重复截面
+reg y i.treat##i.post controls, vce(robust)
+
+* 面板双向固定效应 DID
+xtset id year
+xtreg y did controls i.year, fe vce(cluster id)
+
+* 或使用 reghdfe
+reghdfe y did controls, absorb(id year) vce(cluster id)
+
+* 事件研究/动态 DID：政策前一期作基准
+reghdfe y pre3 pre2 current post1 post2 controls, absorb(id year) vce(cluster id)</code></pre>
+        <p>平行趋势是 DID 的核心假设：如果没有政策，处理组和控制组结果变量应具有相同变化趋势。通常用政策前各期交互项是否显著为 0 来检验。</p>
+        <div class="note warn">
+          <p><strong>易错点：</strong>平行趋势检验看政策前趋势，不要求两组政策前水平相同；政策后出现差异正是政策效应，不能拿政策后差异来否定平行趋势。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">11.4 结果解释、稳健性与答题模板</h2>
+        <ul>
+          <li><strong>系数解释：</strong>\(\delta\) 表示处理组相对于控制组，在政策后相对于政策前的净变化。</li>
+          <li><strong>若 \(y\) 取对数：</strong>\(\delta=0.04\) 可解释为政策使 \(y\) 约增加 4%，精确为 \(e^{0.04}-1\)。</li>
+          <li><strong>稳健性：</strong>平行趋势检验、安慰剂检验、替换样本、替换窗口、加入控制变量、聚类稳健标准误。</li>
+          <li><strong>假设：</strong>平行趋势、无预期效应、无政策溢出。</li>
+        </ul>
+        <div class="note exam">
+          <p><strong>考场模板：</strong>本题有明确政策实施时点，且存在受政策影响的处理组和未受影响的控制组，可采用 DID 模型。设定 \(Y_{it}=\alpha_i+\lambda_t+\delta D_{it}+Controls_{it}'\theta+\varepsilon_{it}\)，其中 \(\delta\) 为政策处理效应。估计时控制个体和时间固定效应，并在个体层面聚类标准误。若 \(\delta\) 显著为正，说明政策显著提高了结果变量。最后说明平行趋势检验和安慰剂检验。</p>
+        </div>
+      </section>
+
+      <section id="model-12">
+        <h1 class="model-title">模型十二：RDD 模型</h1>
+        <h2 class="sub-title">12.1 什么时候使用 RDD</h2>
+        <p>RDD 用于处理由连续驱动变量和明确阈值决定的政策或处理规则。题目中若出现“分数达到某线”“年龄超过某岁”“得票率超过 50%”“人口超过某阈值”等，就可考虑断点回归。</p>
+        <div class="note exam">
+          <p><strong>识别信号：</strong>存在连续驱动变量 \(X\)、断点 \(c\)，且处理状态由 \(X\) 是否越过 \(c\) 决定。断点附近刚好过线和刚好没过线的个体近似随机，断点处的跳跃就是局部处理效应。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">12.2 精确断点与模糊断点</h2>
+        <h3>1. 精确断点 Sharp RDD</h3>
+        <p>若是否接受处理完全由 \(X_i\ge c\) 决定：</p>
+        <div class="formula">
+          \[
+          D_i=1(X_i\ge c)
+          \]
+        </div>
+        <p>断点处的处理效应为：</p>
+        <div class="formula">
+          \[
+          LATE=\lim_{x\downarrow c}E(Y_i\mid X_i=x)
+          -\lim_{x\uparrow c}E(Y_i\mid X_i=x)
+          \]
+        </div>
+        <h3>2. 模糊断点 Fuzzy RDD</h3>
+        <p>若越过断点只提高接受处理的概率，而不是完全决定处理，则为模糊断点：</p>
+        <div class="formula">
+          \[
+          LATE=
+          \frac{
+          \lim_{x\downarrow c}E(Y_i\mid X_i=x)-\lim_{x\uparrow c}E(Y_i\mid X_i=x)}
+          {\lim_{x\downarrow c}E(D_i\mid X_i=x)-\lim_{x\uparrow c}E(D_i\mid X_i=x)}
+          \]
+        </div>
+        <p>模糊 RDD 本质上用“是否过线”作为实际处理 \(D_i\) 的工具变量。</p>
+      </section>
+
+      <section>
+        <h2 class="sub-title">12.3 Stata 命令与估计设定</h2>
+        <pre><code>* 驱动变量中心化
+gen xc = x - c
+
+* 手动局部线性，允许断点两侧斜率不同
+reg y i.D##c.xc, vce(robust)
+
+* rdrobust 专用命令
+rdrobust y x, c(c)
+
+* 模糊 RDD
+rdrobust y x, c(c) fuzzy(treat)
+
+* 画图与密度操纵检验
+rdplot y x, c(c)
+rddensity x, c(c)</code></pre>
+        <p>RDD 的主力估计思想是断点附近的局部回归，通常需要选择带宽，并控制驱动变量在断点两侧的连续趋势。</p>
+      </section>
+
+      <section>
+        <h2 class="sub-title">12.4 核心假设、检验与答题模板</h2>
+        <ul>
+          <li><strong>不可精确操纵：</strong>个体不能精准操纵驱动变量使自己刚好越过断点。</li>
+          <li><strong>协变量连续：</strong>断点处除处理状态外，其他预定协变量应连续。</li>
+          <li><strong>密度检验：</strong>McCrary 或 <code>rddensity</code> 检验断点处驱动变量密度是否跳跃。</li>
+          <li><strong>稳健性：</strong>更换带宽、不同多项式阶数、安慰剂断点、排除断点附近操纵样本。</li>
+          <li><strong>效应口径：</strong>RDD 识别断点附近边际个体的 LATE，不能直接外推到全体样本。</li>
+        </ul>
+        <div class="note exam">
+          <p><strong>考场模板：</strong>本题处理状态由连续驱动变量 \(X\) 是否超过阈值 \(c\) 决定，断点附近个体近似随机分配，因此采用 RDD。若越过阈值完全决定处理，为精确断点；若只改变处理概率，为模糊断点。估计时可设定 \(Y_i=\alpha+\beta(X_i-c)+\gamma D_i+\delta(X_i-c)D_i+\varepsilon_i\)，其中 \(\gamma\) 表示断点处的局部处理效应。最后需检验驱动变量密度是否连续、协变量是否连续，并做带宽稳健性检验。</p>
+        </div>
+      </section>
+        </article>
+
         <section class="frame-view view" id="frameView">
           <iframe id="contentFrame" title="复习内容"></iframe>
         </section>
@@ -1029,6 +4366,10 @@
   <script>
     const views = {
       outline: {
+        title: '首页',
+        src: ''
+      },
+      exam: {
         title: '考试大纲与题型分数',
         src: ''
       },
@@ -1062,6 +4403,34 @@
       'model-5': {
         title: '模型五：空间面板模型',
         src: 'empirical.html#model-5'
+      },
+      'model-6': {
+        title: '模型六：二项选择模型',
+        src: 'empirical.html#model-6'
+      },
+      'model-7': {
+        title: '模型七：多项选择模型',
+        src: 'empirical.html#model-7'
+      },
+      'model-8': {
+        title: '模型八：截尾与截断模型',
+        src: 'empirical.html#model-8'
+      },
+      'model-9': {
+        title: '模型九：计数模型',
+        src: 'empirical.html#model-9'
+      },
+      'model-10': {
+        title: '模型十：生存分析模型',
+        src: 'empirical.html#model-10'
+      },
+      'model-11': {
+        title: '模型十一：DID 模型',
+        src: 'empirical.html#model-11'
+      },
+      'model-12': {
+        title: '模型十二：RDD 模型',
+        src: 'empirical.html#model-12'
       }
     };
 
@@ -1069,13 +4438,35 @@
     const navButtons = Array.from(document.querySelectorAll('.nav-button'));
     const empiricalSubnav = document.getElementById('empiricalSubnav');
     const empiricalButtons = Array.from(document.querySelectorAll('.subnav-button[data-model]'));
+    const docShortcuts = Array.from(document.querySelectorAll('[data-view-shortcut]'));
     const outlineView = document.getElementById('outlineView');
+    const examView = document.getElementById('examView');
+    const empiricalView = document.getElementById('empiricalView');
     const outlineToc = document.getElementById('outlineToc');
     const frameView = document.getElementById('frameView');
     const frame = document.getElementById('contentFrame');
     const contentTitle = document.getElementById('contentTitle');
     const standalone = document.getElementById('openStandalone');
     const toggleExpand = document.getElementById('toggleExpand');
+    const modelButtons = Array.from(empiricalView.querySelectorAll('[data-model-target]'));
+    const modelCards = Array.from(empiricalView.querySelectorAll('[data-model-card]'));
+    const empiricalHeader = empiricalView.querySelector(':scope > header');
+    const modelSections = Array.from(empiricalView.children).filter((child) => child.tagName === 'SECTION');
+    const modelIds = modelButtons.map((button) => button.dataset.modelTarget);
+    const modelDirectory = empiricalView.querySelector('#modelDirectory');
+    const modelNav = empiricalView.querySelector('.model-nav');
+    const modelToc = empiricalView.querySelector('#modelToc');
+    const modelTocLinks = empiricalView.querySelector('#modelTocLinks');
+    const backToModels = empiricalView.querySelector('#backToModels');
+    let currentModelId = modelIds[0];
+
+    modelSections.forEach((section) => {
+      if (modelIds.includes(section.id)) {
+        currentModelId = section.id;
+      }
+      section.classList.add('model-section');
+      section.dataset.model = currentModelId;
+    });
 
     function setEmpiricalActive(modelKey) {
       empiricalButtons.forEach((button) => {
@@ -1093,11 +4484,107 @@
       });
     }
 
+    function getModelTitle(modelKey) {
+      const button = modelButtons.find((item) => item.dataset.modelTarget === modelKey);
+      const title = button ? button.querySelector('.model-nav-title') : null;
+      return title ? title.textContent.trim() : views.empirical.title;
+    }
+
+    function setModelActive(modelKey) {
+      modelButtons.forEach((button) => {
+        button.classList.toggle('active', button.dataset.modelTarget === modelKey);
+      });
+      modelCards.forEach((card) => {
+        card.classList.toggle('active', card.dataset.modelCard === modelKey);
+      });
+    }
+
+    function buildModelToc(modelKey) {
+      modelTocLinks.innerHTML = '';
+      const sections = modelSections.filter((section) => section.dataset.model === modelKey);
+
+      if (!sections.length) {
+        modelToc.hidden = true;
+        return;
+      }
+
+      sections.forEach((section, index) => {
+        const title = section.querySelector('.sub-title');
+        if (!title) return;
+        if (!section.id) {
+          section.id = `${modelKey}-part-${index + 1}`;
+        }
+        const link = document.createElement('a');
+        link.href = `#${section.id}`;
+        link.textContent = title.textContent.trim();
+        link.addEventListener('click', (event) => {
+          event.preventDefault();
+          section.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        });
+        modelTocLinks.appendChild(link);
+      });
+
+      modelToc.hidden = modelTocLinks.children.length === 0;
+    }
+
+    function typesetEmpiricalView() {
+      if (!window.MathJax || !window.MathJax.typesetPromise) return;
+      requestAnimationFrame(() => {
+        window.MathJax.typesetPromise([empiricalView]).catch(() => {});
+      });
+    }
+
+    function showEmpiricalDirectory() {
+      empiricalView.classList.remove('model-open');
+      if (empiricalHeader) {
+        empiricalHeader.hidden = false;
+      }
+      modelDirectory.hidden = false;
+      modelNav.hidden = true;
+      modelToc.hidden = true;
+      modelSections.forEach((section) => {
+        section.hidden = true;
+      });
+      setEmpiricalActive('');
+      setModelActive('');
+      contentTitle.textContent = views.empirical.title;
+      typesetEmpiricalView();
+    }
+
+    function showEmpiricalModel(modelKey) {
+      const selectedModel = modelIds.includes(modelKey) ? modelKey : modelIds[0];
+
+      empiricalView.classList.add('model-open');
+      if (empiricalHeader) {
+        empiricalHeader.hidden = true;
+      }
+      modelDirectory.hidden = true;
+      modelNav.hidden = true;
+      modelSections.forEach((section) => {
+        section.hidden = section.dataset.model !== selectedModel;
+      });
+      setEmpiricalActive(selectedModel);
+      setModelActive(selectedModel);
+      contentTitle.textContent = getModelTitle(selectedModel);
+      buildModelToc(selectedModel);
+      typesetEmpiricalView();
+      requestAnimationFrame(() => {
+        const firstSection = modelSections.find((section) => section.dataset.model === selectedModel);
+        if (firstSection) {
+          firstSection.scrollIntoView({
+            block: 'start'
+          });
+        }
+      });
+    }
+
     function setView(key, updateHash = true, modelKey = '') {
       const viewKey = views[key] ? key : 'outline';
       const view = views[viewKey];
-      const selectedModel = empiricalModels[modelKey] ? modelKey : '';
-      const empiricalModel = selectedModel ? empiricalModels[selectedModel] : null;
+      const selectedModel = modelIds.includes(modelKey) ? modelKey : '';
 
       navButtons.forEach((button) => {
         button.classList.toggle('active', button.dataset.view === viewKey);
@@ -1105,23 +4592,47 @@
 
       empiricalSubnav.hidden = viewKey !== 'empirical';
       setEmpiricalActive(viewKey === 'empirical' ? selectedModel : '');
-      contentTitle.textContent = viewKey === 'empirical' && empiricalModel ? empiricalModel.title : view.title;
+      contentTitle.textContent = view.title;
 
       if (viewKey === 'outline') {
         outlineView.classList.add('active');
+        examView.classList.remove('active');
+        empiricalView.classList.remove('active');
+        outlineToc.hidden = true;
+        frameView.classList.remove('active');
+        frame.removeAttribute('src');
+        standalone.hidden = true;
+      } else if (viewKey === 'exam') {
+        outlineView.classList.remove('active');
+        examView.classList.add('active');
+        empiricalView.classList.remove('active');
         outlineToc.hidden = false;
         frameView.classList.remove('active');
         frame.removeAttribute('src');
         standalone.hidden = true;
+      } else if (viewKey === 'empirical') {
+        outlineView.classList.remove('active');
+        examView.classList.remove('active');
+        empiricalView.classList.add('active');
+        outlineToc.hidden = true;
+        frameView.classList.remove('active');
+        frame.removeAttribute('src');
+        standalone.hidden = true;
+        if (selectedModel) {
+          showEmpiricalModel(selectedModel);
+        } else {
+          showEmpiricalDirectory();
+        }
       } else {
         outlineView.classList.remove('active');
+        examView.classList.remove('active');
+        empiricalView.classList.remove('active');
         outlineToc.hidden = true;
         frameView.classList.add('active');
-        const targetSrc = viewKey === 'empirical' && empiricalModel ? empiricalModel.src : view.src;
-        if (frame.getAttribute('src') !== targetSrc) {
-          frame.src = targetSrc;
+        if (frame.getAttribute('src') !== view.src) {
+          frame.src = view.src;
         }
-        standalone.href = targetSrc;
+        standalone.href = view.src;
         standalone.hidden = false;
       }
 
@@ -1140,13 +4651,29 @@
       button.addEventListener('click', () => setView('empirical', true, button.dataset.model));
     });
 
+    modelButtons.forEach((button) => {
+      button.addEventListener('click', () => setView('empirical', true, button.dataset.modelTarget));
+    });
+
+    modelCards.forEach((card) => {
+      card.addEventListener('click', () => setView('empirical', true, card.dataset.modelCard));
+    });
+
+    backToModels.addEventListener('click', () => setView('empirical'));
+
+    docShortcuts.forEach((button) => {
+      button.addEventListener('click', () => {
+        setView(button.dataset.viewShortcut, true, button.dataset.modelShortcut || '');
+      });
+    });
+
     toggleExpand.addEventListener('click', () => {
       const expanded = appShell.classList.toggle('expanded');
       toggleExpand.textContent = expanded ? '退出放大' : '放大视图';
     });
 
     const initial = location.hash.replace('#', '');
-    const empiricalMatch = initial.match(/^empirical-(model-\d)$/);
+    const empiricalMatch = initial.match(/^empirical-(model-\d+)$/);
     if (empiricalMatch) {
       setView('empirical', false, empiricalMatch[1]);
     } else {
