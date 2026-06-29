@@ -456,6 +456,7 @@
 
     .kb-home,
     #examView,
+    #calculationView,
     .empirical-doc {
       min-height: calc(100vh - 180px);
       border: 0;
@@ -465,7 +466,8 @@
     }
 
     .kb-home,
-    #examView {
+    #examView,
+    #calculationView {
       padding-top: 42px;
     }
 
@@ -705,6 +707,106 @@
       background: var(--blue-soft);
       color: #24364a;
       font-size: 14px;
+    }
+
+    .calc-doc {
+      grid-column: 1 / -1;
+      max-width: 1180px;
+    }
+
+    .calc-doc .doc-intro {
+      max-width: 860px;
+    }
+
+    .calc-section {
+      padding-top: 30px;
+    }
+
+    .calc-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .calc-card {
+      padding: 15px 16px;
+      border: 1px solid #e3e8ef;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.62);
+    }
+
+    .calc-card h3 {
+      margin-bottom: 10px;
+    }
+
+    .calc-card p + p {
+      margin-top: 8px;
+    }
+
+    .calc-formula {
+      margin: 10px 0;
+      padding: 10px 12px;
+      border-left: 4px solid var(--accent);
+      border-radius: 6px;
+      background: #f3faf8;
+      color: #1c3f38;
+      font-size: 14px;
+      overflow-x: auto;
+    }
+
+    .calc-example,
+    .calc-warn {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .calc-example {
+      background: #f8fafc;
+      color: #263548;
+    }
+
+    .calc-warn {
+      background: #fff7ed;
+      color: #7c2d12;
+    }
+
+    .calc-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.7);
+      font-size: 14px;
+    }
+
+    .calc-table th,
+    .calc-table td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+      word-break: break-word;
+    }
+
+    .calc-table th {
+      background: #f8fafc;
+      color: #475467;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .calc-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .calc-table td:first-child {
+      color: #1f2937;
+      font-weight: 800;
     }
 
     .toc {
@@ -1416,6 +1518,10 @@
         grid-template-columns: 1fr;
       }
 
+      .calc-grid {
+        grid-template-columns: 1fr;
+      }
+
       .kb-title-row {
         align-items: flex-start;
         flex-direction: column;
@@ -1558,6 +1664,13 @@
               <span class="nav-desc">模型设定、Stata 命令和系数解释</span>
             </span>
           </button>
+          <button class="nav-button" type="button" data-view="calculation">
+            <span class="nav-icon" aria-hidden="true"></span>
+            <span>
+              <span class="nav-title">计算题</span>
+              <span class="nav-desc">公式速查、代入步骤和典型例题</span>
+            </span>
+          </button>
           <div class="subnav" id="empiricalSubnav" hidden>
             <button class="subnav-button" type="button" data-view="empirical" data-model="model-summary">
               <span class="subnav-kicker">速查</span>
@@ -1629,7 +1742,7 @@
               </div>
             </div>
             <div class="doc-meta">
-              <span>3 文档</span>
+              <span>4 文档</span>
               <span>考试时间：6.30 下午</span>
               <span>卷面：100 分</span>
             </div>
@@ -1655,6 +1768,11 @@
               <span class="doc-index-title"><span class="doc-index-toggle">⌄</span>案例分析题</span>
               <span class="doc-index-line"></span>
               <span class="doc-index-date">5 小题 x 6 分</span>
+            </button>
+            <button class="doc-index-row" type="button" data-view-shortcut="calculation">
+              <span class="doc-index-title">计算题</span>
+              <span class="doc-index-line"></span>
+              <span class="doc-index-date">3 道 x 10 分</span>
             </button>
             <button class="doc-index-row" type="button" data-view-shortcut="empirical" data-model-shortcut="model-1">
               <span class="doc-index-title indent">基准面板模型</span>
@@ -1843,6 +1961,282 @@
             <div class="callout">
               答题提醒：卷子尽量写满，不留空白；模型选择理由、设定式、命令和经济意义都写上。若题目没有给具体估计结果，可以直接假设核心系数显著并解释其经济含义。
             </div>
+          </section>
+        </article>
+
+        <article class="document view calc-doc" id="calculationView">
+          <header class="doc-header">
+            <h1>计算题复习</h1>
+            <p class="doc-intro">参考“高计2复习资料”中的计算题速查卡整理。复习时按“识别题型 -> 写公式 -> 代入数值 -> 标明口径”四步走，重点防止把系数、边际效应、处理效应口径混在一起。</p>
+            <div class="doc-meta">
+              <span>计算分析题：3 道 x 10 分</span>
+              <span>重点：公式代入与经济口径</span>
+              <span>建议：保留中间步骤</span>
+            </div>
+          </header>
+
+          <section class="calc-section" id="calc-panel">
+            <h2>一、面板模型计算题</h2>
+            <div class="calc-grid">
+              <div class="calc-card">
+                <h3>1. 取对数系数换算</h3>
+                <table class="calc-table">
+                  <thead>
+                    <tr><th>模型形式</th><th>系数解释</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>\(Y, X\) 均原值</td><td>\(X\) 增加 1 单位，\(Y\) 变动 \(\beta\) 个单位。</td></tr>
+                    <tr><td>\(\ln Y, X\) 原值</td><td>\(X\) 增加 1 单位，\(Y\) 约变动 \(100\beta\%\)。</td></tr>
+                    <tr><td>\(\ln Y, \ln X\)</td><td>\(X\) 增加 \(1\%\)，\(Y\) 变动 \(\beta\%\)，即弹性。</td></tr>
+                    <tr><td>\(Y, \ln X\)</td><td>\(X\) 增加 \(1\%\)，\(Y\) 变动 \(\beta/100\) 个单位。</td></tr>
+                  </tbody>
+                </table>
+                <div class="calc-example">速算：log-log 模型中 \(\beta=0.45\)，则 \(X\) 增加 \(1\%\)，\(Y\) 增加 \(0.45\%\)，不要再乘 100。</div>
+              </div>
+
+              <div class="calc-card">
+                <h3>2. 动态面板短期与长期效应</h3>
+                <div class="calc-formula">
+                  \[
+                    y_{it}=\gamma y_{i,t-1}+\beta x_{it}+\alpha_i+\lambda_t+\varepsilon_{it}
+                  \]
+                  \[
+                    \text{短期效应}=\beta,\qquad
+                    \text{长期效应}=\frac{\beta}{1-\gamma}
+                  \]
+                </div>
+                <div class="calc-example">速算：若 \(\gamma=0.6,\ \beta=0.3\)，长期效应 \(=0.3/(1-0.6)=0.75\)。若是双对数模型，则 \(X\) 增加 \(1\%\)，\(Y\) 长期增加 \(0.75\%\)。</div>
+                <div class="calc-warn">易错点：\(\gamma\) 是滞后被解释变量系数，只有 \(|\gamma| \lt 1\) 时长期效应公式才有稳定含义。</div>
+              </div>
+
+              <div class="calc-card">
+                <h3>3. 固定效应 F 检验自由度</h3>
+                <div class="calc-formula">
+                  \[
+                    F=\frac{(RSS_{\text{混合}}-RSS_{\text{FE}})/(N-1)}
+                    {RSS_{\text{FE}}/(NT-N-k)}
+                    \sim F(N-1,\ NT-N-k)
+                  \]
+                </div>
+                <div class="calc-example">速算：\(N=30,\ T=10,\ k=2\)，分子自由度 \(=29\)，分母自由度 \(=300-30-2=268\)，即 \(F(29,268)\)。</div>
+              </div>
+
+              <div class="calc-card">
+                <h3>4. 空间相关与空间效应</h3>
+                <div class="calc-formula">
+                  \[
+                    E(I)=\frac{-1}{n-1},\qquad
+                    \text{总效应}=\text{直接效应}+\text{间接效应}
+                  \]
+                </div>
+                <div class="calc-example">速算：若 \(n=51\)，无空间相关时 \(E(I)=-1/50=-0.02\)。若直接效应 \(0.4\)，间接效应 \(0.3\)，总效应 \(0.7\)。</div>
+                <div class="calc-warn">易错点：空间模型不能直接拿 \(\beta\) 当边际效应解释，要读 direct、indirect、total effects；空间溢出主要看间接效应。</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="calc-section" id="calc-micro">
+            <h2>二、微观计量计算题</h2>
+            <div class="calc-grid">
+              <div class="calc-card">
+                <h3>1. 指数换算：OR / RRR / IRR / HR</h3>
+                <div class="calc-formula">
+                  \[
+                    \text{倍数}=e^\beta,\qquad
+                    \text{百分比变化}=(e^\beta-1)\times100\%
+                  \]
+                </div>
+                <table class="calc-table">
+                  <thead>
+                    <tr><th>模型</th><th>指数含义</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>二项 Logit</td><td>\(OR=e^\beta\)，机会变为原来的 \(e^\beta\) 倍。</td></tr>
+                    <tr><td>无序 Logit</td><td>\(RRR=e^\beta\)，相对基础类机会变为 \(e^\beta\) 倍。</td></tr>
+                    <tr><td>计数模型</td><td>\(IRR=e^\beta\)，发生率变为 \(e^\beta\) 倍。</td></tr>
+                    <tr><td>Cox 生存模型</td><td>\(HR=e^\beta\)，风险率变为 \(e^\beta\) 倍。</td></tr>
+                  </tbody>
+                </table>
+                <div class="calc-example">例：\(\beta=0.45\)，\(e^{0.45}=1.568\)，表示变为 1.568 倍，即增加 \(56.8\%\)。</div>
+              </div>
+
+              <div class="calc-card">
+                <h3>2. 伪 \(R^2\)、LR 和 z 值</h3>
+                <div class="calc-formula">
+                  \[
+                    R^2_{McF}=1-\frac{\ln L}{\ln L_0},\qquad
+                    LR=2(\ln L_{ur}-\ln L_r),\qquad
+                    z=\frac{\hat\beta_j}{SE(\hat\beta_j)}
+                  \]
+                </div>
+                <div class="calc-example">例：\(\ln L=-3401.86,\ \ln L_0=-4119.26\)，则 \(R^2_{McF}=1-\frac{-3401.86}{-4119.26}=0.146\)。</div>
+                <div class="calc-warn">易错点：伪 \(R^2\) 天然偏小，不能按 OLS 的 \(R^2\) 直觉解释；LR 检验比较的是受限模型和非受限模型的对数似然。</div>
+              </div>
+
+              <div class="calc-card">
+                <h3>3. 概率代入计算</h3>
+                <table class="calc-table">
+                  <thead>
+                    <tr><th>模型</th><th>代入公式</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Logit</td><td>\(P=\dfrac{1}{1+e^{-X'\beta}}\)。若 \(X'\beta=0.5\)，\(P=0.622\)。</td></tr>
+                    <tr><td>Probit</td><td>\(P=\Phi(X'\beta)\)，查标准正态分布表。</td></tr>
+                    <tr><td>无序 Logit</td><td>\(P(Y=j)=\dfrac{e^{V_j}}{\sum_l e^{V_l}}\)，基础类通常 \(V_1=0\)。</td></tr>
+                    <tr><td>泊松</td><td>\(P(Y=k)=\dfrac{e^{-\lambda}\lambda^k}{k!}\)。</td></tr>
+                    <tr><td>指数生存</td><td>\(S(t)=e^{-\lambda t}\)。若 \(\lambda=0.1,t=5\)，\(S=0.607\)。</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="calc-card">
+                <h3>4. 边际效应与计数模型</h3>
+                <table class="calc-table">
+                  <thead>
+                    <tr><th>模型</th><th>边际效应</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Logit</td><td>\(\Lambda(X'\beta)[1-\Lambda(X'\beta)]\beta_j\)</td></tr>
+                    <tr><td>Probit</td><td>\(\phi(X'\beta)\beta_j\)</td></tr>
+                    <tr><td>计数模型</td><td>\(\dfrac{\partial E(Y|X)}{\partial X_j}=e^{X'\beta}\beta_j=\lambda\beta_j\)</td></tr>
+                    <tr><td>Tobit 全样本</td><td>\(\Phi\!\big(\frac{X'\beta}{\sigma}\big)\beta_j\)</td></tr>
+                  </tbody>
+                </table>
+                <div class="calc-warn">易错点：非线性模型里系数不等于边际效应；多项选择模型中，同一个变量对所有类别概率的边际效应加总为 0。</div>
+              </div>
+
+              <div class="calc-card">
+                <h3>5. 生存分析计算</h3>
+                <div class="calc-formula">
+                  \[
+                    \hat\lambda(t_j)=\frac{d_j}{n_j},\qquad
+                    \hat S(t)=\prod_{t_j\le t}\left(1-\frac{d_j}{n_j}\right)
+                  \]
+                </div>
+                <div class="calc-example">例：数据 \(2,5+,8,10,11+,20,22+\)。在 \(t=10\) 时风险集为 \(\{10,11+,20,22+\}\)，失败数为 1，所以 \(\hat\lambda(10)=1/4=0.25\)。</div>
+                <div class="calc-warn">易错点：右截尾样本在被截尾前仍在风险集中；截尾不是失败，不进入 \(d_j\)。Weibull 中 \(\alpha \gt 1\) 风险递增，\(0 \lt \alpha \lt 1\) 风险递减。</div>
+              </div>
+
+              <div class="calc-card">
+                <h3>6. 多项选择参数计数</h3>
+                <div class="calc-formula">
+                  \[
+                    \text{有序模型参数个数}=k+(m-1),\qquad
+                    \text{无序模型参数个数}=(m-1)(k+1)
+                  \]
+                </div>
+                <div class="calc-example">例：\(m=4,\ k=2\)。有序模型参数 \(=2+3=5\) 个；无序模型参数 \(=(4-1)(2+1)=9\) 个。边际效应都是每个变量对应 \(m=4\) 个类别。</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="calc-section" id="calc-causal">
+            <h2>三、因果推断计算题</h2>
+            <div class="calc-grid">
+              <div class="calc-card">
+                <h3>1. 潜在结果表：ATE / ATT / ATU</h3>
+                <div class="calc-formula">
+                  \[
+                    \tau_i=Y_{1i}-Y_{0i},\qquad
+                    ATE=\frac{n_T ATT+n_U ATU}{n_T+n_U}
+                  \]
+                </div>
+                <table class="calc-table">
+                  <thead>
+                    <tr><th>个体</th><th>\(D\)</th><th>\(Y_1\)</th><th>\(Y_0\)</th><th>\(\tau\)</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>1</td><td>1</td><td>10</td><td>6</td><td>4</td></tr>
+                    <tr><td>2</td><td>1</td><td>8</td><td>7</td><td>1</td></tr>
+                    <tr><td>3</td><td>0</td><td>9</td><td>5</td><td>4</td></tr>
+                    <tr><td>4</td><td>0</td><td>7</td><td>4</td><td>3</td></tr>
+                  </tbody>
+                </table>
+                <div class="calc-example">\(ATT=(4+1)/2=2.5\)，\(ATU=(4+3)/2=3.5\)，\(ATE=(4+1+4+3)/4=3\)。</div>
+              </div>
+
+              <div class="calc-card">
+                <h3>2. 样本选择偏差分解</h3>
+                <div class="calc-formula">
+                  \[
+                    E(Y|D=1)-E(Y|D=0)=ATT+
+                    \left[E(Y_0|D=1)-E(Y_0|D=0)\right]
+                  \]
+                </div>
+                <div class="calc-example">例：参与者均值 3000，未参与者均值 2200，参与者若不参与的均值 2500。朴素差 \(=800\)，\(ATT=3000-2500=500\)，选择偏差 \(=300\)。</div>
+              </div>
+
+              <div class="calc-card">
+                <h3>3. PSM 最近邻匹配</h3>
+                <p><strong>ATT：</strong>给处理组按 \(X\) 找最近控制组，借控制组 \(Y\) 作为反事实 \(Y_0\)。</p>
+                <p><strong>ATU：</strong>给控制组按 \(X\) 找最近处理组，借处理组 \(Y\) 作为反事实 \(Y_1\)。</p>
+                <div class="calc-example">例：处理组 \((Y,X):(8,2),(7,3)\)，控制组 \((5,4),(2,9)\)。ATT：\(8-5=3,\ 7-5=2\)，所以 \(ATT=2.5\)。ATU：\(7-5=2,\ 7-2=5\)，所以 \(ATU=3.5\)。</div>
+                <div class="calc-warn">易错点：\((Y,X)\) 的第二个数是匹配变量 \(X\)，不是潜在结果；ATT 和 ATU 的匹配方向相反。</div>
+              </div>
+
+              <div class="calc-card">
+                <h3>4. DID 2 x 2</h3>
+                <div class="calc-formula">
+                  \[
+                    \delta=(Y^T_1-Y^T_0)-(Y^C_1-Y^C_0)
+                  \]
+                  若 \(Y\) 取对数：
+                  \[
+                    \text{约变化}=\delta\times100\%,\qquad
+                    \text{精确变化}=(e^\delta-1)\times100\%
+                  \]
+                </div>
+                <div class="calc-example">例：处理组 \(3.20 \to 3.70\)，控制组 \(3.10 \to 3.40\)。\(\delta=(3.70-3.20)-(3.40-3.10)=0.20\)，约净增 \(20\%\)，精确为 \(22.1\%\)。</div>
+              </div>
+
+              <div class="calc-card">
+                <h3>5. 精确 RDD：LATE 为跳跃</h3>
+                <div class="calc-formula">
+                  \[
+                    LATE=\lim_{X\downarrow c}E(Y|X)-\lim_{X\uparrow c}E(Y|X)
+                  \]
+                </div>
+                <div class="calc-example">例：左侧 \(E(Y|X)=40+0.5(X-c)\)，右侧 \(E(Y|X)=55+0.8(X-c)\)。在断点 \(X=c\) 处，\(LATE=55-40=15\)。</div>
+                <div class="calc-warn">易错点：斜率项 \((X-c)\) 在断点处为 0，精确 RDD 看的是断点处两侧截距差。</div>
+              </div>
+
+              <div class="calc-card">
+                <h3>6. 模糊 RDD：Wald 比值</h3>
+                <div class="calc-formula">
+                  \[
+                    LATE=\frac{\Delta Y}{\Delta D}
+                    =
+                    \frac{\lim_{X\downarrow c}E(Y|X)-\lim_{X\uparrow c}E(Y|X)}
+                    {\lim_{X\downarrow c}E(D|X)-\lim_{X\uparrow c}E(D|X)}
+                  \]
+                </div>
+                <div class="calc-example">例：断点处 \(Y\) 从 52 跳到 64，受处理概率从 0.25 跳到 0.75。\(Y\) 跳跃 \(=12\)，\(D\) 跳跃 \(=0.50\)，所以 \(LATE=12/0.50=24\)。</div>
+                <div class="calc-warn">易错点：模糊 RDD 比精确 RDD 多除一个处理概率跳跃，不能把分母默认为 1。</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="calc-section" id="calc-cheatsheet">
+            <h2>四、考场速记表</h2>
+            <table class="calc-table">
+              <colgroup>
+                <col style="width: 22%;">
+                <col style="width: 40%;">
+                <col style="width: 38%;">
+              </colgroup>
+              <thead>
+                <tr><th>计算对象</th><th>核心公式</th><th>易错点</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>动态面板长期效应</td><td>\(\beta/(1-\gamma)\)</td><td>先找滞后项系数 \(\gamma\)，不是随便除以 \(1-\beta\)。</td></tr>
+                <tr><td>Logit / RRR / IRR / HR</td><td>\(e^\beta\)，百分比为 \((e^\beta-1)\times100\%\)</td><td>倍数不是概率变化；负系数表示倍数小于 1。</td></tr>
+                <tr><td>边际效应</td><td>Logit: \(\Lambda(1-\Lambda)\beta_j\)；Probit: \(\phi\beta_j\)</td><td>非线性模型系数不等于概率边际效应。</td></tr>
+                <tr><td>生存 KM</td><td>\(\prod(1-d_j/n_j)\)</td><td>截尾样本在截尾前进风险集，但不算失败。</td></tr>
+                <tr><td>DID</td><td>\((处理组后-处理组前)-(控制组后-控制组前)\)</td><td>交互项是净变化，不是处理组前后差。</td></tr>
+                <tr><td>PSM</td><td>ATT 匹配处理组；ATU 匹配控制组</td><td>用 \(X\) 找最近邻，用 \(Y\) 算反事实差。</td></tr>
+                <tr><td>RDD</td><td>精确：\(\Delta Y\)；模糊：\(\Delta Y/\Delta D\)</td><td>RDD 估计断点处 LATE，不能外推为总体 ATE。</td></tr>
+              </tbody>
+            </table>
           </section>
         </article>
 
@@ -4820,6 +5214,10 @@ rddensity x, c(c)</code></pre>
         title: '选择题',
         src: 'multiple-choice.html'
       },
+      calculation: {
+        title: '计算题',
+        src: ''
+      },
       empirical: {
         title: '案例分析题',
         src: 'empirical.html'
@@ -4888,6 +5286,7 @@ rddensity x, c(c)</code></pre>
     const docShortcuts = Array.from(document.querySelectorAll('[data-view-shortcut]'));
     const outlineView = document.getElementById('outlineView');
     const examView = document.getElementById('examView');
+    const calculationView = document.getElementById('calculationView');
     const empiricalView = document.getElementById('empiricalView');
     const outlineToc = document.getElementById('outlineToc');
     const frameView = document.getElementById('frameView');
@@ -4988,6 +5387,13 @@ rddensity x, c(c)</code></pre>
       });
     }
 
+    function typesetStaticView(element) {
+      if (!element || !window.MathJax || !window.MathJax.typesetPromise) return;
+      requestAnimationFrame(() => {
+        window.MathJax.typesetPromise([element]).catch(() => {});
+      });
+    }
+
     function showEmpiricalDirectory() {
       empiricalView.classList.remove('model-open');
       empiricalView.classList.remove('summary-open');
@@ -5050,6 +5456,7 @@ rddensity x, c(c)</code></pre>
       if (viewKey === 'outline') {
         outlineView.classList.add('active');
         examView.classList.remove('active');
+        calculationView.classList.remove('active');
         empiricalView.classList.remove('active');
         outlineToc.hidden = true;
         frameView.classList.remove('active');
@@ -5058,14 +5465,27 @@ rddensity x, c(c)</code></pre>
       } else if (viewKey === 'exam') {
         outlineView.classList.remove('active');
         examView.classList.add('active');
+        calculationView.classList.remove('active');
         empiricalView.classList.remove('active');
         outlineToc.hidden = false;
         frameView.classList.remove('active');
         frame.removeAttribute('src');
         standalone.hidden = true;
+        typesetStaticView(examView);
+      } else if (viewKey === 'calculation') {
+        outlineView.classList.remove('active');
+        examView.classList.remove('active');
+        calculationView.classList.add('active');
+        empiricalView.classList.remove('active');
+        outlineToc.hidden = true;
+        frameView.classList.remove('active');
+        frame.removeAttribute('src');
+        standalone.hidden = true;
+        typesetStaticView(calculationView);
       } else if (viewKey === 'empirical') {
         outlineView.classList.remove('active');
         examView.classList.remove('active');
+        calculationView.classList.remove('active');
         empiricalView.classList.add('active');
         outlineToc.hidden = true;
         frameView.classList.remove('active');
@@ -5079,6 +5499,7 @@ rddensity x, c(c)</code></pre>
       } else {
         outlineView.classList.remove('active');
         examView.classList.remove('active');
+        calculationView.classList.remove('active');
         empiricalView.classList.remove('active');
         outlineToc.hidden = true;
         frameView.classList.add('active');
