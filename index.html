@@ -1059,6 +1059,65 @@
       white-space: nowrap;
     }
 
+    .empirical-doc .model-summary {
+      grid-column: 1 / -1;
+      margin-top: 0;
+      padding-top: 26px;
+      border-top: 0;
+      overflow-x: auto;
+    }
+
+    .empirical-doc.summary-open > .model-summary {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .empirical-doc .model-summary h2 {
+      margin-bottom: 8px;
+    }
+
+    .empirical-doc .model-summary-lede {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .empirical-doc .model-summary-table {
+      width: 100%;
+      min-width: 0;
+      table-layout: fixed;
+      font-size: 12.5px;
+    }
+
+    .empirical-doc .model-summary-table th,
+    .empirical-doc .model-summary-table td {
+      padding: 7px 8px;
+      line-height: 1.45;
+    }
+
+    .empirical-doc .model-summary-table code {
+      display: inline-block;
+      margin: 1px 2px 1px 0;
+      padding: 1px 4px;
+      white-space: normal;
+    }
+
+    .empirical-doc .summary-formula {
+      display: block;
+      margin: 0 0 4px;
+    }
+
+    .empirical-doc .summary-formula:last-child {
+      margin-bottom: 0;
+    }
+
+    .empirical-doc .summary-formula-label {
+      display: inline-block;
+      min-width: 44px;
+      color: #475467;
+      font-weight: 800;
+    }
+
     .empirical-doc .model-nav {
       position: sticky;
       top: 58px;
@@ -1186,6 +1245,10 @@
       display: grid;
       grid-template-columns: minmax(0, 1fr) 220px;
       align-items: start;
+    }
+
+    .view.active.empirical-doc.model-open.summary-open {
+      grid-template-columns: minmax(0, 1fr);
     }
 
     iframe {
@@ -1496,6 +1559,10 @@
             </span>
           </button>
           <div class="subnav" id="empiricalSubnav" hidden>
+            <button class="subnav-button" type="button" data-view="empirical" data-model="model-summary">
+              <span class="subnav-kicker">速查</span>
+              <span class="subnav-title">模型汇总速查表</span>
+            </button>
             <button class="subnav-button" type="button" data-view="empirical" data-model="model-1">
               <span class="subnav-kicker">模型一</span>
               <span class="subnav-title">基准面板模型</span>
@@ -1794,6 +1861,12 @@
           <p>先按题干关键词判断模型类型，再进入对应模型复习模型设定、Stata 命令、检验和经济含义解释。</p>
         </div>
         <div class="model-directory-grid">
+          <button class="model-card-button" type="button" data-model-card="model-summary">
+            <span class="model-card-no">速查</span>
+            <span class="model-card-title">模型汇总速查表</span>
+            <span class="model-card-line"></span>
+            <span class="model-card-desc">公式/Stata</span>
+          </button>
           <button class="model-card-button" type="button" data-model-card="model-1">
             <span class="model-card-no">模型一</span>
             <span class="model-card-title">基准面板模型</span>
@@ -1868,9 +1941,128 @@
           </button>
         </div>
       </div>
+        <section class="model-summary" id="model-summary">
+          <h2 class="model-title">模型汇总速查表</h2>
+          <h2 class="sub-title">速查.1 模型数学形式与 Stata 命令总表</h2>
+          <p class="model-summary-lede">考试作答时先用“识别信号”定模型，再写核心公式和命令。</p>
+          <table class="model-summary-table">
+            <colgroup>
+              <col style="width:13%">
+              <col style="width:22%">
+              <col style="width:37%">
+              <col style="width:28%">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>模型</th>
+                <th>识别信号</th>
+                <th>核心数学形式</th>
+                <th>Stata 命令</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>基准面板模型</td>
+                <td>个体 \(i\) 与时间 \(t\) 的面板数据，控制个体异质性和共同时间冲击。</td>
+                <td>\(y_{it}=\beta x_{it}+\delta'Controls_{it}+\mu_i+\lambda_t+\varepsilon_{it}\)</td>
+                <td><code>xtset id year</code><code>xtreg y x controls i.year, fe vce(cluster id)</code><code>reghdfe y x controls, absorb(id year) vce(cluster id)</code></td>
+              </tr>
+              <tr>
+                <td>GMM 动态面板</td>
+                <td>被解释变量存在惯性，模型含 \(y_{i,t-1}\)，需要处理动态内生性。</td>
+                <td>\(y_{it}=\rho y_{i,t-1}+\beta x_{it}+\mu_i+\varepsilon_{it}\)</td>
+                <td><code>xtabond y x, lag(1) maxldep(4) twostep vce(robust)</code><code>xtdpdsys y x, lag(1) maxldep(4) twostep vce(robust)</code><code>estat abond</code><code>estat sargan</code></td>
+              </tr>
+              <tr>
+                <td>面板门限模型</td>
+                <td>影响存在非线性或阶段差异，按门限变量 \(q\) 分区间。</td>
+                <td>\(y_{it}=\mu_i+\beta_1x_{it}I(q_{it}\le\gamma)+\beta_2x_{it}I(q_{it}>\gamma)+\varepsilon_{it}\)</td>
+                <td><code>xtset id year</code><code>xthreg y x controls, rx(x) qx(q) thnum(1) trim(0.01) grid(300) bs(300)</code></td>
+              </tr>
+              <tr>
+                <td>面板分位数模型</td>
+                <td>关注 \(x\) 对 \(y\) 不同分位点的影响差异，属于按 \(Y\) 分布位置看异质性。</td>
+                <td>\(Q_\tau(y_{it}\mid X_{it})=\mu_i+X_{it}'\beta_\tau\)</td>
+                <td><code>qreg y x controls, quantile(0.50) vce(robust)</code><code>sqreg y x controls, q(0.25 0.50 0.75) reps(300)</code><code>xtqreg y x controls, quantile(0.50)</code></td>
+              </tr>
+              <tr>
+                <td>空间面板模型</td>
+                <td>地区之间存在空间相关、空间溢出、邻近地区影响。</td>
+                <td>\(y_{it}=\rho Wy_{it}+\beta x_{it}+\theta Wx_{it}+\mu_i+\lambda_t+\varepsilon_{it}\)</td>
+                <td><code>xtset id year</code><code>xsmle y x controls, wmat(W) model(sar) fe type(both) effects</code><code>xsmle y x controls, wmat(W) dmat(W) model(sdm) fe type(both) effects</code></td>
+              </tr>
+              <tr>
+                <td>二项选择模型</td>
+                <td>\(Y\) 为 0/1，例如是否参与、是否就业、是否违约。</td>
+                <td>
+                  <span class="summary-formula"><span class="summary-formula-label">Logit：</span>\(P(Y_i=1\mid X_i)=\frac{\exp(\alpha+X_i'\beta)}{1+\exp(\alpha+X_i'\beta)}\)</span>
+                  <span class="summary-formula"><span class="summary-formula-label">Probit：</span>\(P(Y_i=1\mid X_i)=\Phi(\alpha+X_i'\beta)\)</span>
+                </td>
+                <td><code>logit y x controls, vce(robust)</code><code>probit y x controls, vce(robust)</code><code>logit y x controls, or</code><code>margins, dydx(*)</code></td>
+              </tr>
+              <tr>
+                <td>多项选择模型</td>
+                <td>\(Y\) 为三类及以上；有自然顺序用有序模型，无顺序用无序多项模型。</td>
+                <td>
+                  <span class="summary-formula"><span class="summary-formula-label">有序：</span>\(P(Y=j)=\Phi(c_j-X'\beta)-\Phi(c_{j-1}-X'\beta)\)</span>
+                  <span class="summary-formula"><span class="summary-formula-label">无序：</span>\(P(Y=j)=\frac{e^{\alpha_j+X'\beta_j}}{\sum_k e^{\alpha_k+X'\beta_k}}\)</span>
+                </td>
+                <td><code>oprobit y x controls</code><code>ologit y x controls</code><code>mlogit y x controls, baseoutcome(1) rrr</code><code>asclogit choice price, case(id) alt(alt)</code><code>margins, dydx(*)</code></td>
+              </tr>
+              <tr>
+                <td>截尾与截断模型</td>
+                <td>结果变量受边界限制；非参与者在样本中为截尾，不在样本中为截断；选择偏误用 Heckman。</td>
+                <td>
+                  <span class="summary-formula"><span class="summary-formula-label">Tobit：</span>\(Y_i^*=X_i'\beta+u_i,\quad Y_i=\max(0,Y_i^*)\)</span>
+                  <span class="summary-formula"><span class="summary-formula-label">Heckman：</span>\(D_i^*=Z_i'\gamma+v_i,\quad Y_i=X_i'\beta+u_i\)</span>
+                </td>
+                <td><code>tobit y x controls, ll(0)</code><code>truncreg y x controls, ll(0)</code><code>heckman y x controls, select(d = z controls)</code><code>heckman y x controls, select(d = z controls) twostep</code></td>
+              </tr>
+              <tr>
+                <td>计数模型</td>
+                <td>\(Y\) 为非负整数次数；过度离散时用负二项。</td>
+                <td>
+                  <span class="summary-formula"><span class="summary-formula-label">Poisson：</span>\(Y_i\mid X_i\sim Poisson(\lambda_i),\quad \lambda_i=\exp(X_i'\beta)\)</span>
+                  <span class="summary-formula"><span class="summary-formula-label">NB：</span>\(Var(Y_i\mid X_i)=\mu_i(1+\alpha\mu_i)\)</span>
+                </td>
+                <td><code>poisson y x controls, vce(robust)</code><code>poisson y x controls, irr</code><code>nbreg y x controls</code><code>nbreg y x controls, irr</code><code>margins, dydx(*)</code></td>
+              </tr>
+              <tr>
+                <td>生存分析模型</td>
+                <td>研究持续时间、事件发生时间，常有右截尾。</td>
+                <td>
+                  <span class="summary-formula">\(S(t)=P(T>t)\)</span>
+                  <span class="summary-formula">\(\lambda(t\mid X)=\lambda_0(t)\exp(X'\beta)\)</span>
+                  <span class="summary-formula">\(HR=e^\beta\)</span>
+                </td>
+                <td><code>stset time, failure(event)</code><code>stcox x controls</code><code>streg x controls, dist(weibull)</code><code>sts graph</code><code>estat phtest</code></td>
+              </tr>
+              <tr>
+                <td>DID 模型</td>
+                <td>政策冲击 + 处理组/控制组 + 政策前后，核心假设是平行趋势。</td>
+                <td>\(Y_{it}=\alpha_i+\lambda_t+\delta D_{it}+Controls_{it}'\theta+\varepsilon_{it}\)</td>
+                <td><code>reg y i.treat##i.post controls, vce(robust)</code><code>xtreg y did controls i.year, fe vce(cluster id)</code><code>reghdfe y did controls, absorb(id year) vce(cluster id)</code></td>
+              </tr>
+              <tr>
+                <td>RDD 模型</td>
+                <td>连续驱动变量 \(X\) 与断点 \(c\)，处理由是否越过断点决定。</td>
+                <td>
+                  <span class="summary-formula"><span class="summary-formula-label">Sharp：</span>\(D_i=1(X_i\ge c)\)</span>
+                  <span class="summary-formula">\(\quad Y_i=\alpha+\beta(X_i-c)+\gamma D_i+\delta(X_i-c)D_i+\varepsilon_i\)</span>
+                  <span class="summary-formula"><span class="summary-formula-label">Fuzzy：</span>\(LATE=\frac{\Delta Y}{\Delta D}\)</span>
+                </td>
+                <td><code>gen xc = x - c</code><code>reg y i.D##c.xc, vce(robust)</code><code>rdrobust y x, c(c)</code><code>rdrobust y x, c(c) fuzzy(treat)</code><code>rddensity x, c(c)</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
 
       <nav class="model-nav" aria-label="案例分析题模型切换" hidden>
         <button class="model-back" type="button" id="backToModels">返回模型目录</button>
+        <button type="button" data-model-target="model-summary">
+          <span class="model-nav-no">速查</span>
+          <span class="model-nav-title">模型汇总速查表</span>
+        </button>
         <button type="button" data-model-target="model-1">
           <span class="model-nav-no">模型一</span>
           <span class="model-nav-title">基准面板模型</span>
@@ -3627,7 +3819,124 @@ xtprobit y x controls, re vce(bootstrap)</code></pre>
       </section>
 
       <section>
-        <h2 class="sub-title">6.5 检验、拟合优度与预测</h2>
+        <h2 class="sub-title">6.5 课件例子：家庭风险资产持有影响因素分析</h2>
+        <p class="source">参考课件《高级计量经济学(II)》第 6 章二项选择模型中“家庭风险资产持有影响因素分析（截面数据）”例子。</p>
+        <p>研究问题为：哪些因素会影响家庭是否持有风险资产。被解释变量为 \(Risk_i\)，若家庭持有风险资产则取 1，否则取 0。解释变量包括户主性别 \(Sex_i\)、年龄 \(Age_i\)、教育水平 \(Edu_i\)、健康状况 \(Health_i\)、婚姻状况 \(marriage_i\)、家庭规模 \(Fam\_size_i\) 和家庭收入对数 \(lnincome_i\)。</p>
+        <div class="note exam">
+          <p><strong>为什么用二项选择模型：</strong>\(Risk_i\) 只有“持有风险资产”和“不持有风险资产”两个结果，属于 0/1 因变量。题目关注的是家庭进入某种参与状态的概率，因此应采用 Logit 或 Probit 二项选择模型。</p>
+        </div>
+
+        <h3>1. 模型设定</h3>
+        <p>先写潜变量模型，表示家庭持有风险资产的潜在倾向：</p>
+        <div class="formula">
+          \[
+          Risk_i^*
+          =\alpha+\beta_1Sex_i+\beta_2Age_i+\beta_3Edu_i+\beta_4Health_i
+          +\beta_5marriage_i+\beta_6Fam\_size_i+\beta_7lnincome_i+u_i
+          \]
+          \[
+          Risk_i=
+          \begin{cases}
+          1,&Risk_i^*>0\\
+          0,&Risk_i^*\le 0
+          \end{cases}
+          \]
+        </div>
+        <p>若采用 Logit 模型，风险资产持有概率可写为：</p>
+        <div class="formula">
+          \[
+          P(Risk_i=1\mid X_i)
+          =
+          \frac{\exp(\alpha+X_i'\beta)}
+          {1+\exp(\alpha+X_i'\beta)}
+          \]
+        </div>
+
+        <h3>2. Stata 命令</h3>
+        <pre><code>* 课件先保留 2019 年截面样本
+keep if Year==2019
+
+* Logit 估计，使用稳健标准误，不报告迭代过程
+logit Risk Sex Age Edu Health marriage Fam_size lnincome, r nolog
+
+* 如果需要直接报告优势比
+logit Risk Sex Age Edu Health marriage Fam_size lnincome, or r nolog
+
+* 如果需要概率意义，继续计算平均边际效应
+margins, dydx(Edu lnincome Fam_size)</code></pre>
+
+        <h3>3. 课件结果如何读：重点解释系数的经济含义</h3>
+        <p>课件结果显示，样本量为 7,306，Wald 检验和 \(p\) 值只用于说明模型整体或单个变量是否有统计证据；案例分析题的结果解读重点应放在“系数表示什么经济含义”。Logit 原始系数解释的是对数机会，而不是概率变化，因此不能把 \(\hat\beta\) 直接写成“概率提高 \(\hat\beta\)” 。</p>
+        <table>
+          <colgroup>
+            <col style="width:22%">
+            <col style="width:22%">
+            <col style="width:28%">
+            <col style="width:28%">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>变量</th>
+              <th>课件系数</th>
+              <th>经济含义换算</th>
+              <th>考试解释</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>\(Edu\)</td>
+              <td>\(\hat\beta=0.3305\)</td>
+              <td>按课件口径，机会的半弹性约为 \(33.05\%\)。</td>
+              <td>固定其他因素不变，户主教育水平每增加一级，其持有风险资产的机会（相较于不持有）增加约 \(33.05\%\)。</td>
+            </tr>
+            <tr>
+              <td>\(Age\)</td>
+              <td>\(\hat\beta=-0.0324\)</td>
+              <td>按课件口径，机会的半弹性约为 \(-3.24\%\)。</td>
+              <td>固定其他因素不变，户主年龄每增加 1 岁，其持有风险资产的机会下降约 \(3.24\%\)。</td>
+            </tr>
+            <tr>
+              <td>\(lnincome\)</td>
+              <td>\(\hat\beta=0.2778\)</td>
+              <td>按课件口径，机会的半弹性约为 \(27.78\%\)。</td>
+              <td>固定其他因素不变，家庭收入对数每增加 1 个单位，其持有风险资产的机会增加约 \(27.78\%\)。</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>4. Logit 系数的经济意义</h3>
+        <p>Logit 原始系数解释的是对数机会，而不是概率变化。课件中 \(Edu\) 的系数约为 0.3305，因此：</p>
+        <div class="formula">
+          \[
+          \ln(Odds_i)=\alpha+X_i'\beta,\qquad
+          \frac{\partial \ln(Odds_i)}{\partial Edu_i}=0.3305
+          \]
+        </div>
+        <p>可解释为：固定其他因素不变，户主教育水平每增加一级，其持有风险资产的机会（相较于不持有）增加约 33.05%。注意这里解释的是“机会/odds”的变化，不是持有概率直接增加 33.05 个百分点。</p>
+
+        <h3>5. Probit 系数的经济意义</h3>
+        <p>Probit 模型通常回到潜变量模型解释系数。设：</p>
+        <div class="formula">
+          \[
+          Risk_i^*=\alpha+X_i'\beta+u_i,\qquad u_i\sim N(0,1)
+          \]
+          \[
+          Risk_i=
+          \begin{cases}
+          1,&Risk_i^*>0\\
+          0,&Risk_i^*\le 0
+          \end{cases}
+          \]
+        </div>
+        <p>在 Probit 中，\(\beta_j\) 表示 \(X_j\) 对潜在选择倾向 \(Risk_i^*\) 的边际影响。可表述为：固定其他因素不变，\(X_j\) 每增加 1 个单位，家庭选择持有风险资产的潜在倾向平均增加 \(\beta_j\) 个标准差。若从随机效用角度理解，则表示持有风险资产相对于不持有风险资产的效用差增加 \(\beta_j\) 个标准差。</p>
+
+        <div class="note exam">
+          <p><strong>考场表述：</strong>本题被解释变量 \(Risk\) 表示家庭是否持有风险资产，是 0/1 变量，因此采用 Logit 或 Probit 二项选择模型。若采用 Logit，系数解释为对机会的半弹性，例如 \(Edu\) 系数为 0.3305，说明固定其他因素不变，户主教育水平每增加一级，其持有风险资产的机会（相较于不持有）增加约 33.05%。若采用 Probit，系数解释为对潜在持有倾向 \(Risk^*\) 的影响；若需要直接解释概率变化，应进一步报告 <code>margins</code> 的平均边际效应。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">6.6 检验、拟合优度与预测</h2>
         <ul>
           <li><strong>估计方法：</strong>Logit/Probit 通常用最大似然估计 MLE。由于似然函数非线性，通常通过数值迭代求解。</li>
           <li><strong>单个系数显著性：</strong>MLE 下常用 \(z\) 检验，不再使用 OLS 中的小样本 \(t\) 检验。</li>
@@ -3641,7 +3950,7 @@ xtprobit y x controls, re vce(bootstrap)</code></pre>
       </section>
 
       <section>
-        <h2 class="sub-title">6.6 二项选择模型考场完整答题模板</h2>
+        <h2 class="sub-title">6.7 二项选择模型考场完整答题模板</h2>
         <div class="note exam">
           <p><strong>模型选择：</strong>本题被解释变量表示个体是否发生某种行为，取值为 0 或 1，属于二项选择问题。若直接使用线性概率模型，可能导致预测概率超出 \([0,1]\)，且误差项存在异方差，因此采用 Logit 或 Probit 模型。</p>
           <p><strong>模型设定：</strong>设潜在选择倾向为 \(Y_i^*=\alpha+X_i'\beta+u_i\)，当 \(Y_i^*>0\) 时 \(Y_i=1\)，否则 \(Y_i=0\)。若采用 Logit，则：</p>
@@ -3707,9 +4016,9 @@ margins, dydx(*)</code></pre>
           \[
           Y_i=
           \begin{cases}
-          1,&Y_i^*<C_1\\
-          2,&C_1\le Y_i^*<C_2\\
-          3,&Y_i^*\ge C_2
+          1,&Y_i^*\lt C_1\\
+          2,&C_1\leq Y_i^*\lt C_2\\
+          3,&Y_i^*\geq C_2
           \end{cases}
           \]
         </div>
@@ -3754,6 +4063,61 @@ margins, dydx(*)</code></pre>
 
       <section>
         <h2 class="sub-title">7.4 Stata 命令：有序、无序和条件选择</h2>
+        <table>
+          <colgroup>
+            <col style="width:18%">
+            <col style="width:28%">
+            <col style="width:22%">
+            <col style="width:14%">
+            <col style="width:18%">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>场景</th>
+              <th>变量结构</th>
+              <th>适用模型</th>
+              <th>Stata 命令</th>
+              <th>关键点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>有序多类别</td>
+              <td>\(Y\) 为有序多类别，如满意度、风险偏好、信用评级。</td>
+              <td>Ordered Probit / Ordered Logit</td>
+              <td><code>oprobit</code><code>ologit</code></td>
+              <td>解释潜在等级倾向和各类别边际效应。</td>
+            </tr>
+            <tr>
+              <td>无序多类别：只包含个体特征</td>
+              <td>收入、年龄、性别、教育等只随个体变化，不随选项变化。</td>
+              <td>Multinomial Logit</td>
+              <td><code>mlogit</code></td>
+              <td>需设基础类别，常报告 RRR 和边际效应。</td>
+            </tr>
+            <tr>
+              <td>无序多类别：只包含选项特征</td>
+              <td>商品价格、油耗、距离、耗时等随选项变化。</td>
+              <td>Conditional Logit / McFadden's Model</td>
+              <td><code>clogit</code></td>
+              <td>数据通常是“个体 × 选项”的长数据，用 <code>group()</code> 指定选择集合。</td>
+            </tr>
+            <tr>
+              <td>无序多类别：同时包含两类特征</td>
+              <td>既有价格、油耗等选项属性，又有收入、年龄等个体属性。</td>
+              <td>Alternative-Specific Conditional Logit</td>
+              <td><code>asclogit</code></td>
+              <td>适合处理选项特征和个体特征并存的混合情形。</td>
+            </tr>
+            <tr>
+              <td>重复选择或面板选择</td>
+              <td>同一个体多次选择，且允许偏好异质性。</td>
+              <td>Mixed Logit</td>
+              <td><code>cmxtmixlogit</code></td>
+              <td>先用 <code>cmset</code> 声明 choice model 数据结构。</td>
+            </tr>
+          </tbody>
+        </table>
         <pre><code>* 1. 有序选择模型
 oprobit y x controls, vce(robust)
 ologit y x controls, vce(robust)
@@ -3766,43 +4130,15 @@ meoprobit y x controls || id:
 mlogit y x controls, baseoutcome(1) rrr vce(robust)
 margins, dydx(*)
 
-* 4. 条件 Logit：解释变量随选项变化
+* 4. 条件 Logit：只包含选项特征，解释变量随选项变化
+clogit choice price fuel distance, group(id)
+
+* 5. Alternative-Specific Conditional Logit：同时包含选项特征和个体特征
 asclogit choice price time, case(id) alternatives(alt) casevars(income age)
 
-* 5. 面板/重复选择的混合 Logit
+* 6. 面板/重复选择的混合 Logit
 cmset id alt
 cmxtmixlogit choice price time</code></pre>
-        <table>
-          <thead>
-            <tr>
-              <th>命令</th>
-              <th>使用条件</th>
-              <th>关键点</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>oprobit</code>/<code>ologit</code></td>
-              <td>\(Y\) 为有序多类别。</td>
-              <td>解释潜在等级倾向和各类别边际效应。</td>
-            </tr>
-            <tr>
-              <td><code>mlogit</code></td>
-              <td>\(Y\) 为无序多类别，解释变量主要随个体变化。</td>
-              <td>需设基础类别，常报告 RRR 和边际效应。</td>
-            </tr>
-            <tr>
-              <td><code>asclogit</code></td>
-              <td>解释变量随选项变化，如价格、距离、耗时。</td>
-              <td>数据通常是“个体 × 选项”的长数据。</td>
-            </tr>
-            <tr>
-              <td><code>cmxtmixlogit</code></td>
-              <td>重复选择或面板选择，且允许偏好异质性。</td>
-              <td>先用 <code>cmset</code> 声明 choice model 数据结构。</td>
-            </tr>
-          </tbody>
-        </table>
       </section>
 
       <section>
@@ -3835,7 +4171,114 @@ cmxtmixlogit choice price time</code></pre>
       </section>
 
       <section>
-        <h2 class="sub-title">7.6 核心假设与模型检验</h2>
+        <h2 class="sub-title">7.6 课件例子：家庭消费偏好影响因素分析</h2>
+        <p class="source">参考课件《高级计量经济学(II)》第 7 章无序多项选择模型中“家庭消费偏好影响因素分析”例子。</p>
+        <p>研究问题为：户主和家庭特征如何影响家庭消费偏好类型。被解释变量为 \(consum\)，有三个互斥且无天然顺序的类别：第 1 类为偏好基础类消费，第 2 类为偏好发展享受类消费，第 3 类为偏好医疗卫生类消费。由于三类消费偏好没有高低顺序，应使用无序多项选择模型。</p>
+
+        <h3>1. 数据结构与模型选择</h3>
+        <p>课件先将短数据转换为“家庭 × 选项”的长数据，每个家庭对应 3 个可选消费偏好类别，并用 <code>hhid</code> 作为个体分组变量、<code>alt</code> 表示选项类别。因为模型同时包含选项类别与家庭个体特征，课件使用 <code>asclogit</code>。</p>
+        <div class="note exam">
+          <p><strong>识别口径：</strong>若题目只有“家庭选择哪一类消费偏好”，且解释变量是户主性别、年龄、教育、健康、婚姻、家庭规模、收入等个体特征，可以写无序多项 Logit；若题目给出长数据并出现 <code>case()</code>、<code>alternatives()</code>、基础选项等信息，可以写 <code>asclogit</code>。</p>
+        </div>
+
+        <h3>2. Stata 命令</h3>
+        <pre><code>* 保留 2019 年截面样本
+keep if Year==2019
+
+* Alternative-specific conditional logit
+asclogit consum, case(hhid) alternatives(alt) ///
+    casevars(Sex Age Edu Health marriage Fam_size lnincome) ///
+    basealternative(1) nolog r
+
+* 平均边际效应
+margins, dydx(Sex Edu)</code></pre>
+        <ul>
+          <li><code>case(hhid)</code>：以家庭 ID 作为选择主体。</li>
+          <li><code>alternatives(alt)</code>：选项变量，表示 1、2、3 三类消费偏好。</li>
+          <li><code>casevars(...)</code>：随家庭变化但不随选项变化的个体特征变量。</li>
+          <li><code>basealternative(1)</code>：设定第 1 类“偏好基础类消费”为基础类别。</li>
+        </ul>
+
+        <h3>3. 模型设定</h3>
+        <p>设家庭 \(i\) 选择消费偏好类别 \(j\) 的效用为：</p>
+        <div class="formula">
+          \[
+          U_{ij}=V_{ij}+\varepsilon_{ij},
+          \qquad
+          V_{ij}=\alpha_j+X_i'\beta_j
+          \]
+        </div>
+        <p>若第 1 类为基础类别，则有：</p>
+        <div class="formula">
+          \[
+          \ln\frac{P(Y_i=j\mid X_i)}{P(Y_i=1\mid X_i)}
+          =\alpha_j+X_i'\beta_j,\qquad j=2,3
+          \]
+        </div>
+        <p>因此，无序多项选择模型的系数解释为“选择某类别相对于基础类别的机会变化”。</p>
+
+        <h3>4. 边际效应解释：直接解释概率变化</h3>
+        <p>课件使用 <code>margins, dydx(Sex Edu)</code> 报告平均边际效应。边际效应比原始系数更适合直接写“概率增加/减少多少个百分点”。</p>
+        <table>
+          <colgroup>
+            <col style="width:22%">
+            <col style="width:26%">
+            <col style="width:52%">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>变量</th>
+              <th>类别</th>
+              <th>课件解释</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td rowspan="3">户主性别 \(Sex\)</td>
+              <td>基础类消费</td>
+              <td>固定其他因素不变，男性户主家庭偏好基础类消费的概率比女性户主家庭高约 0.93 个百分点。</td>
+            </tr>
+            <tr>
+              <td>发展享受类消费</td>
+              <td>固定其他因素不变，男性户主家庭偏好发展享受类消费的概率比女性户主家庭低约 0.65 个百分点。</td>
+            </tr>
+            <tr>
+              <td>医疗卫生类消费</td>
+              <td>男性户主家庭与女性户主家庭在偏好医疗卫生类消费的概率上没有显著差异。</td>
+            </tr>
+            <tr>
+              <td rowspan="3">户主教育 \(Edu\)</td>
+              <td>基础类消费</td>
+              <td>固定其他因素不变，户主受教育水平每增加一级，偏好基础类消费的概率平均增加约 0.37 个百分点。</td>
+            </tr>
+            <tr>
+              <td>发展享受类消费</td>
+              <td>固定其他因素不变，户主受教育水平每增加一级，偏好发展享受类消费的概率平均增加约 2.06 个百分点。</td>
+            </tr>
+            <tr>
+              <td>医疗卫生类消费</td>
+              <td>固定其他因素不变，户主受教育水平每增加一级，偏好医疗卫生类消费的概率平均减少约 0.58 个百分点。</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>5. 参数经济意义：相对于基础类别的机会</h3>
+        <p>若解释的是原始系数或 \(e^\beta\)，就不能直接说概率变化，而要说明“相对于基础类别的机会”。课件中第 1 类为基础类消费，因此第 2 类和第 3 类的系数都相对于第 1 类解释。</p>
+        <div class="formula">
+          \[
+          \ln Odds_{ij}
+          =
+          \ln\frac{P(Y_i=j\mid X_i)}{P(Y_i=1\mid X_i)}
+          =\alpha_j+X_i'\beta_j
+          \]
+        </div>
+        <div class="note exam">
+          <p><strong>课件例子：</strong>固定其他因素不变，男性户主偏好发展享受类消费的机会，相对于偏好基础类消费，平均是女性户主的 \(\exp(-0.27)=76.34\%\)。固定其他因素不变，户主年龄每增加一岁，偏好医疗卫生类消费的机会，相对于偏好基础类消费，平均增加约 4.21%。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="sub-title">7.7 核心假设与模型检验</h2>
         <table>
           <colgroup>
             <col style="width:20%">
@@ -3875,7 +4318,7 @@ cmxtmixlogit choice price time</code></pre>
       </section>
 
       <section>
-        <h2 class="sub-title">7.7 有序与无序模型的参数个数</h2>
+        <h2 class="sub-title">7.8 有序与无序模型的参数个数</h2>
         <p>设解释变量个数为 \(k\)，类别个数为 \(m\)。考试选择题常考参数个数和边际效应个数。</p>
         <table>
           <thead>
@@ -3907,7 +4350,7 @@ cmxtmixlogit choice price time</code></pre>
       </section>
 
       <section>
-        <h2 class="sub-title">7.8 多项选择模型考场完整答题模板</h2>
+        <h2 class="sub-title">7.9 多项选择模型考场完整答题模板</h2>
         <div class="note exam">
           <p><strong>模型选择：</strong>本题被解释变量为多个互斥类别。若类别之间存在自然顺序，如满意度或评级，应采用有序选择模型；若类别之间没有高低顺序，如出行方式或职业类型，应采用无序多项选择模型。</p>
           <p><strong>有序模型设定：</strong>设潜在等级倾向 \(Y_i^*=\alpha+X_i'\beta+u_i\)，并由切点 \(C_1,C_2,\ldots,C_{m-1}\) 将 \(Y_i^*\) 划分为不同等级。若采用 Ordered Probit，则类别概率由标准正态分布函数 \(\Phi(\cdot)\) 给出。</p>
@@ -4384,6 +4827,10 @@ rddensity x, c(c)</code></pre>
     };
 
     const empiricalModels = {
+      'model-summary': {
+        title: '模型汇总速查表',
+        src: 'empirical.html#model-summary'
+      },
       'model-1': {
         title: '模型一：基准面板模型',
         src: 'empirical.html#model-1'
@@ -4501,6 +4948,10 @@ rddensity x, c(c)</code></pre>
 
     function buildModelToc(modelKey) {
       modelTocLinks.innerHTML = '';
+      if (modelKey === 'model-summary') {
+        modelToc.hidden = true;
+        return;
+      }
       const sections = modelSections.filter((section) => section.dataset.model === modelKey);
 
       if (!sections.length) {
@@ -4539,6 +4990,7 @@ rddensity x, c(c)</code></pre>
 
     function showEmpiricalDirectory() {
       empiricalView.classList.remove('model-open');
+      empiricalView.classList.remove('summary-open');
       if (empiricalHeader) {
         empiricalHeader.hidden = false;
       }
@@ -4558,6 +5010,7 @@ rddensity x, c(c)</code></pre>
       const selectedModel = modelIds.includes(modelKey) ? modelKey : modelIds[0];
 
       empiricalView.classList.add('model-open');
+      empiricalView.classList.toggle('summary-open', selectedModel === 'model-summary');
       if (empiricalHeader) {
         empiricalHeader.hidden = true;
       }
@@ -4673,7 +5126,7 @@ rddensity x, c(c)</code></pre>
     });
 
     const initial = location.hash.replace('#', '');
-    const empiricalMatch = initial.match(/^empirical-(model-\d+)$/);
+    const empiricalMatch = initial.match(/^empirical-(model-(?:summary|\d+))$/);
     if (empiricalMatch) {
       setView('empirical', false, empiricalMatch[1]);
     } else {
